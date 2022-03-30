@@ -1,0 +1,43 @@
+/* 页脚透明 */
+#footer {
+  background: linear-gradient(0deg, #fff, transparent)
+}
+#footer-wrap{
+  color: #4c4948;
+}
+#footer-wrap .framework-info a{
+  color: #4c4948;
+}
+/* 滚动条 */
+::-webkit-scrollbar-thumb{
+  background: #00c4b6;
+  border-radius: 5px;
+}
+/* 右侧按钮 */
+#rightside > div > button, #rightside > div > a{
+  background: #00c4b6;
+}
+/* post标题hover */
+#recent-posts > .recent-post-item >.recent-post-info > .article-title:hover{
+  color: #00c4b6;
+}
+/* 导航hover */
+#nav .site-page:not(.child):after{
+  background: #00c4b6;
+}
+#page-header.nav-fixed #nav a:hover, 
+#page-header.nav-fixed #nav #site-name:hover, 
+#page-header.nav-fixed #nav #toggle-menu:hover{
+  color: #00c4b6;
+}
+/* 侧边栏hover */
+#aside-content .aside-list > .aside-list-item .content > .title:hover, #aside-content .aside-list > .aside-list-item .content > .comment:hover{
+  color: #00c4b6;
+}
+#aside-content .card-tag-cloud a:hover{
+  color: #00c4b6!important;
+}
+/* 去除page-header背景色 */
+#page-header{
+  background-color: transparent!important;
+}
