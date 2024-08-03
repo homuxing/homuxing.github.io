@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.homu.space/posts/71a00ca2/</loc>
+    
+    <lastmod>2024-08-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.homu.space/posts/369146d4/</loc>
     
     <lastmod>2024-08-03</lastmod>
@@ -794,14 +803,14 @@
 
   
   <url>
-    <loc>https://blog.homu.space/tags/hexo/</loc>
+    <loc>https://blog.homu.space/tags/git/</loc>
     <lastmod>2024-08-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.homu.space/tags/git/</loc>
+    <loc>https://blog.homu.space/tags/hexo/</loc>
     <lastmod>2024-08-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -899,14 +908,14 @@
   </url>
   
   <url>
-    <loc>https://blog.homu.space/tags/vue/</loc>
+    <loc>https://blog.homu.space/tags/TypeScript/</loc>
     <lastmod>2024-08-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.homu.space/tags/TypeScript/</loc>
+    <loc>https://blog.homu.space/tags/vue/</loc>
     <lastmod>2024-08-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
