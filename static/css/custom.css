@@ -63,3 +63,20 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 10px
 }
+/* 视频播放器 4:3 */
+.dplayer {
+  position: relative;
+  padding-top: 75%;
+  .dplayer-video-wrap {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.gallery-groups-section {
+  display: flex;
+  flex-wrap: wrap;
+}
