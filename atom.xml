@@ -267,11 +267,11 @@
     <category term="Blog" scheme="https://blog.homu.space/categories/Blog/"/>
     
     
+    <category term="git" scheme="https://blog.homu.space/tags/git/"/>
+    
     <category term="hexo" scheme="https://blog.homu.space/tags/hexo/"/>
     
     <category term="docker" scheme="https://blog.homu.space/tags/docker/"/>
-    
-    <category term="git" scheme="https://blog.homu.space/tags/git/"/>
     
     <category term="caddy" scheme="https://blog.homu.space/tags/caddy/"/>
     
