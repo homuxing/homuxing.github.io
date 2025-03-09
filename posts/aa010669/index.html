@@ -1,0 +1,336 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>7个作弊般的实用设计技巧（翻译） | 吼姆小行星</title><meta name="author" content="Amurita"><meta name="copyright" content="Amurita"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="原文链接：7 Practical Tips for Cheating at Design 原文作者：Adam Wathan &amp;amp; Steve Schoger 一篇讲程序员自己构建页面的技巧的文章，Tailwind CSS 作者写的。 这些技巧确实很实用 自己翻译的，英语水平很一般，查单词意思整"><link rel="shortcut icon" href="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/hanamaru.png"><link rel="canonical" href="https://blog.homu.space/posts/aa010669/index.html"><link rel="preconnect" href="//unpkg.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://unpkg.com/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: false,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '7个作弊般的实用设计技巧（翻译）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-08-21 16:55:55'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/static/css/custom.css"><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="吼姆小行星" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E5%B0%8F%E5%8E%A8%E5%A8%98Avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">60</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间线</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/message-board/"><i class="fa-fw fas fa-seedling"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/gallery"><i class="fa-fw fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-star"></i><span> 我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/illust_94284226_20240804_123616.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="吼姆小行星"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/hanamaru.png"/><span class="site-name">吼姆小行星</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间线</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-book"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/message-board/"><i class="fa-fw fas fa-seedling"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/gallery"><i class="fa-fw fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-star"></i><span> 我</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">7个作弊般的实用设计技巧（翻译）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-28T12:47:13.000Z" title="发表于 2022-01-28 20:47:13">2022-01-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-21T08:55:55.858Z" title="更新于 2024-08-21 16:55:55">2024-08-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B0%8F%E7%AC%94%E8%AE%B0/">小笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="7个作弊般的实用设计技巧（翻译）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="note orange flat"><p>原文链接：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://medium.com/refactoring-ui/7-practical-tips-for-cheating-at-design-40c736799886">7 Practical Tips for Cheating at Design</a></p>
+<p>原文作者：Adam Wathan &amp; Steve Schoger</p>
+<p>一篇讲程序员自己构建页面的技巧的文章，Tailwind CSS 作者写的。</p>
+<p>这些技巧确实很实用</p>
+<p>自己翻译的，英语水平很一般，查单词意思整理语言之后写下来的东西。不免有错误，欢迎指出</p>
+</div>
+
+<h1 id="7-个作弊般的实用设计技巧"><a href="#7-个作弊般的实用设计技巧" class="headerlink" title="7 个作弊般的实用设计技巧"></a>7 个作弊般的实用设计技巧</h1><h2 id="用策略来改善你的设计，而不是用天赋。"><a href="#用策略来改善你的设计，而不是用天赋。" class="headerlink" title="用策略来改善你的设计，而不是用天赋。"></a>用策略来改善你的设计，而不是用天赋。</h2><p>每个开发者都不可避免地会遇到需要自己去决定页面设计的场景，不论开发者们是否喜欢。</p>
+<p>也许公司没有一个全职的设计师，或者你自己想做一些什么东西。也许你正在 hacking 一个项目，并且你喜欢这个项目比另一个 bootstrap 网站更好看。</p>
+<p>这很容易让你甩甩手抱怨，_干哦，我这辈子估计都弄不好，我又不是个设计师_。但事实证明，有很多技巧可以让你快速地提升设计等级，而且不一定非得有平面设计师的背景。</p>
+<p>今天，这儿有些简单的好点子可以该改善你的设计</p>
+<hr>
+<h2 id="1-使用颜色（color）和粗细（weight）来控制等级，而不是大小（size）"><a href="#1-使用颜色（color）和粗细（weight）来控制等级，而不是大小（size）" class="headerlink" title="1.使用颜色（color）和粗细（weight）来控制等级，而不是大小（size）"></a>1.使用颜色（color）和粗细（weight）来控制等级，而不是大小（size）</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_KYZikUrx9F02cJU9kpn_gQ.png"></p>
+<p>设计 UI 的时候，一个常见的错误是想把重要信息的字体大小设置的更大一些。</p>
+<p><em>这个不是很重要吗，让他大点儿啊。</em></p>
+<p><em>这个次要，那就小点儿。</em></p>
+<p>比起让 font-size 承担所有的区别，不如试试让 color 和 font-weight 来做这件事。</p>
+<p><em>这个不是很重要吗，让他粗点儿。</em></p>
+<p><em>这个没那么重要，用个轻点的颜色就好了。</em></p>
+<p>试着用起来两到三种 color 来区分着重项：</p>
+<ul>
+<li>用一个暗（dark）一些的颜色（注意不是黑色 black）来修饰主要的内容，比如大标题</li>
+<li>用灰色来修饰次要的内容，比如一篇文章的发表日期</li>
+<li>用浅灰色来修饰辅助性的内容，比如页脚的版权声明</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_2YuCOOCjdMEJxg-Lb6G2FA.png"></p>
+<p>类似地，两个 font-weight 也能做到：</p>
+<ul>
+<li>对于大多数的内容使用通常的 font-weight（400 或者 500）</li>
+<li>对于想要强调的文本使用更重的 font-weight（600 或者 700）</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_AHrVF0vTtj-yoyhmBNHNLA.png"></p>
+<p><strong>日常工作中，不要使用低于 400 的 font-weight</strong>，他们可以用于大标题，但小标题实在太小了。如果你想用轻一些的字重来淡化某些内容，可以使用淡一些的颜色或者较小的字体来替代。</p>
+<hr>
+<h2 id="2-不要在有颜色的背景上使用灰色字体"><a href="#2-不要在有颜色的背景上使用灰色字体" class="headerlink" title="2.不要在有颜色的背景上使用灰色字体"></a>2.不要在有颜色的背景上使用灰色字体</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_ajjrhpp-l3GDG7ne7Am8fw.png"></p>
+<p>使用一个看起来轻一点的灰色字体去淡化内容在白色背景里是个不错的方法，但是在有颜色的背景里就不怎么棒了。</p>
+<p>这是因为往往我们觉得灰色字体在白色背景上，相对黑色而言<em>对比度会降低</em>。</p>
+<p>事实上，<strong>让文本逐渐接近背景色可以创造出层次感</strong>，而不是使用灰色。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_CNaej5BrPr9lWTMAfllfdw.png"></p>
+<p>有两种方法可以在有颜色的背景上处理对比度：</p>
+<h3 id="1-减少白色字体的透明度"><a href="#1-减少白色字体的透明度" class="headerlink" title="1. 减少白色字体的透明度"></a>1. 减少白色字体的透明度</h3><p>使用带有透明度的白色字体，可以让背景色渗入到字体中一些，从而淡化文字在背景中的显示。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_OMntEW2V5jPXrZR6CjrBFQ.png"></p>
+<h3 id="2-手动地从背景色中采集一个颜色"><a href="#2-手动地从背景色中采集一个颜色" class="headerlink" title="2. 手动地从背景色中采集一个颜色"></a>2. 手动地从背景色中采集一个颜色</h3><p>当背景图是图片或者花纹时，或者降低了透明度之后，感觉字体很沉闷，这个方法要比减少透明度更好。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_d5Ft9yND08hTdmXgFTLQJw.png"></p>
+<p>调一个色调和背景相同，饱和度和亮度不同的颜色。这个颜色让你看起来舒服就好。</p>
+<hr>
+<h2 id="3-调一调阴影的偏移量"><a href="#3-调一调阴影的偏移量" class="headerlink" title="3.调一调阴影的偏移量"></a>3.调一调阴影的偏移量</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_LisFGBtYOvR-3cwFTzTDUw.png"></p>
+<p>比起使用更大的模糊和扩散值让阴影让盒子更加醒目，不如加一个垂直方向的偏移。</p>
+<p>这会让盒子看起来更加自然，因为它模拟了一个从上面照射下来的光源。就像是我们在现实中看东西的视角。</p>
+<p>这个建议同样适用于诸如 input 输入框之类的内阴影的使用。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_qWSsYovqBDKF87f1IVMHsQ.png"></p>
+<p>如果你觉得这些关于阴影的设计很有意思，可以尝试一下这本神奇的读物：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://material.io/design/material-design/elevation-shadows.html"> Material Design Guidelines</a>。</p>
+<hr>
+<h2 id="4-少用一些边框"><a href="#4-少用一些边框" class="headerlink" title="4.少用一些边框"></a>4.少用一些边框</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_fNm6hXxnBvIcHGp9DQRdRQ.png"></p>
+<p>当你想让两个元素分开的时候，不要立即给他们之间塞一个分隔线。</p>
+<p>虽然边框是一个区分多个元素很好的做法，但它并不是唯一的方法。使用太多的边框容易让界面看起来繁杂凌乱。</p>
+<p>接下来你想使用边框的时候，不妨试试这些建议：</p>
+<h3 id="1-使用-box-shadow-替代"><a href="#1-使用-box-shadow-替代" class="headerlink" title="1.使用 box-shadow 替代"></a>1.使用 box-shadow 替代</h3><p>盒子阴影可以像边框一样勾勒出一个元素的轮廓，在达到分隔元素目的的同时，微妙地不让人觉得繁杂。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_Pm5PyS0vZ65GuGu8erPRfA.png"></p>
+<h3 id="2-使用两个不同的背景色"><a href="#2-使用两个不同的背景色" class="headerlink" title="2.使用两个不同的背景色"></a>2.使用两个不同的背景色</h3><p>给两个相邻的元素加上稍稍不同的背景色，可以让人们感受到两个元素的差异。如果你在不同的背景色中间增加了边框，试试把边框去掉。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_qWSsYovqBDKF87f1IVMHsQ.png"></p>
+<h3 id="3-添加一点额外的空隙"><a href="#3-添加一点额外的空隙" class="headerlink" title="3.添加一点额外的空隙"></a>3.添加一点额外的空隙</h3><p>有没有什么更好的方法可以更简单的让元素显得分离呢？在不添加新的 UI 的情况下，用空隙把元素分开是个不错的方法。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_7CEsoYdtFPjMBqpDB58HqQ.png"></p>
+<hr>
+<h2 id="5-不要让小的图标显得炸裂（Don’t-blow-up-icons-that-are-meant-to-be-small）"><a href="#5-不要让小的图标显得炸裂（Don’t-blow-up-icons-that-are-meant-to-be-small）" class="headerlink" title="5.不要让小的图标显得炸裂（Don’t blow up icons that are meant to be small）"></a>5.不要让小的图标显得炸裂（Don’t blow up icons that are meant to be small）</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_57g05Gl-FjDtcCUtaPPOLw.png"></p>
+<p>如果你的设计需要用到一些大图标（_比如页面中有特征的区域_），你也许会本能的拿起一些免费图标就用，比如<a target="_blank" rel="noopener external nofollow noreferrer" href="https://fontawesome.com/">FontAwesome</a>或者<a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.zondicons.com/">Zondicons</a>。然后增加图标的尺寸，直至满足自己的需求。</p>
+<p>反正它们是矢量图，增加尺寸也不会糊？</p>
+<p>确实，矢量图放大也不会糊。<strong>在 16-24 像素下绘制的图标，硬生生地放大三四倍，怎么看都不会让人觉得专业。</strong>他们会因为缺少细节而显得又矮又胖。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_dJyk3SNvrxuTEuZa7fiY0g.png"></p>
+<p>如果你得到的是一个小图标，并且没有什么其他的填充。那么可以试试把它放在一个有形状的背景中。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_Og6TmKmbZg7qauQymzhxBQ.png"></p>
+<p>这么做可以让图标更加符合它本身设计时的尺寸，同时也填充了更大的空间。</p>
+<p>如果你有足够的预算，那么你可以设计一些用得到的大尺寸图标，比如<a target="_blank" rel="noopener external nofollow noreferrer" href="https://heroicons.com/">Heroicons</a>或者<a target="_blank" rel="noopener external nofollow noreferrer" href="https://useiconic.com/">Iconic</a>。</p>
+<h2 id="6-用一些突出的有颜色的边框，给平淡的设计加点料"><a href="#6-用一些突出的有颜色的边框，给平淡的设计加点料" class="headerlink" title="6.用一些突出的有颜色的边框，给平淡的设计加点料"></a>6.用一些突出的有颜色的边框，给平淡的设计加点料</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_uwsVo34TWzKM91Gyqsh88Q.png"></p>
+<p>如果你不是个平面设计师，那么该如何在你的 UI 里添加一些摄影或者插画那样的视觉魅力呢。</p>
+<p>一个简单的小技巧，在你的 UI 里添加一些彩色的边框，从而让整个界面看上去不那么平淡乏味。</p>
+<p>举个例子，比如这个提示框的沿边：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_jEivJuYRI3PbrGYVccKkHA.png"></p>
+<p>…或者这个高亮的导航：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_7Pf5gu0r3uPi7W5vR9dcWQ.png"></p>
+<p>…甚至横跨整个页面布局：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_YMrMBgjpbuTs_WqdbhymNg.png"></p>
+<p>这不需要任何平面设计天赋就可以创造一个多彩的 UI，而且可以很大程度的让人觉得你的网站很有“设计感”。</p>
+<p><em>觉得配色很难？试试从一个有边界的调色板里（比如<a target="_blank" rel="noopener external nofollow noreferrer" href="https://dribbble.com/shots">Dribbble’s color search</a>）选择颜色。这样可以避免被传统的无边界调色板淹没灵感。</em></p>
+<hr>
+<h2 id="7-不是每个按钮都必须要有背景色"><a href="#7-不是每个按钮都必须要有背景色" class="headerlink" title="7.不是每个按钮都必须要有背景色"></a>7.不是每个按钮都必须要有背景色</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_SIfuJd-3ZFYyA_W1Nme1Yw.png"></p>
+<p>当用户在界面上进行操作时，很容易掉进一些带有语义的设计陷阱里。</p>
+<p>像 Bootstrap 这样的框架，在你添加按钮的时候，会鼓励你使用一个有语义性的样式：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_2xkDfSjvq7Xyb_ceInrMpw.png"></p>
+<p><em>“这是个有积极性的操作？给这个按钮加上绿色。”</em></p>
+<p><em>“这是要删除数据？把这个按钮变红。”</em></p>
+<p>语义是按钮设计的一个重要组成，但是通常会忽略一个维度更高的设计：<strong>重要性的层次结构</strong>。</p>
+<p>页面上的每个操作都在一个表示重要性的金字塔中。大多数页面里都只有一个真正的主要操作，几个不太重要的次级操作，以及一些很少使用的第三级操作。</p>
+<p><strong>在设计这些操作的时候，更重要的是传达它们在重要性金字塔中的位置。</strong></p>
+<ul>
+<li>主要操作应该是很明显的，坚实的（solid），高对比度的背景色非常合适</li>
+<li>次要操作应该是明确的，但不突出。低对比度的背景色，或者大纲样式是不错的选择</li>
+<li>三级操作应该是可以发现但是不显眼的。把它们设计成跟链接差不多的样式最合适了</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1__tq33tZkr3DZuZgP08Jcrw.png"></p>
+<p><em>“那一些破坏性的操作呢，应该把他们都做成红色吗？”</em></p>
+<p>并不一定！如果这个破坏性操作不是这个页面的主要操作，那么给他二级或者三级操作的处理方式更合适。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_1CxYaUc6Bk-pTRXH5TQonw.png"></p>
+<p>保存一个又大又红又粗的样式，来修饰页面上具有破坏性的主要操作。比如这个弹窗：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_cuYcwjOO26sKHImHaY6yFA.png"></p>
+<hr>
+<h2 id="觉得这篇文章不错？我们刚出了一本书！"><a href="#觉得这篇文章不错？我们刚出了一本书！" class="headerlink" title="觉得这篇文章不错？我们刚出了一本书！"></a>觉得这篇文章不错？我们刚出了一本书！</h2><p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.refactoringui.com/book">Refactoring UI</a>。我们所知道的关于设计的一切都打包在这里，包含了一本书，一些截图，一个组件库以及一些定制设计的资源等。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1_sU4xq5W_xPjKPvSvQvOOzw.png"></p>
+<p>已经有<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.refactoringui.com/book/kind-words">超过六千人</a>购买了，而且风评相当不错。</p>
+<p>如果有兴趣，可以到<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.refactoringui.com/book">RefactoringUI.com/book</a>去学到更多的东西，并且下载一个样本。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.homu.space">Amurita</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.homu.space/posts/aa010669/">https://blog.homu.space/posts/aa010669/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.homu.space" target="_blank">吼姆小行星</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BF%BB%E8%AF%91/">翻译</a></div><div class="post_share"><div class="social-share" data-image="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/illust_94284226_20240804_123616.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://unpkg.com/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://unpkg.com/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E5%BE%AE%E4%BF%A1.jpg" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E5%BE%AE%E4%BF%A1.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E6%94%AF%E4%BB%98%E5%AE%9D.jpg" rel="external nofollow noreferrer" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E6%94%AF%E4%BB%98%E5%AE%9D.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/2416a3fc/" title="Mapbox使用笔记"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/illust_94284226_20240804_123616.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Mapbox使用笔记</div></div></a></div><div class="next-post pull-right"><a href="/posts/5093a6d4/" title="明年继续努力啦"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/2022.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">明年继续努力啦</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E5%B0%8F%E5%8E%A8%E5%A8%98Avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Amurita</div><div class="author-info__description">日々私たちが過ごしている日常は、実は奇跡の連続なのかもしれない。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">60</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/homuxing" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:amurita0521@gmail.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://wpa.qq.com/msgrd?v=3&amp;uin=1708825868&amp;site=qq&amp;menu=yes" rel="external nofollow noreferrer" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#7-%E4%B8%AA%E4%BD%9C%E5%BC%8A%E8%88%AC%E7%9A%84%E5%AE%9E%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%8A%80%E5%B7%A7"><span class="toc-number">1.</span> <span class="toc-text">7 个作弊般的实用设计技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E7%AD%96%E7%95%A5%E6%9D%A5%E6%94%B9%E5%96%84%E4%BD%A0%E7%9A%84%E8%AE%BE%E8%AE%A1%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E7%94%A8%E5%A4%A9%E8%B5%8B%E3%80%82"><span class="toc-number">1.1.</span> <span class="toc-text">用策略来改善你的设计，而不是用天赋。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BD%BF%E7%94%A8%E9%A2%9C%E8%89%B2%EF%BC%88color%EF%BC%89%E5%92%8C%E7%B2%97%E7%BB%86%EF%BC%88weight%EF%BC%89%E6%9D%A5%E6%8E%A7%E5%88%B6%E7%AD%89%E7%BA%A7%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E5%A4%A7%E5%B0%8F%EF%BC%88size%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">1.使用颜色（color）和粗细（weight）来控制等级，而不是大小（size）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%B8%8D%E8%A6%81%E5%9C%A8%E6%9C%89%E9%A2%9C%E8%89%B2%E7%9A%84%E8%83%8C%E6%99%AF%E4%B8%8A%E4%BD%BF%E7%94%A8%E7%81%B0%E8%89%B2%E5%AD%97%E4%BD%93"><span class="toc-number">1.3.</span> <span class="toc-text">2.不要在有颜色的背景上使用灰色字体</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%87%8F%E5%B0%91%E7%99%BD%E8%89%B2%E5%AD%97%E4%BD%93%E7%9A%84%E9%80%8F%E6%98%8E%E5%BA%A6"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. 减少白色字体的透明度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%89%8B%E5%8A%A8%E5%9C%B0%E4%BB%8E%E8%83%8C%E6%99%AF%E8%89%B2%E4%B8%AD%E9%87%87%E9%9B%86%E4%B8%80%E4%B8%AA%E9%A2%9C%E8%89%B2"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. 手动地从背景色中采集一个颜色</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%B0%83%E4%B8%80%E8%B0%83%E9%98%B4%E5%BD%B1%E7%9A%84%E5%81%8F%E7%A7%BB%E9%87%8F"><span class="toc-number">1.4.</span> <span class="toc-text">3.调一调阴影的偏移量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%B0%91%E7%94%A8%E4%B8%80%E4%BA%9B%E8%BE%B9%E6%A1%86"><span class="toc-number">1.5.</span> <span class="toc-text">4.少用一些边框</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BD%BF%E7%94%A8-box-shadow-%E6%9B%BF%E4%BB%A3"><span class="toc-number">1.5.1.</span> <span class="toc-text">1.使用 box-shadow 替代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E4%B8%A4%E4%B8%AA%E4%B8%8D%E5%90%8C%E7%9A%84%E8%83%8C%E6%99%AF%E8%89%B2"><span class="toc-number">1.5.2.</span> <span class="toc-text">2.使用两个不同的背景色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B7%BB%E5%8A%A0%E4%B8%80%E7%82%B9%E9%A2%9D%E5%A4%96%E7%9A%84%E7%A9%BA%E9%9A%99"><span class="toc-number">1.5.3.</span> <span class="toc-text">3.添加一点额外的空隙</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%B8%8D%E8%A6%81%E8%AE%A9%E5%B0%8F%E7%9A%84%E5%9B%BE%E6%A0%87%E6%98%BE%E5%BE%97%E7%82%B8%E8%A3%82%EF%BC%88Don%E2%80%99t-blow-up-icons-that-are-meant-to-be-small%EF%BC%89"><span class="toc-number">1.6.</span> <span class="toc-text">5.不要让小的图标显得炸裂（Don’t blow up icons that are meant to be small）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%94%A8%E4%B8%80%E4%BA%9B%E7%AA%81%E5%87%BA%E7%9A%84%E6%9C%89%E9%A2%9C%E8%89%B2%E7%9A%84%E8%BE%B9%E6%A1%86%EF%BC%8C%E7%BB%99%E5%B9%B3%E6%B7%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8A%A0%E7%82%B9%E6%96%99"><span class="toc-number">1.7.</span> <span class="toc-text">6.用一些突出的有颜色的边框，给平淡的设计加点料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E4%B8%8D%E6%98%AF%E6%AF%8F%E4%B8%AA%E6%8C%89%E9%92%AE%E9%83%BD%E5%BF%85%E9%A1%BB%E8%A6%81%E6%9C%89%E8%83%8C%E6%99%AF%E8%89%B2"><span class="toc-number">1.8.</span> <span class="toc-text">7.不是每个按钮都必须要有背景色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%89%E5%BE%97%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%E4%B8%8D%E9%94%99%EF%BC%9F%E6%88%91%E4%BB%AC%E5%88%9A%E5%87%BA%E4%BA%86%E4%B8%80%E6%9C%AC%E4%B9%A6%EF%BC%81"><span class="toc-number">1.9.</span> <span class="toc-text">觉得这篇文章不错？我们刚出了一本书！</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/a590ccae/" title="做一个好玩的聊天机器人"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/illust_94284226_20240804_123616.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="做一个好玩的聊天机器人"/></a><div class="content"><a class="title" href="/posts/a590ccae/" title="做一个好玩的聊天机器人">做一个好玩的聊天机器人</a><time datetime="2025-03-09T10:26:52.345Z" title="更新于 2025-03-09 18:26:52">2025-03-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/a8791436/" title="记录各种各样的面试题"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/illust_94284226_20240804_123616.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记录各种各样的面试题"/></a><div class="content"><a class="title" href="/posts/a8791436/" title="记录各种各样的面试题">记录各种各样的面试题</a><time datetime="2025-01-31T09:22:26.050Z" title="更新于 2025-01-31 17:22:26">2025-01-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/70ac33cd/" title="第一次摩旅：洛阳-西安"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_133014.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第一次摩旅：洛阳-西安"/></a><div class="content"><a class="title" href="/posts/70ac33cd/" title="第一次摩旅：洛阳-西安">第一次摩旅：洛阳-西安</a><time datetime="2024-10-08T07:14:26.901Z" title="更新于 2024-10-08 15:14:26">2024-10-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By Amurita</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://unpkg.com/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.js"></script><script src="https://unpkg.com/vanilla-lazyload@17.8.8/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://unpkg.com/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://unpkg.com/mermaid@10.8.0/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'LQe4MLYTHsze7pF9lPI2FzaP-gzGzoHsz',
+      appKey: '21H3m311IQkKkKwysWYVU24z',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await getScript('https://unpkg.com/valine@1.5.1/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !true) {
+    if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>

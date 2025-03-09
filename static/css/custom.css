@@ -1,0 +1,82 @@
+:root {
+  --scrollbar-color: #00c4b6;
+  --card-bg: rgba(255, 255, 255, .75);
+  --timeline-bg: rgba(208,255,252, .2);
+}
+
+[data-theme='dark'] {
+  --card-bg: rgba(18,18,18,0.7);
+
+}
+
+/* 页脚透明 */
+#footer {
+  background: linear-gradient(0deg, #fff, transparent)
+}
+[data-theme="dark"] #footer {
+  background: linear-gradient(0deg, rgb(18,18,18), transparent)
+}
+
+#footer-wrap{
+  color: #4c4948;
+}
+#footer-wrap .framework-info a{
+  color: #4c4948;
+}
+/* 滚动条 */
+/* 由于使用了 scroll-bar: thin; 属性，圆角不生效 */
+/* *::-webkit-scrollbar-thumb{
+  border-radius: 5px;
+} */
+/* 右侧按钮 */
+/* #rightside > div > button, #rightside > div > a{
+  background: #00c4b6;
+} */
+
+/* post标题hover */
+/* #recent-posts > .recent-post-item >.recent-post-info > .article-title:hover{
+  color: #00c4b6;
+} */
+/* 导航hover */
+#nav .site-page:not(.child):after{
+  background: #00c4b6;
+}
+#page-header.nav-fixed #nav a:hover, 
+#page-header.nav-fixed #nav #site-name:hover, 
+#page-header.nav-fixed #nav #toggle-menu:hover{
+  color: #00c4b6;
+}
+/* 侧边栏hover */
+/* #aside-content .aside-list > .aside-list-item .content > .title:hover, #aside-content .aside-list > .aside-list-item .content > .comment:hover{
+  color: #00c4b6;
+} */
+/* #aside-content .card-tag-cloud a:hover{
+  color: #00c4b6!important;
+} */
+/* 去除page-header背景色 */
+#page-header{
+  background-color: transparent!important;
+}
+
+.gallery-videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 10px
+}
+/* 视频播放器 4:3 */
+.dplayer {
+  position: relative;
+  padding-top: 75%;
+  .dplayer-video-wrap {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.gallery-groups-section {
+  display: flex;
+  flex-wrap: wrap;
+}
