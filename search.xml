@@ -386,6 +386,32 @@
       </tags>
   </entry>
   <entry>
+    <title>吼姆小行星环境工程</title>
+    <url>/posts/671cb70a/</url>
+    <content><![CDATA[<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><p>主题是<a href="https://butterfly.js.org/">butterfly</a></p>
+<h2 id="持续更新"><a href="#持续更新" class="headerlink" title="持续更新"></a>持续更新</h2><p>自定义博客样式是一个渐进的过程…<br>这篇文章主要用来记录美化网站样式的过程<br>有好的建议欢迎留言~</p>
+<h2 id="修改主题源文件"><a href="#修改主题源文件" class="headerlink" title="修改主题源文件"></a>修改主题源文件</h2><h3 id="修改卡片颜色"><a href="#修改卡片颜色" class="headerlink" title="修改卡片颜色"></a>修改卡片颜色</h3><p>theme/butterfly/source/css/var.styl</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $card-bg = $white</span></span><br><span class="line"><span class="addition">+ $card-bg = rgba(255, 255, 255, .75)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="修改-hover-颜色"><a href="#修改-hover-颜色" class="headerlink" title="修改 hover 颜色"></a>修改 hover 颜色</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $text-bg-hover = $theme-color</span></span><br><span class="line"><span class="addition">+ $text-bg-hover = #00c4b6</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="修改夜间模式卡片颜色"><a href="#修改夜间模式卡片颜色" class="headerlink" title="修改夜间模式卡片颜色"></a>修改夜间模式卡片颜色</h2><p>theme/butterfly/source/css/_mode/darkmode.styl</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- --card-bg: alpha(#121212, .7)</span></span><br><span class="line"><span class="addition">+ --card-bg: alpha(#121212, .7)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义-CSS"><a href="#自定义-CSS" class="headerlink" title="自定义 CSS"></a>自定义 CSS</h2><p>自定义 css 的方法</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># _config.butterfly.yml</span></span><br><span class="line"><span class="comment"># Inject</span></span><br><span class="line"><span class="comment"># Insert the code to head (before &#x27;&lt;/head&gt;&#x27; tag) and the bottom (before &#x27;&lt;/body&gt;&#x27; tag)</span></span><br><span class="line"><span class="comment"># 插入代码到头部 &lt;/head&gt; 之前 和 底部 &lt;/body&gt; 之前</span></span><br><span class="line"><span class="attr">inject:</span></span><br><span class="line">  <span class="attr">head:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&lt;link</span> <span class="string">rel=&quot;stylesheet&quot;</span> <span class="string">href=&quot;/static/css/custom.css&quot;&gt;</span></span><br><span class="line">  <span class="attr">bottom:</span></span><br><span class="line">    <span class="comment"># - &lt;script src=&quot;xxxx&quot;&gt;&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>custom.css</strong></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 页脚透明 */</span></span><br><span class="line"><span class="selector-id">#footer</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(<span class="number">0deg</span>, <span class="number">#fff</span>, transparent);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#footer-wrap</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#4c4948</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#footer-wrap</span> <span class="selector-class">.framework-info</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#4c4948</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 滚动条 */</span></span><br><span class="line">::-webkit-scrollbar-thumb &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#00c4b6</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 右侧按钮 */</span></span><br><span class="line"><span class="selector-id">#rightside</span> &gt; <span class="selector-tag">div</span> &gt; <span class="selector-tag">button</span>,</span><br><span class="line"><span class="selector-id">#rightside</span> &gt; <span class="selector-tag">div</span> &gt; <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#00c4b6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* post标题hover */</span></span><br><span class="line"><span class="selector-id">#recent-posts</span> &gt; <span class="selector-class">.recent-post-item</span> &gt; <span class="selector-class">.recent-post-info</span> &gt; <span class="selector-class">.article-title</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#00c4b6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 导航hover */</span></span><br><span class="line"><span class="selector-id">#nav</span> <span class="selector-class">.site-page</span><span class="selector-pseudo">:not</span>(<span class="selector-class">.child</span>)<span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#00c4b6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#page-header</span><span class="selector-class">.nav-fixed</span> <span class="selector-id">#nav</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>,</span><br><span class="line"><span class="selector-id">#page-header</span><span class="selector-class">.nav-fixed</span> <span class="selector-id">#nav</span> <span class="selector-id">#site-name</span><span class="selector-pseudo">:hover</span>,</span><br><span class="line"><span class="selector-id">#page-header</span><span class="selector-class">.nav-fixed</span> <span class="selector-id">#nav</span> <span class="selector-id">#toggle-menu</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#00c4b6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 侧边栏hover */</span></span><br><span class="line"><span class="selector-id">#aside-content</span> <span class="selector-class">.aside-list</span> &gt; <span class="selector-class">.aside-list-item</span> <span class="selector-class">.content</span> &gt; <span class="selector-class">.title</span><span class="selector-pseudo">:hover</span>,</span><br><span class="line"><span class="selector-id">#aside-content</span> <span class="selector-class">.aside-list</span> &gt; <span class="selector-class">.aside-list-item</span> <span class="selector-class">.content</span> &gt; <span class="selector-class">.comment</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#00c4b6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#aside-content</span> <span class="selector-class">.card-tag-cloud</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#00c4b6</span> <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 去除page-header背景色 */</span></span><br><span class="line"><span class="selector-id">#page-header</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: transparent <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Blog</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用Caddy和docker部署hexo博客</title>
     <url>/posts/992525a2/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>以前这个博客是部署在阿里云的一台服务器上的，域名是 shirofune.cn</p>
@@ -468,32 +494,6 @@
         <tag>hexo</tag>
         <tag>docker</tag>
         <tag>caddy</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>吼姆小行星环境工程</title>
-    <url>/posts/671cb70a/</url>
-    <content><![CDATA[<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><p>主题是<a href="https://butterfly.js.org/">butterfly</a></p>
-<h2 id="持续更新"><a href="#持续更新" class="headerlink" title="持续更新"></a>持续更新</h2><p>自定义博客样式是一个渐进的过程…<br>这篇文章主要用来记录美化网站样式的过程<br>有好的建议欢迎留言~</p>
-<h2 id="修改主题源文件"><a href="#修改主题源文件" class="headerlink" title="修改主题源文件"></a>修改主题源文件</h2><h3 id="修改卡片颜色"><a href="#修改卡片颜色" class="headerlink" title="修改卡片颜色"></a>修改卡片颜色</h3><p>theme/butterfly/source/css/var.styl</p>
-<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $card-bg = $white</span></span><br><span class="line"><span class="addition">+ $card-bg = rgba(255, 255, 255, .75)</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="修改-hover-颜色"><a href="#修改-hover-颜色" class="headerlink" title="修改 hover 颜色"></a>修改 hover 颜色</h3><figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- $text-bg-hover = $theme-color</span></span><br><span class="line"><span class="addition">+ $text-bg-hover = #00c4b6</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="修改夜间模式卡片颜色"><a href="#修改夜间模式卡片颜色" class="headerlink" title="修改夜间模式卡片颜色"></a>修改夜间模式卡片颜色</h2><p>theme/butterfly/source/css/_mode/darkmode.styl</p>
-<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">- --card-bg: alpha(#121212, .7)</span></span><br><span class="line"><span class="addition">+ --card-bg: alpha(#121212, .7)</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="自定义-CSS"><a href="#自定义-CSS" class="headerlink" title="自定义 CSS"></a>自定义 CSS</h2><p>自定义 css 的方法</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># _config.butterfly.yml</span></span><br><span class="line"><span class="comment"># Inject</span></span><br><span class="line"><span class="comment"># Insert the code to head (before &#x27;&lt;/head&gt;&#x27; tag) and the bottom (before &#x27;&lt;/body&gt;&#x27; tag)</span></span><br><span class="line"><span class="comment"># 插入代码到头部 &lt;/head&gt; 之前 和 底部 &lt;/body&gt; 之前</span></span><br><span class="line"><span class="attr">inject:</span></span><br><span class="line">  <span class="attr">head:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&lt;link</span> <span class="string">rel=&quot;stylesheet&quot;</span> <span class="string">href=&quot;/static/css/custom.css&quot;&gt;</span></span><br><span class="line">  <span class="attr">bottom:</span></span><br><span class="line">    <span class="comment"># - &lt;script src=&quot;xxxx&quot;&gt;&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>custom.css</strong></p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 页脚透明 */</span></span><br><span class="line"><span class="selector-id">#footer</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(<span class="number">0deg</span>, <span class="number">#fff</span>, transparent);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#footer-wrap</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#4c4948</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#footer-wrap</span> <span class="selector-class">.framework-info</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#4c4948</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 滚动条 */</span></span><br><span class="line">::-webkit-scrollbar-thumb &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#00c4b6</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 右侧按钮 */</span></span><br><span class="line"><span class="selector-id">#rightside</span> &gt; <span class="selector-tag">div</span> &gt; <span class="selector-tag">button</span>,</span><br><span class="line"><span class="selector-id">#rightside</span> &gt; <span class="selector-tag">div</span> &gt; <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#00c4b6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* post标题hover */</span></span><br><span class="line"><span class="selector-id">#recent-posts</span> &gt; <span class="selector-class">.recent-post-item</span> &gt; <span class="selector-class">.recent-post-info</span> &gt; <span class="selector-class">.article-title</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#00c4b6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 导航hover */</span></span><br><span class="line"><span class="selector-id">#nav</span> <span class="selector-class">.site-page</span><span class="selector-pseudo">:not</span>(<span class="selector-class">.child</span>)<span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#00c4b6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#page-header</span><span class="selector-class">.nav-fixed</span> <span class="selector-id">#nav</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>,</span><br><span class="line"><span class="selector-id">#page-header</span><span class="selector-class">.nav-fixed</span> <span class="selector-id">#nav</span> <span class="selector-id">#site-name</span><span class="selector-pseudo">:hover</span>,</span><br><span class="line"><span class="selector-id">#page-header</span><span class="selector-class">.nav-fixed</span> <span class="selector-id">#nav</span> <span class="selector-id">#toggle-menu</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#00c4b6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 侧边栏hover */</span></span><br><span class="line"><span class="selector-id">#aside-content</span> <span class="selector-class">.aside-list</span> &gt; <span class="selector-class">.aside-list-item</span> <span class="selector-class">.content</span> &gt; <span class="selector-class">.title</span><span class="selector-pseudo">:hover</span>,</span><br><span class="line"><span class="selector-id">#aside-content</span> <span class="selector-class">.aside-list</span> &gt; <span class="selector-class">.aside-list-item</span> <span class="selector-class">.content</span> &gt; <span class="selector-class">.comment</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#00c4b6</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#aside-content</span> <span class="selector-class">.card-tag-cloud</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#00c4b6</span> <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 去除page-header背景色 */</span></span><br><span class="line"><span class="selector-id">#page-header</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: transparent <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Blog</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -801,6 +801,479 @@
       </categories>
   </entry>
   <entry>
+    <title>明年继续努力啦</title>
+    <url>/posts/5093a6d4/</url>
+    <content><![CDATA[<h1 id="今年都做了些什么"><a href="#今年都做了些什么" class="headerlink" title="今年都做了些什么"></a>今年都做了些什么</h1><p>2021 年马上就结束了，今天是 2021.12.29。想到什么写什么，零零散散，写给自己</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/2022.png" alt="花汪的新年祝福"></p>
+<p>不知不觉，距离新型冠状病毒肺炎出现已经两年了，这东西已经无法从我的人生中忽视掉了。新冠疫情深刻地改变了生活方式，以前是想去哪里就去哪里，现在旅行不仅在时间和行动上收到了限制，在个人的计划里更是一种奢侈。希望明年可以好起来吧</p>
+<p>都怪拖延症…写了好久，本来打算在 12.31 写完的，结果拖到了今天（1 月 3 号），所以今年去年什么的…emmmm 我也不知道是那年，凑合看吧（</p>
+<h2 id="好的地方"><a href="#好的地方" class="headerlink" title="好的地方"></a>好的地方</h2><p>夸夸自己</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/taiga.jpg" alt="今年是大河年！"></p>
+<h3 id="技能进步"><a href="#技能进步" class="headerlink" title="技能进步"></a>技能进步</h3><p>前年（2020）从郑州来到上海，找了半个月的工作，确定了今年一年的生活方式。刚来上海的时候知识储备差的有点多，又找不到人问，不好意思问，就只能把搜索框作为自己的导师。这给我的职业发展提供了最底层的基础，也就是我一年内最常用的学习方法。</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/lan.jpg" alt="郑州的小兰花"></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/toshanghai.jpg" alt="To ShangHai"></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/chudaoshanghai.jpg" alt="找工作"></p>
+<p>还记得那年找工作蛮辛苦的</p>
+<blockquote>
+<p>技术能力上的进步可以这么总结：从不信任代码到不信有什么东西是搞不出来的</p>
+</blockquote>
+<p>我解决问题的方法论也有了雏形，用两个词来概括，格物，溯源</p>
+<p>万物可分，有果必有因，遵循基础规律不停的分解问题，理清多个问题之间的联系，找到各个问题的根源所在。</p>
+<h2 id="经济独立"><a href="#经济独立" class="headerlink" title="经济独立"></a>经济独立</h2><p>经济方面完成了养活自己的独立。虽说之前在福建的时候，已经不需要和家里要钱了，但是存不下来，不能满足自己对更好生活的期望，更不能反馈到家里。到了上海稳定之后，更大的挑战带来的收益也更大。现在终于有能力完成一些自己的想法了</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/A1231F983CF3BB9CD1575D53335C1B17.jpg"></p>
+<h2 id="未来的学历"><a href="#未来的学历" class="headerlink" title="未来的学历"></a>未来的学历</h2><p>完成了成人高考，阶段性任务完成！</p>
+<p>两年半之后就能破除找工作的学历限制了</p>
+<p>不过我相信做技术这一行，能力还是最重要的</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/chengkao.jpg" alt="成考"></p>
+<h2 id="游玩"><a href="#游玩" class="headerlink" title="游玩"></a>游玩</h2><p>清明节，劳动节，端午节的时候去其他城市游玩的很开心。</p>
+<h3 id="苏州-amp-上海"><a href="#苏州-amp-上海" class="headerlink" title="苏州&amp;上海"></a>苏州&amp;上海</h3><p>清明和朋友去了苏州，打卡了拙政园，狮子林，平江古镇，体验到了一点江南的优雅精致（kora，上海明明也是江南地区！</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/suzhou.jpg" alt="苏州"></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/shizilin1.jpg" alt="狮子林"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/shizilin2.jpg" alt="狮子林"><br>狮子林的假山特别好玩</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/CFBF71494139FD3337AE1CC317E158B0.jpg" alt="拙政园"><br>课本上的拙政园</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E4%B8%83%E9%87%8C%E5%B1%B1%E5%A1%98.jpg" alt="七里山塘"></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E6%A1%82%E6%BB%A1%E9%99%87.jpg" alt="桂满陇"></p>
+<p>桂满陇的菜非常美味！</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/huqiu.jpg" alt="虎丘"></p>
+<p>海拔 37M 的高山！</p>
+<p>在苏州有一点小小的遗憾，没有去到苏州博物馆。苏州博物馆的建筑很独特，只从外面看到了…</p>
+<p>苏州玩了两天之后回到上海继续转了转，外滩，世纪公园散散步 おだやか…</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/shanghai.jpg" alt="外滩"></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/E832AD1E3EE2BCC722B9C74296678099.jpg" alt="世纪公园"></p>
+<p>世纪公园的这张照片是我拍的最满意的一张！是和上海的朋友一起去逛的</p>
+<h3 id="洛阳龙门石窟"><a href="#洛阳龙门石窟" class="headerlink" title="洛阳龙门石窟"></a>洛阳龙门石窟</h3><p>劳动节回家，和发小去了龙门石窟，在洛河边晃悠。果然根在洛阳，我喜欢洛河</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/luoyangqiao.jpg" alt="洛阳桥"></p>
+<p>劳动节在洛阳桥上拍的照片</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/lushena.jpg" alt="卢舍那大佛"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/yihe.jpg" alt="伊河"><br>龙门石窟，还有伊河两岸。伊河两岸太美了</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/5B9D7AD75510A5C14D9A4489CA231582.jpg" alt="应天门博物馆"></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/luotu.jpg" alt="夜晚的洛阳中心图书馆"></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/ichigo.jpg" alt="草莓地"></p>
+<p>家里的小草莓地，没有人管过…但是竟然结果了，还蛮好吃！虽然很小</p>
+<h3 id="端午节的秦皇岛度假"><a href="#端午节的秦皇岛度假" class="headerlink" title="端午节的秦皇岛度假"></a>端午节的秦皇岛度假</h3><p>端午节去朋友家度假，秦皇岛是个好地方啊，宜人的温度，舒适的海风，早起赶海。非常难忘的一次旅行</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/qinhuangdaozhan.jpg" alt="秦皇岛站"></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/heimi.jpg" alt="黑米"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/xiaozheng.jpg" alt="小正"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/heimihexiaozheng.jpg" alt="一起玩嘛~"><br>朋友家的两只喵，黑米和小正~</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/shanhaiguan.jpg" alt="山海关"><br>山海关！天下第一关</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/changchengruhaikou.jpg" alt="老龙头"><br>长城入海口<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/heihei.jpg" alt="笑（）"></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/geziwo.jpg" alt="鸽子窝"></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E5%87%8C%E6%99%A8%E8%B5%B6%E6%B5%B7%E7%9A%84%E6%94%B6%E8%8E%B7.jpg" alt="凌晨赶海的收获"><br>赶海太好玩了！真想再来一次，带上万全的工具！</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/tiedao.jpg" alt="铁道"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/tiedaohaibian.jpg" alt="铁道的尽头"><br>还有一条很美很美的旧铁道</p>
+<p>记得当时是毕业季，有不少人在这儿拍毕业照呢</p>
+<p>铁道的尽头是柔软的海风</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/beijingst.jpg" alt="北京站"></p>
+<p>回上海的时候路过了北京，当时还下了小雨</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/sanbu.jpg"><br>旅行就是边晃悠边聊天嘛</p>
+<p>平平淡淡才是真…</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E7%9C%9F%E8%AE%A9%E4%BA%BA%E8%84%B8%E6%89%81.png" alt="真让人脸扁"></p>
+<h3 id="十一回家，看看洛河"><a href="#十一回家，看看洛河" class="headerlink" title="十一回家，看看洛河"></a>十一回家，看看洛河</h3><p>从端午到十一，是传送带一般的循环运动，上班，下班，睡觉…</p>
+<p>这段时间仿佛得了五月病似的没有干劲（你有过几天的干劲？</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E5%9B%BD%E8%8A%B1%E5%9B%AD.jpg" alt="国花园，适逢花展"><br>十一回家，和老爸谈谈人生…</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/luohedi.jpg" alt="家附近的洛河堤"></p>
+<p>和家人散散步挺好的</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/dianshita.jpg" alt="诡异审美的洛阳电视塔"></p>
+<p>以后会回家的吧…</p>
+<blockquote>
+<p><a href="https://music.163.com/#/song?id=469508285">铁道浪漫（谷村新司）</a><br>右延べるは　无残な梦への诱い<br>左のレールは　ささやかな幸福の诱い「いざない」</p>
+</blockquote>
+<h3 id="其他的一些地方"><a href="#其他的一些地方" class="headerlink" title="其他的一些地方"></a>其他的一些地方</h3><p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/gucungongyuan.jpg" alt="顾村公园"><br>得到了一顶帐篷，和朋友去顾村公园搭帐篷拍羽毛球很愉快</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/luxun.jpg" alt="鲁迅公园"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/luxunbowuguan.jpg" alt="鲁迅博物馆"><br>鲁迅公园和鲁迅博物馆</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/bengbengbeng.jpg" alt="崩坏2&amp;涟泉大江户"><br>崩崩的线下坦诚相见</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/muxiao.jpg" alt="洛阳三中"><br>回去看了眼母校</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/gongqing.jpg" alt="共青森林公园"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/gongqingsenlin.jpg" alt="共青森林公园"><br>搬家之前去了趟共青森林公园</p>
+<p>大概五六月份，买了服务器，建成了自己的 blog，然后把很早之前写的文章给搬了过来（凑数，以后会让 blog 更偏向生活</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/xin.jpg" alt="我收到的信，袋子是之前魔卡少女樱展的"></p>
+<p>每隔几个月，就会和一个在部队里的朋友写信，频率很低，但是很有意思。不过我写字好丑啊 orz…</p>
+<p>十月，我和朋友一起在上海宝山整租了一套房子，租房真贵啊…</p>
+<p>离开了刚来上海时不舒服的住所</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/sipinglu.jpg" alt="以前的房间"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/chuangwai.jpg" alt="窗外"></p>
+<p>新的住所可以燃气做饭，中间一两年没做菜，都快不知道怎么颠锅了</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/banjia.jpg"></p>
+<p>搬家之后和上海朋友们的聚餐，不过大都不是我做的，</p>
+<p>四月份，公司换了办公地址，从这里</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/gangtai.jpg" alt="港泰广场"></p>
+<p>搬到了这里</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/hengli.jpg" alt="恒利国际大厦"></p>
+<p>哦对了，我还留了很长的头发，扎起了鞭子~~为什么要留长头发呢…<br>因为好玩！（其实超麻烦的）<br>这个不给看！</p>
+<h2 id="不好的地方"><a href="#不好的地方" class="headerlink" title="不好的地方"></a>不好的地方</h2><p>交际一如既往的不擅长，没能和身边很厉害的人关系特别好…</p>
+<p>遇到了很麻烦的同事 orz</p>
+<p>没攒住很多钱吧，但是日常生活的水平提高了很多</p>
+<p>没有丰富的旅行是一大遗憾…</p>
+<p>缺少运动啊，健康才是最重要的，鼻炎的困扰好难受啊！！</p>
+<h1 id="想法和感慨"><a href="#想法和感慨" class="headerlink" title="想法和感慨"></a>想法和感慨</h1><p>健康真的很重要，自己独立在外，最痛苦的时候就是生病了，无助的感觉能把心灵摧垮</p>
+<p>不愉快的时候就想办法让自己高兴</p>
+<p>WLB，工作与生活应该分离，这点我做的很好，工作与生活平衡是非常重要的，不能持续加班，未来找工作我会拒绝掉严重加班的公司。</p>
+<p><strong>能摸鱼的工作才能提升自己的能力</strong>，不能一个劲埋头写业务代码。真的真的会废掉的</p>
+<p>我好羡慕这位程序媛：<a href="https://space.bilibili.com/42233366">被删</a>，这一年多很认同她的想法，处理同事关系，反内卷，生活与工作的平衡，以及写作和成长的方法。虽然我在一家小公司，朝九晚六很少有这种软技能的应用场景。但是依然获益匪浅，非常感谢</p>
+<p>还有好多好多想法，一时半会儿写不出来了 orz，其实现在的时间是<code>new Date().toLocaleString()</code></p>
+<p>打死你，是<code>2021/12/31 下午11:42:00</code></p>
+<p>新朋友越来越少，高中的时候我认识了很多很多有趣的人，我喜欢他们。但是现在我的朋友圈仿佛已经封闭了。新朋友没有，老朋友渐渐地流失。我为什么这么害羞呢…我是不是应该主动一点 orz</p>
+<p>意识到自己可能被人故意边缘化的时候，就会很心痛</p>
+<p>算是职业发展的副作用吧，自己以前的一些宝贵的兴趣渐渐地被忽视，看的动画片少了，玩游戏也少了，动画片的幕后关注也少了…太可惜了，我会补回来的。</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/lisamiya.png" alt="LisaMiya"></p>
+<blockquote>
+<p>对美少女和 Yuri 的爱是绝对的！！</p>
+</blockquote>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/SayaKyoko.png" alt="SayaKyoko"></p>
+<p>自己从小就是寄宿学校，一个星期住校五天回家两天，回家两天母上还带着我风里雨里的去奥数英语班，虽然现在感觉没什么用，但是对于教育，她们真的用心了也尽力了。父上总是很不好惹，小时候事情和母上讲得多，有时候还撒泼不讲理，毕竟在父上那里撒泼是要挨拖鞋的。现在和父上讲得更多，也更能理解父母的辛苦。</p>
+<p>有时候就想啊…我现在在上海，他们是什么想法。虽然每次回家都会告诉我洛阳很有发展潜力，未来创业支持我，希望我可以在家乡扎根发展。我能理解，我也想回家，但是在家时间一长就会因为各种问题吵起来，这是我的情绪控制能力不够。</p>
+<p>父母在家的生活还不错，不需要节俭，虽然他们吃过苦，有节俭的习惯。身体也还算健康，这让我很放心。我在上海也尽可能地让家里放心。这样的距离给了我自由，但是给了父母什么…我也不知道该怎么做，定期往家里打点钱，多少分享点生活的近况。但是对他们来说，只要在外地，我就是不可及的。</p>
+<p>养了这么大的孩子终于独立了，却不能长久地在身边。等孩子有能力的时候自己彻底的老了，又不想给孩子添麻烦 orz。这不是我想看到的，太残酷了</p>
+<p>大桥卓弥的<a href="https://music.163.com/#/song?id=492053">ありがとう</a>，反复听过好几遍…</p>
+<h1 id="明年做些什么事"><a href="#明年做些什么事" class="headerlink" title="明年做些什么事"></a>明年做些什么事</h1><p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/2022.jpg"></p>
+<h2 id="安稳又有进步的生活"><a href="#安稳又有进步的生活" class="headerlink" title="安稳又有进步的生活"></a>安稳又有进步的生活</h2><p>想搞一台台式机，虽然说了很久了还没买，手机笔记本什么的都换了一遍，平常忙起来打游戏的时间就很少。台式机对我来说也许是一个很少用的伪需求，但是玩游戏真的很快乐。即使时间很少，还是想玩的。</p>
+<p>换一个稍微紧凑一点，工资更高的工作。多攒一些钱才能出去玩</p>
+<p>想去长沙，广州，重庆。青藏也想去，但是有点难吧。明年要把江南的几个城市玩一遍！</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1873B5E8B62C4EE7F354DFA34A827DF6.jpg" alt="小书柜"></p>
+<p>我想有更多的收藏品，明年我要这些</p>
+<ul>
+<li>终将成为你，安达达与岛村村</li>
+<li>补齐我的魔女之旅</li>
+<li>蘑菇的拟态日常，我好喜欢蘑菇煎蛋啊</li>
+<li>再抱一只 fufu！手办景品什么的不能轻易剁手了</li>
+<li>少女终末旅行，画集</li>
+<li>继续支持我家鹿乃</li>
+</ul>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/fufu.jpg" alt="fufu"></p>
+<p>让自己的 Blog 更加得生活化，技术类文章还是会有的，但是质量要提高！我是有分享欲的，但是就是懒嘛。</p>
+<ul>
+<li>完善相册的功能，会记录一些出去玩的照片，日常生活，还有我家鹿乃！</li>
+<li>我想做一个歌词页面，或者可以记录歌词片段的东西</li>
+<li>看过的作品分享，动画片，电影，galgame 什么的。Hexo 有个豆瓣的插件。我应该会单独做一个系统</li>
+<li>好好地介绍一下自己！</li>
+</ul>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/kano.jpg" alt="Kano"></p>
+<h2 id="自己的创造力"><a href="#自己的创造力" class="headerlink" title="自己的创造力"></a>自己的创造力</h2><p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E5%B0%8F%E5%8E%A8%E5%A8%98Avatar.png"></p>
+<p>我一直觉得创造些什么东西是非常棒的事情。插画师们塑造的一个个角色让我心动不已。GitHub 上好玩的开源代码库也给我带来了很多乐趣。</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/baichuan.jpg"></p>
+<p>明年就是毕业第三年了，工作理所应到的要手到擒来。除此之外，我要明确一下自己的发展方向。目前还在埋头处理业务，我应该能成为一个小团队的 leader，今年一年里思考了很多一个良好的团队应该是什么样子的问题。</p>
+<p>我的理想工作是写自己想要的东西，和几个人一起创作出属于我们自己的 IP 或者产品。即使未来不创业，现在也要为创业积累硬实力</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/shirofune.jpg"></p>
+<p>与创造力相并提的是行动力…今年我本来能做得更好的，行动力不足，很多事情都在拖延。比如墨刀上面的产品原型画了一个又一个，结果都是 demo 级别的…</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/neko.jpg"></p>
+<ul>
+<li>建设一个类似于<a href="https://firenzia.github.io/sakura-ui/">Sakura UI</a>的小组件库，这是一个很简单的组件库，我觉得我能做到</li>
+<li>Memories，一个记录和推荐动画片，galgame 的网站。现在只有前端的简单页面。</li>
+<li>今年最少要啃掉的技术类书籍<ul>
+<li>JavaScript 设计模式</li>
+<li>CSS 世界 / CSS 新世界</li>
+<li>狼书三卷</li>
+</ul>
+</li>
+<li>一个自己的工具库，封装一些 DOM 处理，数据处理之类的函数，以 npm 模块发布</li>
+<li>可以管理网站的后台系统，涉猎一点用前端的技术去开发 App</li>
+<li>python 得玩儿的更熟一点，Renpy 一直都是我的行动力之痛</li>
+<li>mirai robot 再丰富一点，写几个好玩的插件</li>
+</ul>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/mirai.png" alt="Mirai"></p>
+<h2 id="健康和锻炼"><a href="#健康和锻炼" class="headerlink" title="健康和锻炼"></a>健康和锻炼</h2><p>啊我的…腰</p>
+<p>每天起床扭扭屁股弯弯腰 ww</p>
+<p>保证平均七个小时以上的睡眠</p>
+<p>每天一万步，或者一公里跑步</p>
+<p>把牙齿看好，没有一口好用的牙就没有美味！</p>
+<p>年中一次的全身体检</p>
+<p>控制好体重！</p>
+<h2 id="性格和交际"><a href="#性格和交际" class="headerlink" title="性格和交际"></a>性格和交际</h2><p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/neko.jpg"></p>
+<p>提升一点沟通能力吧，降低知识的诅咒，做到更全面的换位思考。</p>
+<p>我觉得自己应该稍微主动一点，把和集中于几个人的聊天和分享扩散到更多的人。每天上班下班的生活中，确实找不到什么亮点。灰色的循环…</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/wuwuwuw.jpg" alt="呜呜呜"></p>
+<p>继续保持自己的简单透明，坦诚对待身边的人</p>
+<p>继续抵制大数据推送，有选择地摄取信息和知识。不随波逐流，不脱离自我</p>
+<p><a href="https://www.pc426.com/">学会思考，停止盲从</a></p>
+<p>抵制大数据推送的同时，我也丧失了很多很多的信息来源。忙碌紧凑的时间还有孤僻的性格，让我放弃了一个又一个曾经很愉快的论坛社区，我已经没有地方玩了。曾经自己建立的群也没有了新的活力。我应该把这些都捡起来。如果眼睛可以初步过滤信息，不让某些东西进入脑子里就好了</p>
+<p>大学以来，我的活动轨迹就越来越小，对线上交流从参与变成了观望和放弃。我也知道自闭是不对的…</p>
+<p>如果有机会像前年一样加入一个字幕组，或者和一群人搞一些什么事情就好了。</p>
+<h2 id="经济上"><a href="#经济上" class="headerlink" title="经济上"></a>经济上</h2><p>我相信钱不是省出来的，而是通过把握机遇和提升自己创造出来的</p>
+<p>但是不必要的开销还是要砍掉</p>
+<p>换一份工作，是最直接的攒钱方式</p>
+<p>今年电子产品换了一个遍儿，所以明年就减少这部分的开销</p>
+<p>吃喝的花销不会继续增加，旅行的比例要增加</p>
+<p>房租是没办法的，上海的房租，呸，呸呸呸</p>
+<p>基金之类的以钱生钱的理财，今年一年还亏了一千块钱 orz，但是找到玩这个东西的感觉了</p>
+<p>放长线，放平心态。今年的目标是把去年的捞回来，然后投资增值百分之 10 吧</p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/jiayou.jpg"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E5%94%94.jpg"></p>
+]]></content>
+      <categories>
+        <category>年末记忆</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>也许是上海最难忘的一年</title>
+    <url>/posts/8052be14/</url>
+    <content><![CDATA[<p>这篇文章拖了太久了… 但是依然有很多事情想要记录下来</p>
+<p>也许大多都不是高兴的吧</p>
+<h1 id="今年都做了什么"><a href="#今年都做了什么" class="headerlink" title="今年都做了什么"></a>今年都做了什么</h1><h2 id="辞去工作准备旅游"><a href="#辞去工作准备旅游" class="headerlink" title="辞去工作准备旅游"></a>辞去工作准备旅游</h2><p>首先就是辞职</p>
+<p>大概二月份的时候提出离职，三月离开了现在这家公司</p>
+<p>辞职的原因很多</p>
+<ul>
+<li>公司技术部团队很小，一个前端（我）一个后端，一个设计师。以前的设计师跳槽了，新的是后来又招的。新的设计师的沟通方式和我俩合不来… 经常闹矛盾 orz 我是会躲避矛盾的那种人，于是小团队不合就成为了辞职的原因之一</li>
+<li>公司社保欠缴一年多，虽然工资有发，但是员工人人都担心着公司是不是快不行了（其实并没有），因为社保的问题，也有些不愉快</li>
+<li>在这家公司一年半，确实开阔了视野（毕竟是坐落在上海市中心的留学公司），技术上也有不小的进步，但是这个公司的项目用的技术并不先进，基本都是在维护。我想找一个新的工作，尝试开阔自己的技术面</li>
+<li>我想玩，上班挺累的，像辞职去旅游，也和朋友约好了时间，已经订好了三月份的机票</li>
+</ul>
+<p>于是我就辞职了…</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/8b336bdf9e74c16aefc2833a5d0117d8.jpg" alt="公司前的成都北路高架"></p>
+<h2 id="遭遇疫情"><a href="#遭遇疫情" class="headerlink" title="遭遇疫情"></a>遭遇疫情</h2><p>但是辞职后马上遇到了天灾人祸，也就是让我感觉最难受最难忘的上海疫情封城</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/4915f01dab18f81145e122706e1e8851.jpg" alt="当时住在上海宝山区"></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/a1df48433b001b350b058e3a01833936.jpg" alt="住处小区"></p>
+<p>维基百科上称这次疫情封城为：<a href="https://zh.m.wikipedia.org/wiki/2022%E5%B9%B43%E6%9C%88%E4%B8%8A%E6%B5%B7%E5%B8%822019%E5%86%A0%E7%8A%B6%E7%97%85%E6%AF%92%E7%97%85%E8%81%9A%E9%9B%86%E6%80%A7%E7%96%AB%E6%83%85">2022 年 3 月上海市 2019 冠状病毒病聚集性疫情</a></p>
+<p>当时和在上海的朋友一起买好了去重庆的机票，也因为重庆市政府发布的通告上海游客落地需要隔离半个月以上而取消了。取而代之，3.17 我们去辰山植物园散了散步，那天还下小雨</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/fe92961d7b5a4ecc12aa3fe0fc2f0328.jpg"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/36f7836b3a52e5eed9472e9e54f22352.jpg"></p>
+<p>内心是很难受的… 谁能想到这次封锁强度之大。</p>
+<p>实际上，从三月底开始，手机里的新照片就少了很多</p>
+<p>封城前的小区，很漂亮</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/4a31e755f49598e5e94ccee4b7987677.jpg" alt="草地落花"></p>
+<p>平日在家里的时候，家门都不让出，每天门口有人来做核酸检测，阳性就会被拉去隔离，后来阳性太多，变成了居家隔离。</p>
+<p>那时候的人们感觉自己好像在玩生化危机…</p>
+<p>在上海还出现了食物供应链问题。不过好在我的仓鼠属性，我在家里囤了许多干货，方便面，干米线，腐竹之类的… 勉强过的还算可以。至少没有挨饿</p>
+<p>因为不能出门，每天除了对着电脑，只能在窗户口看看。满满铁窗泪</p>
+<p>疫情期间，我的窗外<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/03bbf8db1280c20fac34db1093f60f37.jpg"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/0fe7ed3f89527ddd295dcb641ed6abde.jpg"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/0bf9cc3e96d0e34f6465ee531d8821b0.jpg" alt="窗外的大白，我讨厌大白"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/105f0ef3db2fba8c66b52c38a61713ee_720.jpg" alt="我讨厌核酸，但是全都是这东西"></p>
+<p>当时的乐趣来源也就是给小草浇浇水，打打游戏什么的…<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/5714529726c7b53f2311d4ad320863bf.jpg"></p>
+<p>一度还把自己喝醉了，我从来没有喝醉过，那是我长这么大第一次喝醉，大概在四月份，心情非常糟糕<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/be0db404ba0fe632928562d8e96349eb.jpg"></p>
+<p>三月底的时候，我还试过找工作。当时想要入职堆糖网，那个做壁纸图库的网站。</p>
+<p>我在堆糖面试了三轮技术面试，每次都一个多小时，最后以为稳了，结果三月底，大概 27 号的时候开始彻底封城。心仪的工作也因此没有了</p>
+<p>度过了三个月，期间有悲痛欲绝的像失恋一般的伤心，还有浑浑噩噩地打艾尔登法环，最后卡在艾尔登之兽前面。也没有当上艾尔登之王</p>
+<h2 id="解封之后重新找工作"><a href="#解封之后重新找工作" class="headerlink" title="解封之后重新找工作"></a>解封之后重新找工作</h2><p>六月初的时候终于解封了，可以去其他地方</p>
+<p>先去了上海松江区的佘山。和在上海的发小一起去的。之后发小就回家了，也是对上海挺失望的<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/0d2fbf279c66b44afff4783fb77597f3.jpeg" alt="佘山俯瞰，虽然这个山只有二三百米高"></p>
+<p>开始找工作，疫情刚结束，工作实在是很难找。不过依然拿到了 offer</p>
+<p>虽然拿到了 offer，不太想去，因为看起来公司里成员年龄都很大，而且是那种加班光荣的企业文化…</p>
+<p>后来尝试面试米哈游，不过因为学历问题挂掉了初筛（呜呜呜</p>
+<p>抱着对米哈游的好奇心，投了一个外包到米哈游的岗位，面试虽然比其他甲方公司的面试还要难，但是依然拿下了。</p>
+<p>经过一番犹豫，哪怕是外包，还是进了米家</p>
+<ul>
+<li>想要了解大公司的工作模式和流程（虽然大公司的繁文缛节早有耳闻，但是这些对于只在小公司干过的我，确实是很欠缺的东西）</li>
+<li>文化认同，我希望在这里能认识到一些志同道合的朋友（确实结交到了很厉害又合得来的朋友）</li>
+<li>不管怎么说… 我也是崩坏 2 时期就开始玩米家游戏的老玩家，虽然我只玩过崩 2 崩 3</li>
+<li>工作环境，工作时间符合我所期望的，薪资也不错</li>
+</ul>
+<p>入职之后，感觉即使是外包，依然感觉是比小公司要强一点的。哪怕这只是开始………</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/3ce202f2d830419b0c8a0c8d17da9d49.jpeg" alt="因为不好意思问米咖在哪里，所以忘记用掉的迎新卡"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1614ef4f644869978291c7928a792545.jpeg" alt="办公室里的猫猫"></p>
+<h2 id="新工作稳定，搬家"><a href="#新工作稳定，搬家" class="headerlink" title="新工作稳定，搬家"></a>新工作稳定，搬家</h2><p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/b709ca961e91fa7f6072a9278c0fb03c.jpeg" alt="搬家前的月亮"></p>
+<p>十月份在宝山的租房就到期了，找到了新的室友一起租房，新住址在上海七宝<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/ca8992a3928dc2594b2acee7e866762b.jpeg" alt="小区里的小河"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/7b9c23e3eef59078bdafb8c8761a826b.jpeg" alt="刚搬家进去的房间"></p>
+<h2 id="生活平稳向上"><a href="#生活平稳向上" class="headerlink" title="生活平稳向上"></a>生活平稳向上</h2><p>枫林园区<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/3c7ccc3ce4c96bc95d4d6a0410c26bd8.jpeg" alt="呵，米哈游的夕阳"></p>
+<p>十月底的时候，意识到自己缺乏运动了。因为上班距离不到 9 公里，所以打算买一辆自行车</p>
+<p>于是.. 铛铛~ 美利达 Crossway90<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/32a978d63388ee13352c8d5966be34e4.jpeg"></p>
+<p>骑自行车上班确实有不一样的体验<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/885388d949f814bc0744a61d327a5cdd.jpeg" alt="七宝宝龙大蚂蚁"></p>
+<h1 id="今年的旅游足迹"><a href="#今年的旅游足迹" class="headerlink" title="今年的旅游足迹"></a>今年的旅游足迹</h1><h2 id="上海青浦太阳岛"><a href="#上海青浦太阳岛" class="headerlink" title="上海青浦太阳岛"></a>上海青浦太阳岛</h2><p>公司团建去的这个地方，很不错呢。在不用担心花费的时候度假，松弛感确实很舒服。</p>
+<p><a href="/gallery/Album/2022/2022.01%E4%B8%8A%E6%B5%B7%E9%9D%92%E6%B5%A6%E5%A4%AA%E9%98%B3%E5%B2%9B">一些照片</a></p>
+<h2 id="春节回家"><a href="#春节回家" class="headerlink" title="春节回家"></a>春节回家</h2><p>这个大概不算旅游，我也只拍了一张照片。但是非常喜欢<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/18c7964e5ba663e5a4a59d102b1fbc60.jpeg" alt="夜晚的洛河岸"></p>
+<h2 id="六月上海闲逛"><a href="#六月上海闲逛" class="headerlink" title="六月上海闲逛"></a>六月上海闲逛</h2><p>六月份解封之后，去了佘山，去了<a href="/gallery/Album/2022/2022.06%E4%B8%8A%E6%B5%B7%E8%B1%AB%E5%9B%AD">豫园</a>，总之就是闲逛，只能在上海本地</p>
+<h2 id="新年旅行-宁波"><a href="#新年旅行-宁波" class="headerlink" title="新年旅行-宁波"></a>新年旅行-宁波</h2><p>在 22 年的结尾，我和朋友一起去了宁波，宁波给我留下了很好的印象呢</p>
+<p>东钱湖的干芦苇，虽然是冬天，但那就是我心中的江南风景卷</p>
+<p>宁波博物馆很好看，不论是内在的文物，还是建筑本身的设计感。《三体》的史强办公室就在这里取的景</p>
+<p>品尝了一下宁波汤圆，缸鸭狗，印象是贵！太贵了…五十一笼的小笼包，吃的我好心疼… 另外缸鸭狗的糖桂花很不错</p>
+<p>然后是印象极其深刻的芥末海蜇… 想起来就头皮发麻！</p>
+<p><a href="/gallery/Album/2022/2022.12.31%E5%AE%81%E6%B3%A2/">照片点这里</a></p>
+]]></content>
+      <categories>
+        <category>年末记忆</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>在重复的每一天里看星星</title>
+    <url>/posts/3625dd20/</url>
+    <content><![CDATA[<h1 id="星星点点的记忆"><a href="#星星点点的记忆" class="headerlink" title="星星点点的记忆"></a>星星点点的记忆</h1><p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1686050041079.jpg"></p>
+<h2 id="上海大雪"><a href="#上海大雪" class="headerlink" title="上海大雪"></a>上海大雪</h2><p>虽然不知道地球什么时候毁灭，但是上海确实下大雪了，虽然很短暂</p>
+<video controls width="100%">
+  <source src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/video_20230115_124246.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<p>(视频里大名鼎鼎的七宝万科，好像已经没了)</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/af3320469f48a72a80be9b9a3bb7cb12.jpeg" alt="雪花飘飘和飞机"></p>
+<h2 id="春节回家"><a href="#春节回家" class="headerlink" title="春节回家"></a>春节回家</h2><p>在洛河边拍出了一张朦朦胧胧的照片，非常喜欢</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240731233101.jpg"></p>
+<p>春节假期，在洛阳去了偃师的虎头山和首阳山，普通的散步道，简单愉快</p>
+<p><a href="/gallery/Album/2023/2023.01%E6%B4%9B%E9%98%B3%E5%81%83%E5%B8%88/">照片在这里</a></p>
+<p>从洛阳回上海坐飞机，到达上海的时候是夜晚</p>
+<p>有幸看到了非常漂亮的俯瞰夜景</p>
+<video controls width="100%">
+  <source src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/video_20230130_182343.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20230130_181334.jpg"></p>
+<h2 id="露营的想法"><a href="#露营的想法" class="headerlink" title="露营的想法"></a>露营的想法</h2><p>三月份是最有活力的时候，工作稳定，生活轻松。加上天气慢慢温暖，有了倾向户外的想法</p>
+<p>春天的时候，去公园里和朋友一起坐着晒太阳，打打羽毛球。很舒服呢</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20230225_134635.jpg" alt="一些露营装备"></p>
+<h2 id="团建"><a href="#团建" class="headerlink" title="团建"></a>团建</h2><p>在米哈游的团建，实际上就是出去吃饭。不论是正式员工还是 mi 岗员工，每个月都有 170 的团建报销额度。</p>
+<p>所以团建单纯就是把这 170 给霍霍掉，总不能便宜了公司对吧</p>
+<p>印象里项目组整体出去有两次，一次去吃了高丽菜，产品同事带领的。一次是项目管理带领的去玩（我没参加）</p>
+<p>相比项目组整体，前端自己去的次数比较多（目的地海底捞居多）</p>
+<p>不过捏… 据同事的不完全统计，每次一起下馆子，就会有个人被辞退或者离职</p>
+<p>hhh…</p>
+<h2 id="用心推荐的上海动物园"><a href="#用心推荐的上海动物园" class="headerlink" title="用心推荐的上海动物园"></a>用心推荐的上海动物园</h2><p>四月份，已经暖和起来了，去了上海动物园。</p>
+<p>十分感叹，这才是我梦想中的动物园啊…</p>
+<p><a href="/gallery/Album/2023/2023.04%E4%B8%8A%E6%B5%B7%E5%8A%A8%E7%89%A9%E5%9B%AD/">这里是在动物园拍的照片</a></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240801231933.png" alt="我喜欢小熊猫，最初就是冲着小熊猫去的"></p>
+<h2 id="喜欢的生日礼物"><a href="#喜欢的生日礼物" class="headerlink" title="喜欢的生日礼物"></a>喜欢的生日礼物</h2><p>今年过生日收到了一盏星空投影灯，在夜晚，我的天花板会变成一片星空</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20230525_225140.jpg" alt="我喜欢星星灯！"></p>
+<h2 id="小浪底水库"><a href="#小浪底水库" class="headerlink" title="小浪底水库"></a>小浪底水库</h2><p>六月端午，刚好是小浪底水库调水，和老爸开车就去了，场面相当壮观</p>
+<div id="dplayer1" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer1"),"video":{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/video_20230624_100113.mp4"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
+
+<p><a href="/gallery/Album/2023/2023.06%E6%B4%9B%E9%98%B3%E5%B0%8F%E6%B5%AA%E5%BA%95/">更多照片在这里</a></p>
+<h2 id="BW-amp-南京东路的二次元街道"><a href="#BW-amp-南京东路的二次元街道" class="headerlink" title="BW &amp; 南京东路的二次元街道"></a>BW &amp; 南京东路的二次元街道</h2><p>七月份参加了国内规模比较大的漫展，bilibili world</p>
+<p>和高中时代带我一起玩 ACGN 的大姐姐一起去的，是为我打开新世界大门的大姐姐！</p>
+<p>因为有前辈一起逛街聊天，所以非常愉快，这场漫展本身就是一个消费平台，并没有让人感动的氛围</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240802000238.png" alt="3023年了还能看到乌贼娘的痛车"></p>
+<p><a href="/gallery/Album/2023/2023.07BilibiliWorld/">更多照片在这里哦</a></p>
+<p>第二天去逛了淮海中路那边孤独摇滚联动的索尼店，其实是因为耳机坏了，去取修好的耳机（WF1000xm4）</p>
+<p>不得不说索尼的品控真的很一般</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240802000550.png" alt="这套镭射卡，店里不给卖！结果最后我在网上买到了"></p>
+<p>八月份的时候，有个朋友从亚美利加回国，准备在上海找个短期工作，并且体验一下魔都的二次元味道。</p>
+<p>我们一起去了雾雨咖啡厅，一家东方主题的小咖啡店。店里铺满了店长的周边，是梦幻的小屋呢</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240802092636.png"></p>
+<p>之后一起去了百米香榭，看到了很多二次元遗老的周边。果然心动的东西还是要去中古店找啊</p>
+<p><a href="/gallery/Album/2023/2023.08%E4%BA%8C%E6%AC%A1%E5%85%83%E6%8E%A2%E5%BA%97/">这里是逛街的照片</a></p>
+<h2 id="和表弟一起过十一假期"><a href="#和表弟一起过十一假期" class="headerlink" title="和表弟一起过十一假期"></a>和表弟一起过十一假期</h2><p>十月份的时候，毕业许久没找到工作的表弟决定来上海试试</p>
+<p>但是从一开始我就没有抱有很大的希望</p>
+<p>因为我觉得，找不到工作的原因并不是能力不够或者什么，而是不知道找什么，术业有专攻，没有专攻就不会有术和业</p>
+<p>教给弟弟怎么找房子，然后找工作也给了一些建议，能做的事情也尽可能的帮了</p>
+<p>之后，<a href="/gallery/Album/2023/2023.10%E5%8D%81%E4%B8%80/">十一假期就一起去逛景区啦</a></p>
+<h2 id="函授学位证"><a href="#函授学位证" class="headerlink" title="函授学位证"></a>函授学位证</h2><p>十月底参加了学位证考试，请假去河南焦作的河南理工大学考试</p>
+<p>这是我头一次来学校里面，学校还蛮大的，风景很不错</p>
+<p>考试很简单，单考一门英语，难度还可以，程序员英语勉勉强强给糊弄过去了</p>
+<p>十一月份的时候得到考试通过的结果，剩下的只有毕业论文就毕业啦</p>
+<p>考完试，下午去爬云台山，云台山能玩两天的，不过和家人只逛了一下午，晚上就回家了</p>
+<p><a href="/gallery/Album/2023/2023.10%E7%84%A6%E4%BD%9C/">照片在这里</a></p>
+<h2 id="新的电子产品"><a href="#新的电子产品" class="headerlink" title="新的电子产品"></a>新的电子产品</h2><p>十一月份花了好多钱 QAQ</p>
+<p>先后买了 MacBook 和小米手机</p>
+<p>Mac 主要用来做开发用，写笔记什么的很舒服（但是从事后看来，我还是太理想了，装上 windows 虚拟机打 galgame 也挺舒服的（（（<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20231113_205048.jpg"></p>
+<p>自己用贴纸装饰了手机，我喜欢小一点的屏幕，小米 14 是今年发布的手机中唯一一个个头比较小的（除了 iphone15）<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/Image_1699971720201.jpg" alt="喵 喵 阿梓喵"></p>
+<h1 id="工作心情"><a href="#工作心情" class="headerlink" title="工作心情"></a>工作心情</h1><p>春节后，工作地点就被调换了。本来是在枫林园区的，那边很好，办公室人也不太多，相对自由。</p>
+<p>工作虽然比较多，但是也能每天安排在下班前搞定。</p>
+<p>在枫林的日子整体是比较轻松愉快的，和同事也建立了深厚的友谊</p>
+<p>由于我们是给原神组（甲方）做平台的，甲方希望我们和他们坐在一起，这样对接更方便…</p>
+<p>听起来是很合理，但是实际上却非常不正确。</p>
+<p>实际上，甲方是提出需求的，而且我们项目组这边有专门负责对接需求并且将需求转化为项目排期和需求文档（PRD）的产品经理和项目管理，实际上甲方对接的目标是两位 PM 就对了（产品和项目管理）</p>
+<p>原神组权力还是比较大的，说让我们过去，我们就得过去。</p>
+<p>理想中的大厂程序员，埋头实现需求，和上下游同事做好沟通就可以了。这样才能把程序员的价值发挥到最大化，就我本身而言，我也期望这样。实现自己价值的同时还能学习，还不被公司里的冗杂事情所干涉。</p>
+<p>过去之后就不一样了，甲方会直接找到我们开发，同时也会给产品和项管更大的压力。总而言之，先前建立的工作流被新插入的，不懂开发的其他组给破坏了</p>
+<p>工作排期出现了严重问题，产品也趋向于不合理，开发也经常做起客服的工作</p>
+<p>除此之外，测试那边填上了一个不解决问题不工作，每天玩企业微信，只会问责的领导。</p>
+<p>从测试那边开始，卷起来了。因为不合理的流程和不干活的人，这份工作逐渐也变得困难</p>
+<p>对大家直接的影响就是，纯粹的工作时间变少了，工作量增加且不合理，排期更紧张，同事关系变得糟糕，压力更大</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20230320_194715.jpg" alt="下班路上哗啦啦的大雨"></p>
+<p>这种崩坏是渐进的，从三月份开始，直到我今年（24）年离职。从我的视角来看，从三月份到 24 年三月份，先前努力工作的人要么被辞退，要么开始摆烂等着被辞退，实际不工作，喜欢搞流程，对上管理的那些人留了下来。</p>
+<p>到 23 年年底，实际上已经有产品缩水的现象了，要么产品妥协，要么砍掉需求。因为实际问题是做不完，所有人每天加班也做不完。</p>
+<p>也就是这个原因吧，我对米哈游失望了。</p>
+<p>我是不怎么加班的，我痛恨体制性加班，为了给人做样子而加班。我会想尽办法去在上班的时间内完成我的工作</p>
+<p>我相信我只要把精力投入工作，上班时间不摸鱼，下班时间自然也能走。</p>
+<p>事实上我做到了，即使恪守不加班原则，我也完成了分配给我的需求，并且高质量完成（没出过什么线上问题）</p>
+<p>所以，可能不太愉快，可能非常辛苦，但是我对自己在米哈游时期的表现是满意的</p>
+<p>即使米哈游的工作氛围辜负了我的期望，我也没有认为自己选择来这里是错误的</p>
+<p>我得到了我想要的东西</p>
+<ul>
+<li>大公司的经验</li>
+<li>喜欢的游戏公司的憧憬</li>
+<li>技术进步，代码更规范</li>
+<li>结交到新的朋友</li>
+</ul>
+<h1 id="失去的东西和得到的东西"><a href="#失去的东西和得到的东西" class="headerlink" title="失去的东西和得到的东西"></a>失去的东西和得到的东西</h1><p>一整年都在殷实的工作，解决过各种问题，也见过职场百态</p>
+<p>失去最多的东西是活力，因为上班很累，回到家之后如果不是有游戏搭子粘着我打游戏，甚至连电脑都懒得开….</p>
+<p>去年写日记的习惯，今年也没有了。虽然在工作里积累了很多经验，但是博客更新却变少了</p>
+<p>看的动画片少了。缺少了努力追逐偶像，追逐角色的动力，现在只是去关注，出周边了买，出视频了看，只能得到一时的满足</p>
+<p>虽然有经常出去玩，但是生活的乐趣确实减少了。</p>
+<p><strong>未来会以守护爱好作为前提去工作</strong>！</p>
+<p>与此同时，得到的也很多嘛</p>
+<p>首先就是钱钱，这一年确实赚到了钱钱，而且买了好多周边和手办，成就了学生时代的梦想（我的圆神手办！）</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240323_185019.jpg"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240323_185416.jpg"></p>
+<p>这一年在互联网上和朋友交流更多，试着和大家见面，收到了不少的礼物。非常开心，非常珍贵</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240413_190517.jpg"></p>
+<p>各种信件，还有来自霓虹的留学生信件，同事去霓虹旅游带给我的伴手礼护身符，作为生日礼物的 cd…</p>
+<p>这些都是猫咪的宝物！</p>
+<p>这一年吃到了很多美食，国内的国外的各种不同风格的菜。味蕾环游世界</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20230826_122300.jpg" alt="土耳其烤肉"></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20231230_185647.jpg" alt="德意志香肠"></p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>今年难忘的游戏：塞尔达，星之卡比<br>今年的年度歌手依然是鹿乃<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/7bc27ccca67cf84e.jpg"></p>
+<p>总结下来，这是平稳和积累的一年</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/799dc46c3b47fa08.jpg" alt="月光！"></p>
+]]></content>
+      <categories>
+        <category>年末记忆</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>休息一下继续出发</title>
+    <url>/posts/eb63e3a5/</url>
+    <content><![CDATA[<div class="note orange flat"><p>文章写于 8 月份，这一年还没过完呢，后续还会更新</p>
+</div>
+
+<h1 id="摇曳吼姆"><a href="#摇曳吼姆" class="headerlink" title="摇曳吼姆"></a>摇曳吼姆</h1><p><a href="/gallery/Album/2024">2024 年所有的照片都在这里</a></p>
+<p>封面：《变成菜变成花》</p>
+<h2 id="天冷我不冷，逛街！"><a href="#天冷我不冷，逛街！" class="headerlink" title="天冷我不冷，逛街！"></a>天冷我不冷，逛街！</h2><p>我说谎了，其实我超懒的，我好怕冷，我好懒….</p>
+<p>是有一个朋友把我给拉出来了，一月一号元旦，我们去了徐汇的美罗城</p>
+<p>目的地是橡子共和国，吉卜力的周边专买店，以及美罗城其他的一些二次元店铺（太有活力了！）</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240802193120.png" alt="战利品！呜呜呜，花了七百多！"></p>
+<p>算是给魔女宅急便这个动画片补票，所以相当满足</p>
+<hr>
+<p>之后春节，在武汉的朋友回家之前来上海旅游，我就请了假和他一起逛二次元圣地魔都（？）</p>
+<p>我们在 B 站的会员购上发现了一个 LoveLive 同好会的售票，最初以为是小型漫展。感觉只是逛店也好无聊，所以两个人就一起参加了这个同好会</p>
+<p>这是我头一次去 Live house 在此之前我只在孤独摇滚里见过 Live House</p>
+<p>这个不能被称之为漫展，因为这就是同好会！</p>
+<p>先从检票说起，门口的检票是很无所谓的，甚至… 后面直接把检票给撤了。检票的好处是可以拿电子票换取两张明信片</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240131_201232.jpg" alt="还有一个吧唧"></p>
+<p>因为是 Live House 所以主要是演出，除了演出没有其他的</p>
+<p>这是我参加过最最最有 ACG 氛围的演出了，台上的 coser 用心的表演，台下的每个观众都跟着唱</p>
+<p>刚进去的一瞬间我是震惊的，我是不是来错地方了… 哇！我的浓度远远不够</p>
+<p>后面，我和朋友推测这是一个社团搞的活动，台下的大都是熟人，他们好像都认识？</p>
+<div id="dplayer2" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer2"),"video":{"url":"https://honyan-gallery.oss-cn-hangzhou.aliyuncs.com/Album/2024/2024.01%E6%84%9A%E5%9B%AD%E8%B7%AF%E6%96%B0%E6%AD%8C%E7%A9%BA%E9%97%B4LoveLive%E5%90%8C%E5%A5%BD%E4%BC%9A/VID_20240131_154109.mp4"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
+
+<p>总之，这是我去过最棒的一次 ACG 演出，没有任何一次漫展或者剧场比得上这次！</p>
+<h2 id="自驾舟山，学习开车"><a href="#自驾舟山，学习开车" class="headerlink" title="自驾舟山，学习开车"></a>自驾舟山，学习开车</h2><p>清明节假期的时候，我和两位关系很好的同事一起，租车去舟山自驾游玩。其目的一是玩，二是学习开车。</p>
+<p>我高中毕业的时候就拿到驾照了，但是家里只有手动挡的车，我一开车老爸就骂我。索性不开了，反正我在外面也是打车比较多。目前没有开车的场景</p>
+<p>有计划回家自驾游之后，开车就变成了比较重要的技能，于是下决心自己在上海学车！</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240803101800.png" alt="跨海大桥，自由的空气"></p>
+<p>旁边有老司机同事坐着，也不会像老爸一样怼我。车撞坏了也有全险，没有心理包袱很快就上手了：在舟山三天是我开的，高速上也开了一段。开车还是好玩的~ 稍微有些累</p>
+<p>在舟山前两天玩的蛮开心！去了海滩，第一天吃的鱼很棒，之后去普陀岛逛的有些累。第三天从绍兴回上海</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240803101844.png"></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240803101922.png" alt="背着我的鹿乃一起去的"></p>
+<p>从结交到朋友这方面出发，我还是非常感谢米哈游的</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/2024-%E8%88%9F%E5%B1%B1.jpg" alt="观沧海的两位大哥"><br>在舟山岛留下了不错的回忆</p>
+<h2 id="跑路跑路"><a href="#跑路跑路" class="headerlink" title="跑路跑路"></a>跑路跑路</h2><p>在<a href="/posts/3625dd20/">去年的文章</a>里提到过，现在的工作因为一些没意义的东西变得令人失望。</p>
+<p>到今年三月份的时候，身边的同事都要走光了，原来十几个人的前端团队，现在只剩下五六个了</p>
+<p>三月份我也接到了裁员的通知，意料之中，或者有点期待吧，因为早先熟悉的同事都不在了，大家上班也没有了最初的冲劲，每天打交道的人都满口黑话，不切实际，需求还没进入开发就先推卸未来的事故责任，说几句就令人厌烦。</p>
+<p>二月份的时候就在想，如果离职了，应该好好休息几个月。因为现在工作不好找，既然不好找就更不应该在裁员潮和人竞争。家里也有不少事情，家里在盖房子，而且这几年都没回家，没有关注过家人的生活状态。回家之后也想给自己充充电，学点新技能，寻找一些新的爱好</p>
+<p>和长沙工作的朋友，活力满满的天津友人，以及几个无所不能的网友讨论了上班和休息的事情，也得到了支持</p>
+<p>四月底的时候离职了，把行李打包回家，我在上海的行李好多（我真的是来过日子的，不只是打工），邮寄花了一千还多。</p>
+<p>走之前逛了好多馆子，一直想去但是没去成的天文馆水族馆自然博物馆。上海的展馆还是非常棒的</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240803103021.png" alt="sakana~~~ chinanago~~"></p>
+<h2 id="从杭州回家"><a href="#从杭州回家" class="headerlink" title="从杭州回家"></a>从杭州回家</h2><p>行李寄回家之后，先去了杭州，游玩了西湖和良渚。</p>
+<p>杭州的风景真棒啊！</p>
+<p>吃了传说中无敌难吃的杭帮菜，西湖醋鱼</p>
+<p>但是不够难吃，有点失望，后来问了店家，店家说稍微有些改进，把做醋鱼的西湖草鱼换成了鲈鱼（我就说嘛，吃起来没有土腥味也没有刺）</p>
+<p>群友描述醋鱼的味道是这样的：浓郁的土腥伴随着酸涩不和谐的浓醋在嘴里爆开，漱口都难以清除的味道</p>
+<p>嗯… 出于以上好奇去吃的… 所以稍微有点落差（不够难吃）</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240803103352.png"></p>
+<h2 id="回到洛阳生活"><a href="#回到洛阳生活" class="headerlink" title="回到洛阳生活"></a>回到洛阳生活</h2><p>虽然在外很长时间，但是各种生活习惯还是源自于洛阳的，比如自己做晚饭的话喜欢弄汤菜馍。</p>
+<p>回洛阳之后才知道洛阳的美食是什么，油泼面，烧烤（每个地方的烧烤都不一样），糖葫芦，米皮凉皮擀面皮馄饨细米线，牛肉汤羊肉汤驴肉汤。卤肉和烧饼，烧鸡….</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240628_194847.jpg" alt="emmmmmm"></p>
+<p>回家之后想做的事情</p>
+<ul>
+<li>拿到本科毕业证和学士学位证</li>
+<li>考取摩托车驾照，买摩托车</li>
+<li>装饰一下自己的屋子，搞出一张理想的桌面</li>
+<li>更换证件，身份证，驾照</li>
+<li>开车自驾游</li>
+<li>玩好多我想玩的游戏</li>
+<li>关注一下家里盖房子的事情</li>
+<li>整理网站，更换域名和服务器</li>
+<li>学习一下服务端渲染框架</li>
+<li>思考未来去哪里生活</li>
+</ul>
+<p>事情算是不少的，不过时间很充裕</p>
+<p>基本上是都完成了</p>
+<h1 id="本田小狼与我"><a href="#本田小狼与我" class="headerlink" title="本田小狼与我"></a>本田小狼与我</h1><p>因为今年看了一个动画片，<a href="https://bangumi.tv/subject/294337">本田小狼与我</a></p>
+<p>印象里，摩托车是很猛汉有些危险的东西，但是以这个动画片为契机去深入了解之后，我也懂得了摩托车的魅力</p>
+<p>作为交通工具，有他独特的浪漫，就像小狼说的，Cub 可以带我去任何地方，但是 Cub 也有做不到的事情…</p>
+<p>本田小狼有独特的青春的味道，不同于挥洒汗水映出彩虹的热血，而是温和平静的自我满足和愉悦，发动机的震动和开阔的视野在心里开拓出了一片新世界</p>
+<p>最好的风景在路上</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240624_132101.jpg" alt="我的Cub"></p>
+<p>六月底，拿到驾照之后，骑着摩托车去了一次洛阳陆浑，绕湖骑行的感觉真好</p>
+<h1 id="可爱的安达达和岛村村"><a href="#可爱的安达达和岛村村" class="headerlink" title="可爱的安达达和岛村村"></a>可爱的安达达和岛村村</h1><p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/Image_1707734292627.jpg"></p>
+]]></content>
+      <categories>
+        <category>年末记忆</category>
+      </categories>
+  </entry>
+  <entry>
     <title>qq机器人框架--mirai</title>
     <url>/posts/6425a11a/</url>
     <content><![CDATA[<h1 id="在自己的电脑上搭建一个-qq-机器人"><a href="#在自己的电脑上搭建一个-qq-机器人" class="headerlink" title="在自己的电脑上搭建一个 qq 机器人"></a>在自己的电脑上搭建一个 qq 机器人</h1><h2 id="使用框架"><a href="#使用框架" class="headerlink" title="使用框架"></a>使用框架</h2><p><a href="https://github.com/mamoe/mirai">mirai</a><br><a href="https://docs.mirai.mamoe.net/">Mirai 文档</a><br><a href="https://mirai.mamoe.net/">Mirai 官方论坛</a></p>
@@ -1079,477 +1552,32 @@
       </categories>
   </entry>
   <entry>
-    <title>在重复的每一天里看星星</title>
-    <url>/posts/3625dd20/</url>
-    <content><![CDATA[<h1 id="星星点点的记忆"><a href="#星星点点的记忆" class="headerlink" title="星星点点的记忆"></a>星星点点的记忆</h1><p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1686050041079.jpg"></p>
-<h2 id="上海大雪"><a href="#上海大雪" class="headerlink" title="上海大雪"></a>上海大雪</h2><p>虽然不知道地球什么时候毁灭，但是上海确实下大雪了，虽然很短暂</p>
-<video controls width="100%">
-  <source src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/video_20230115_124246.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+    <title>Hexo博客的使用笔记</title>
+    <url>/posts/369146d4/</url>
+    <content><![CDATA[<h1 id="文章置顶与置底"><a href="#文章置顶与置底" class="headerlink" title="文章置顶与置底"></a>文章置顶与置底</h1><p>在 Front-matter 区域添加 sticky 字段可以设定文章的置顶与置底，亦可以设置文章的排列顺序</p>
+<p>这个功能是 <code>hexo-generator-index</code> 插件所提供的</p>
+<p><a href="https://github.com/hexojs/hexo-generator-index">具体文档在这里</a></p>
+<p>将 <code>sticky</code> 设置为 <code>true</code> 或者大于 1 的数字，可以设置置顶</p>
+<p>将 <code>sticky</code> 设置为 <code>-1</code> 可以设置置底</p>
+<h1 id="文章隐藏"><a href="#文章隐藏" class="headerlink" title="文章隐藏"></a>文章隐藏</h1><p>如果有一些文章只想记录不想发布在网站上，可以使用<code>hexo-hide-posts</code>插件</p>
+<p>在 Front-matter 中设置 <code>hidden</code> 属性为 <code>true</code> 即可</p>
+<p><a href="https://github.com/prinsss/hexo-hide-posts">文档在这里</a></p>
+<h1 id="视频标签"><a href="#视频标签" class="headerlink" title="视频标签"></a>视频标签</h1><p>一直用 <code>video</code> 标签插入视频，但是每次都要写好麻烦，而且不同浏览器的原生 video 标签样式是不同的</p>
+<p>于是找到了 <code>hexo-tag-dplayer</code> 这个插件，用法很简单：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% dplayer url=&quot;&quot; key=value ... %&#125;</span><br></pre></td></tr></table></figure>
 
-<p>(视频里大名鼎鼎的七宝万科，好像已经没了)</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/af3320469f48a72a80be9b9a3bb7cb12.jpeg" alt="雪花飘飘和飞机"></p>
-<h2 id="春节回家"><a href="#春节回家" class="headerlink" title="春节回家"></a>春节回家</h2><p>在洛河边拍出了一张朦朦胧胧的照片，非常喜欢</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240731233101.jpg"></p>
-<p>春节假期，在洛阳去了偃师的虎头山和首阳山，普通的散步道，简单愉快</p>
-<p><a href="/gallery/Album/2023/2023.01%E6%B4%9B%E9%98%B3%E5%81%83%E5%B8%88/">照片在这里</a></p>
-<p>从洛阳回上海坐飞机，到达上海的时候是夜晚</p>
-<p>有幸看到了非常漂亮的俯瞰夜景</p>
-<video controls width="100%">
-  <source src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/video_20230130_182343.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+<h1 id="hideToggle-标签"><a href="#hideToggle-标签" class="headerlink" title="hideToggle 标签"></a>hideToggle 标签</h1><p>有时候想要隐藏一些内容，手动点击才打开</p>
+<details class="toggle" ><summary class="toggle-button" style="">点我打开</summary><div class="toggle-content"><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% hideToggle 点我打开 %&#125;</span><br><span class="line">&#123;% endhideToggle %&#125;</span><br></pre></td></tr></table></figure>
+</div></details>
 
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20230130_181334.jpg"></p>
-<h2 id="露营的想法"><a href="#露营的想法" class="headerlink" title="露营的想法"></a>露营的想法</h2><p>三月份是最有活力的时候，工作稳定，生活轻松。加上天气慢慢温暖，有了倾向户外的想法</p>
-<p>春天的时候，去公园里和朋友一起坐着晒太阳，打打羽毛球。很舒服呢</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20230225_134635.jpg" alt="一些露营装备"></p>
-<h2 id="团建"><a href="#团建" class="headerlink" title="团建"></a>团建</h2><p>在米哈游的团建，实际上就是出去吃饭。不论是正式员工还是 mi 岗员工，每个月都有 170 的团建报销额度。</p>
-<p>所以团建单纯就是把这 170 给霍霍掉，总不能便宜了公司对吧</p>
-<p>印象里项目组整体出去有两次，一次去吃了高丽菜，产品同事带领的。一次是项目管理带领的去玩（我没参加）</p>
-<p>相比项目组整体，前端自己去的次数比较多（目的地海底捞居多）</p>
-<p>不过捏… 据同事的不完全统计，每次一起下馆子，就会有个人被辞退或者离职</p>
-<p>hhh…</p>
-<h2 id="用心推荐的上海动物园"><a href="#用心推荐的上海动物园" class="headerlink" title="用心推荐的上海动物园"></a>用心推荐的上海动物园</h2><p>四月份，已经暖和起来了，去了上海动物园。</p>
-<p>十分感叹，这才是我梦想中的动物园啊…</p>
-<p><a href="/gallery/Album/2023/2023.04%E4%B8%8A%E6%B5%B7%E5%8A%A8%E7%89%A9%E5%9B%AD/">这里是在动物园拍的照片</a></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240801231933.png" alt="我喜欢小熊猫，最初就是冲着小熊猫去的"></p>
-<h2 id="喜欢的生日礼物"><a href="#喜欢的生日礼物" class="headerlink" title="喜欢的生日礼物"></a>喜欢的生日礼物</h2><p>今年过生日收到了一盏星空投影灯，在夜晚，我的天花板会变成一片星空</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20230525_225140.jpg" alt="我喜欢星星灯！"></p>
-<h2 id="小浪底水库"><a href="#小浪底水库" class="headerlink" title="小浪底水库"></a>小浪底水库</h2><p>六月端午，刚好是小浪底水库调水，和老爸开车就去了，场面相当壮观</p>
-<div id="dplayer1" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer1"),"video":{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/video_20230624_100113.mp4"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
-
-<p><a href="/gallery/Album/2023/2023.06%E6%B4%9B%E9%98%B3%E5%B0%8F%E6%B5%AA%E5%BA%95/">更多照片在这里</a></p>
-<h2 id="BW-amp-南京东路的二次元街道"><a href="#BW-amp-南京东路的二次元街道" class="headerlink" title="BW &amp; 南京东路的二次元街道"></a>BW &amp; 南京东路的二次元街道</h2><p>七月份参加了国内规模比较大的漫展，bilibili world</p>
-<p>和高中时代带我一起玩 ACGN 的大姐姐一起去的，是为我打开新世界大门的大姐姐！</p>
-<p>因为有前辈一起逛街聊天，所以非常愉快，这场漫展本身就是一个消费平台，并没有让人感动的氛围</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240802000238.png" alt="3023年了还能看到乌贼娘的痛车"></p>
-<p><a href="/gallery/Album/2023/2023.07BilibiliWorld/">更多照片在这里哦</a></p>
-<p>第二天去逛了淮海中路那边孤独摇滚联动的索尼店，其实是因为耳机坏了，去取修好的耳机（WF1000xm4）</p>
-<p>不得不说索尼的品控真的很一般</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240802000550.png" alt="这套镭射卡，店里不给卖！结果最后我在网上买到了"></p>
-<p>八月份的时候，有个朋友从亚美利加回国，准备在上海找个短期工作，并且体验一下魔都的二次元味道。</p>
-<p>我们一起去了雾雨咖啡厅，一家东方主题的小咖啡店。店里铺满了店长的周边，是梦幻的小屋呢</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240802092636.png"></p>
-<p>之后一起去了百米香榭，看到了很多二次元遗老的周边。果然心动的东西还是要去中古店找啊</p>
-<p><a href="/gallery/Album/2023/2023.08%E4%BA%8C%E6%AC%A1%E5%85%83%E6%8E%A2%E5%BA%97/">这里是逛街的照片</a></p>
-<h2 id="和表弟一起过十一假期"><a href="#和表弟一起过十一假期" class="headerlink" title="和表弟一起过十一假期"></a>和表弟一起过十一假期</h2><p>十月份的时候，毕业许久没找到工作的表弟决定来上海试试</p>
-<p>但是从一开始我就没有抱有很大的希望</p>
-<p>因为我觉得，找不到工作的原因并不是能力不够或者什么，而是不知道找什么，术业有专攻，没有专攻就不会有术和业</p>
-<p>教给弟弟怎么找房子，然后找工作也给了一些建议，能做的事情也尽可能的帮了</p>
-<p>之后，<a href="/gallery/Album/2023/2023.10%E5%8D%81%E4%B8%80/">十一假期就一起去逛景区啦</a></p>
-<h2 id="函授学位证"><a href="#函授学位证" class="headerlink" title="函授学位证"></a>函授学位证</h2><p>十月底参加了学位证考试，请假去河南焦作的河南理工大学考试</p>
-<p>这是我头一次来学校里面，学校还蛮大的，风景很不错</p>
-<p>考试很简单，单考一门英语，难度还可以，程序员英语勉勉强强给糊弄过去了</p>
-<p>十一月份的时候得到考试通过的结果，剩下的只有毕业论文就毕业啦</p>
-<p>考完试，下午去爬云台山，云台山能玩两天的，不过和家人只逛了一下午，晚上就回家了</p>
-<p><a href="/gallery/Album/2023/2023.10%E7%84%A6%E4%BD%9C/">照片在这里</a></p>
-<h2 id="新的电子产品"><a href="#新的电子产品" class="headerlink" title="新的电子产品"></a>新的电子产品</h2><p>十一月份花了好多钱 QAQ</p>
-<p>先后买了 MacBook 和小米手机</p>
-<p>Mac 主要用来做开发用，写笔记什么的很舒服（但是从事后看来，我还是太理想了，装上 windows 虚拟机打 galgame 也挺舒服的（（（<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20231113_205048.jpg"></p>
-<p>自己用贴纸装饰了手机，我喜欢小一点的屏幕，小米 14 是今年发布的手机中唯一一个个头比较小的（除了 iphone15）<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/Image_1699971720201.jpg" alt="喵 喵 阿梓喵"></p>
-<h1 id="工作心情"><a href="#工作心情" class="headerlink" title="工作心情"></a>工作心情</h1><p>春节后，工作地点就被调换了。本来是在枫林园区的，那边很好，办公室人也不太多，相对自由。</p>
-<p>工作虽然比较多，但是也能每天安排在下班前搞定。</p>
-<p>在枫林的日子整体是比较轻松愉快的，和同事也建立了深厚的友谊</p>
-<p>由于我们是给原神组（甲方）做平台的，甲方希望我们和他们坐在一起，这样对接更方便…</p>
-<p>听起来是很合理，但是实际上却非常不正确。</p>
-<p>实际上，甲方是提出需求的，而且我们项目组这边有专门负责对接需求并且将需求转化为项目排期和需求文档（PRD）的产品经理和项目管理，实际上甲方对接的目标是两位 PM 就对了（产品和项目管理）</p>
-<p>原神组权力还是比较大的，说让我们过去，我们就得过去。</p>
-<p>理想中的大厂程序员，埋头实现需求，和上下游同事做好沟通就可以了。这样才能把程序员的价值发挥到最大化，就我本身而言，我也期望这样。实现自己价值的同时还能学习，还不被公司里的冗杂事情所干涉。</p>
-<p>过去之后就不一样了，甲方会直接找到我们开发，同时也会给产品和项管更大的压力。总而言之，先前建立的工作流被新插入的，不懂开发的其他组给破坏了</p>
-<p>工作排期出现了严重问题，产品也趋向于不合理，开发也经常做起客服的工作</p>
-<p>除此之外，测试那边填上了一个不解决问题不工作，每天玩企业微信，只会问责的领导。</p>
-<p>从测试那边开始，卷起来了。因为不合理的流程和不干活的人，这份工作逐渐也变得困难</p>
-<p>对大家直接的影响就是，纯粹的工作时间变少了，工作量增加且不合理，排期更紧张，同事关系变得糟糕，压力更大</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20230320_194715.jpg" alt="下班路上哗啦啦的大雨"></p>
-<p>这种崩坏是渐进的，从三月份开始，直到我今年（24）年离职。从我的视角来看，从三月份到 24 年三月份，先前努力工作的人要么被辞退，要么开始摆烂等着被辞退，实际不工作，喜欢搞流程，对上管理的那些人留了下来。</p>
-<p>到 23 年年底，实际上已经有产品缩水的现象了，要么产品妥协，要么砍掉需求。因为实际问题是做不完，所有人每天加班也做不完。</p>
-<p>也就是这个原因吧，我对米哈游失望了。</p>
-<p>我是不怎么加班的，我痛恨体制性加班，为了给人做样子而加班。我会想尽办法去在上班的时间内完成我的工作</p>
-<p>我相信我只要把精力投入工作，上班时间不摸鱼，下班时间自然也能走。</p>
-<p>事实上我做到了，即使恪守不加班原则，我也完成了分配给我的需求，并且高质量完成（没出过什么线上问题）</p>
-<p>所以，可能不太愉快，可能非常辛苦，但是我对自己在米哈游时期的表现是满意的</p>
-<p>即使米哈游的工作氛围辜负了我的期望，我也没有认为自己选择来这里是错误的</p>
-<p>我得到了我想要的东西</p>
-<ul>
-<li>大公司的经验</li>
-<li>喜欢的游戏公司的憧憬</li>
-<li>技术进步，代码更规范</li>
-<li>结交到新的朋友</li>
-</ul>
-<h1 id="失去的东西和得到的东西"><a href="#失去的东西和得到的东西" class="headerlink" title="失去的东西和得到的东西"></a>失去的东西和得到的东西</h1><p>一整年都在殷实的工作，解决过各种问题，也见过职场百态</p>
-<p>失去最多的东西是活力，因为上班很累，回到家之后如果不是有游戏搭子粘着我打游戏，甚至连电脑都懒得开….</p>
-<p>去年写日记的习惯，今年也没有了。虽然在工作里积累了很多经验，但是博客更新却变少了</p>
-<p>看的动画片少了。缺少了努力追逐偶像，追逐角色的动力，现在只是去关注，出周边了买，出视频了看，只能得到一时的满足</p>
-<p>虽然有经常出去玩，但是生活的乐趣确实减少了。</p>
-<p><strong>未来会以守护爱好作为前提去工作</strong>！</p>
-<p>与此同时，得到的也很多嘛</p>
-<p>首先就是钱钱，这一年确实赚到了钱钱，而且买了好多周边和手办，成就了学生时代的梦想（我的圆神手办！）</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240323_185019.jpg"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240323_185416.jpg"></p>
-<p>这一年在互联网上和朋友交流更多，试着和大家见面，收到了不少的礼物。非常开心，非常珍贵</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240413_190517.jpg"></p>
-<p>各种信件，还有来自霓虹的留学生信件，同事去霓虹旅游带给我的伴手礼护身符，作为生日礼物的 cd…</p>
-<p>这些都是猫咪的宝物！</p>
-<p>这一年吃到了很多美食，国内的国外的各种不同风格的菜。味蕾环游世界</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20230826_122300.jpg" alt="土耳其烤肉"></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20231230_185647.jpg" alt="德意志香肠"></p>
-<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>今年难忘的游戏：塞尔达，星之卡比<br>今年的年度歌手依然是鹿乃<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/7bc27ccca67cf84e.jpg"></p>
-<p>总结下来，这是平稳和积累的一年</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/799dc46c3b47fa08.jpg" alt="月光！"></p>
+<h1 id="更多标签"><a href="#更多标签" class="headerlink" title="更多标签"></a>更多标签</h1><p><a href="https://butterfly.js.org/posts/4aa8abbe/#%E6%A8%99%E7%B1%A4%E5%A4%96%E6%8E%9B%EF%BC%88Tag-Plugins%EF%BC%89">butterfly.org 文档</a></p>
 ]]></content>
       <categories>
-        <category>年末记忆</category>
+        <category>Blog</category>
       </categories>
-  </entry>
-  <entry>
-    <title>明年继续努力啦</title>
-    <url>/posts/5093a6d4/</url>
-    <content><![CDATA[<h1 id="今年都做了些什么"><a href="#今年都做了些什么" class="headerlink" title="今年都做了些什么"></a>今年都做了些什么</h1><p>2021 年马上就结束了，今天是 2021.12.29。想到什么写什么，零零散散，写给自己</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/2022.png" alt="花汪的新年祝福"></p>
-<p>不知不觉，距离新型冠状病毒肺炎出现已经两年了，这东西已经无法从我的人生中忽视掉了。新冠疫情深刻地改变了生活方式，以前是想去哪里就去哪里，现在旅行不仅在时间和行动上收到了限制，在个人的计划里更是一种奢侈。希望明年可以好起来吧</p>
-<p>都怪拖延症…写了好久，本来打算在 12.31 写完的，结果拖到了今天（1 月 3 号），所以今年去年什么的…emmmm 我也不知道是那年，凑合看吧（</p>
-<h2 id="好的地方"><a href="#好的地方" class="headerlink" title="好的地方"></a>好的地方</h2><p>夸夸自己</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/taiga.jpg" alt="今年是大河年！"></p>
-<h3 id="技能进步"><a href="#技能进步" class="headerlink" title="技能进步"></a>技能进步</h3><p>前年（2020）从郑州来到上海，找了半个月的工作，确定了今年一年的生活方式。刚来上海的时候知识储备差的有点多，又找不到人问，不好意思问，就只能把搜索框作为自己的导师。这给我的职业发展提供了最底层的基础，也就是我一年内最常用的学习方法。</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/lan.jpg" alt="郑州的小兰花"></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/toshanghai.jpg" alt="To ShangHai"></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/chudaoshanghai.jpg" alt="找工作"></p>
-<p>还记得那年找工作蛮辛苦的</p>
-<blockquote>
-<p>技术能力上的进步可以这么总结：从不信任代码到不信有什么东西是搞不出来的</p>
-</blockquote>
-<p>我解决问题的方法论也有了雏形，用两个词来概括，格物，溯源</p>
-<p>万物可分，有果必有因，遵循基础规律不停的分解问题，理清多个问题之间的联系，找到各个问题的根源所在。</p>
-<h2 id="经济独立"><a href="#经济独立" class="headerlink" title="经济独立"></a>经济独立</h2><p>经济方面完成了养活自己的独立。虽说之前在福建的时候，已经不需要和家里要钱了，但是存不下来，不能满足自己对更好生活的期望，更不能反馈到家里。到了上海稳定之后，更大的挑战带来的收益也更大。现在终于有能力完成一些自己的想法了</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/A1231F983CF3BB9CD1575D53335C1B17.jpg"></p>
-<h2 id="未来的学历"><a href="#未来的学历" class="headerlink" title="未来的学历"></a>未来的学历</h2><p>完成了成人高考，阶段性任务完成！</p>
-<p>两年半之后就能破除找工作的学历限制了</p>
-<p>不过我相信做技术这一行，能力还是最重要的</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/chengkao.jpg" alt="成考"></p>
-<h2 id="游玩"><a href="#游玩" class="headerlink" title="游玩"></a>游玩</h2><p>清明节，劳动节，端午节的时候去其他城市游玩的很开心。</p>
-<h3 id="苏州-amp-上海"><a href="#苏州-amp-上海" class="headerlink" title="苏州&amp;上海"></a>苏州&amp;上海</h3><p>清明和朋友去了苏州，打卡了拙政园，狮子林，平江古镇，体验到了一点江南的优雅精致（kora，上海明明也是江南地区！</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/suzhou.jpg" alt="苏州"></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/shizilin1.jpg" alt="狮子林"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/shizilin2.jpg" alt="狮子林"><br>狮子林的假山特别好玩</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/CFBF71494139FD3337AE1CC317E158B0.jpg" alt="拙政园"><br>课本上的拙政园</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E4%B8%83%E9%87%8C%E5%B1%B1%E5%A1%98.jpg" alt="七里山塘"></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E6%A1%82%E6%BB%A1%E9%99%87.jpg" alt="桂满陇"></p>
-<p>桂满陇的菜非常美味！</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/huqiu.jpg" alt="虎丘"></p>
-<p>海拔 37M 的高山！</p>
-<p>在苏州有一点小小的遗憾，没有去到苏州博物馆。苏州博物馆的建筑很独特，只从外面看到了…</p>
-<p>苏州玩了两天之后回到上海继续转了转，外滩，世纪公园散散步 おだやか…</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/shanghai.jpg" alt="外滩"></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/E832AD1E3EE2BCC722B9C74296678099.jpg" alt="世纪公园"></p>
-<p>世纪公园的这张照片是我拍的最满意的一张！是和上海的朋友一起去逛的</p>
-<h3 id="洛阳龙门石窟"><a href="#洛阳龙门石窟" class="headerlink" title="洛阳龙门石窟"></a>洛阳龙门石窟</h3><p>劳动节回家，和发小去了龙门石窟，在洛河边晃悠。果然根在洛阳，我喜欢洛河</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/luoyangqiao.jpg" alt="洛阳桥"></p>
-<p>劳动节在洛阳桥上拍的照片</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/lushena.jpg" alt="卢舍那大佛"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/yihe.jpg" alt="伊河"><br>龙门石窟，还有伊河两岸。伊河两岸太美了</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/5B9D7AD75510A5C14D9A4489CA231582.jpg" alt="应天门博物馆"></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/luotu.jpg" alt="夜晚的洛阳中心图书馆"></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/ichigo.jpg" alt="草莓地"></p>
-<p>家里的小草莓地，没有人管过…但是竟然结果了，还蛮好吃！虽然很小</p>
-<h3 id="端午节的秦皇岛度假"><a href="#端午节的秦皇岛度假" class="headerlink" title="端午节的秦皇岛度假"></a>端午节的秦皇岛度假</h3><p>端午节去朋友家度假，秦皇岛是个好地方啊，宜人的温度，舒适的海风，早起赶海。非常难忘的一次旅行</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/qinhuangdaozhan.jpg" alt="秦皇岛站"></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/heimi.jpg" alt="黑米"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/xiaozheng.jpg" alt="小正"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/heimihexiaozheng.jpg" alt="一起玩嘛~"><br>朋友家的两只喵，黑米和小正~</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/shanhaiguan.jpg" alt="山海关"><br>山海关！天下第一关</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/changchengruhaikou.jpg" alt="老龙头"><br>长城入海口<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/heihei.jpg" alt="笑（）"></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/geziwo.jpg" alt="鸽子窝"></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E5%87%8C%E6%99%A8%E8%B5%B6%E6%B5%B7%E7%9A%84%E6%94%B6%E8%8E%B7.jpg" alt="凌晨赶海的收获"><br>赶海太好玩了！真想再来一次，带上万全的工具！</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/tiedao.jpg" alt="铁道"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/tiedaohaibian.jpg" alt="铁道的尽头"><br>还有一条很美很美的旧铁道</p>
-<p>记得当时是毕业季，有不少人在这儿拍毕业照呢</p>
-<p>铁道的尽头是柔软的海风</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/beijingst.jpg" alt="北京站"></p>
-<p>回上海的时候路过了北京，当时还下了小雨</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/sanbu.jpg"><br>旅行就是边晃悠边聊天嘛</p>
-<p>平平淡淡才是真…</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E7%9C%9F%E8%AE%A9%E4%BA%BA%E8%84%B8%E6%89%81.png" alt="真让人脸扁"></p>
-<h3 id="十一回家，看看洛河"><a href="#十一回家，看看洛河" class="headerlink" title="十一回家，看看洛河"></a>十一回家，看看洛河</h3><p>从端午到十一，是传送带一般的循环运动，上班，下班，睡觉…</p>
-<p>这段时间仿佛得了五月病似的没有干劲（你有过几天的干劲？</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E5%9B%BD%E8%8A%B1%E5%9B%AD.jpg" alt="国花园，适逢花展"><br>十一回家，和老爸谈谈人生…</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/luohedi.jpg" alt="家附近的洛河堤"></p>
-<p>和家人散散步挺好的</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/dianshita.jpg" alt="诡异审美的洛阳电视塔"></p>
-<p>以后会回家的吧…</p>
-<blockquote>
-<p><a href="https://music.163.com/#/song?id=469508285">铁道浪漫（谷村新司）</a><br>右延べるは　无残な梦への诱い<br>左のレールは　ささやかな幸福の诱い「いざない」</p>
-</blockquote>
-<h3 id="其他的一些地方"><a href="#其他的一些地方" class="headerlink" title="其他的一些地方"></a>其他的一些地方</h3><p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/gucungongyuan.jpg" alt="顾村公园"><br>得到了一顶帐篷，和朋友去顾村公园搭帐篷拍羽毛球很愉快</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/luxun.jpg" alt="鲁迅公园"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/luxunbowuguan.jpg" alt="鲁迅博物馆"><br>鲁迅公园和鲁迅博物馆</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/bengbengbeng.jpg" alt="崩坏2&amp;涟泉大江户"><br>崩崩的线下坦诚相见</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/muxiao.jpg" alt="洛阳三中"><br>回去看了眼母校</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/gongqing.jpg" alt="共青森林公园"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/gongqingsenlin.jpg" alt="共青森林公园"><br>搬家之前去了趟共青森林公园</p>
-<p>大概五六月份，买了服务器，建成了自己的 blog，然后把很早之前写的文章给搬了过来（凑数，以后会让 blog 更偏向生活</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/xin.jpg" alt="我收到的信，袋子是之前魔卡少女樱展的"></p>
-<p>每隔几个月，就会和一个在部队里的朋友写信，频率很低，但是很有意思。不过我写字好丑啊 orz…</p>
-<p>十月，我和朋友一起在上海宝山整租了一套房子，租房真贵啊…</p>
-<p>离开了刚来上海时不舒服的住所</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/sipinglu.jpg" alt="以前的房间"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/chuangwai.jpg" alt="窗外"></p>
-<p>新的住所可以燃气做饭，中间一两年没做菜，都快不知道怎么颠锅了</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/banjia.jpg"></p>
-<p>搬家之后和上海朋友们的聚餐，不过大都不是我做的，</p>
-<p>四月份，公司换了办公地址，从这里</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/gangtai.jpg" alt="港泰广场"></p>
-<p>搬到了这里</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/hengli.jpg" alt="恒利国际大厦"></p>
-<p>哦对了，我还留了很长的头发，扎起了鞭子~~为什么要留长头发呢…<br>因为好玩！（其实超麻烦的）<br>这个不给看！</p>
-<h2 id="不好的地方"><a href="#不好的地方" class="headerlink" title="不好的地方"></a>不好的地方</h2><p>交际一如既往的不擅长，没能和身边很厉害的人关系特别好…</p>
-<p>遇到了很麻烦的同事 orz</p>
-<p>没攒住很多钱吧，但是日常生活的水平提高了很多</p>
-<p>没有丰富的旅行是一大遗憾…</p>
-<p>缺少运动啊，健康才是最重要的，鼻炎的困扰好难受啊！！</p>
-<h1 id="想法和感慨"><a href="#想法和感慨" class="headerlink" title="想法和感慨"></a>想法和感慨</h1><p>健康真的很重要，自己独立在外，最痛苦的时候就是生病了，无助的感觉能把心灵摧垮</p>
-<p>不愉快的时候就想办法让自己高兴</p>
-<p>WLB，工作与生活应该分离，这点我做的很好，工作与生活平衡是非常重要的，不能持续加班，未来找工作我会拒绝掉严重加班的公司。</p>
-<p><strong>能摸鱼的工作才能提升自己的能力</strong>，不能一个劲埋头写业务代码。真的真的会废掉的</p>
-<p>我好羡慕这位程序媛：<a href="https://space.bilibili.com/42233366">被删</a>，这一年多很认同她的想法，处理同事关系，反内卷，生活与工作的平衡，以及写作和成长的方法。虽然我在一家小公司，朝九晚六很少有这种软技能的应用场景。但是依然获益匪浅，非常感谢</p>
-<p>还有好多好多想法，一时半会儿写不出来了 orz，其实现在的时间是<code>new Date().toLocaleString()</code></p>
-<p>打死你，是<code>2021/12/31 下午11:42:00</code></p>
-<p>新朋友越来越少，高中的时候我认识了很多很多有趣的人，我喜欢他们。但是现在我的朋友圈仿佛已经封闭了。新朋友没有，老朋友渐渐地流失。我为什么这么害羞呢…我是不是应该主动一点 orz</p>
-<p>意识到自己可能被人故意边缘化的时候，就会很心痛</p>
-<p>算是职业发展的副作用吧，自己以前的一些宝贵的兴趣渐渐地被忽视，看的动画片少了，玩游戏也少了，动画片的幕后关注也少了…太可惜了，我会补回来的。</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/lisamiya.png" alt="LisaMiya"></p>
-<blockquote>
-<p>对美少女和 Yuri 的爱是绝对的！！</p>
-</blockquote>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/SayaKyoko.png" alt="SayaKyoko"></p>
-<p>自己从小就是寄宿学校，一个星期住校五天回家两天，回家两天母上还带着我风里雨里的去奥数英语班，虽然现在感觉没什么用，但是对于教育，她们真的用心了也尽力了。父上总是很不好惹，小时候事情和母上讲得多，有时候还撒泼不讲理，毕竟在父上那里撒泼是要挨拖鞋的。现在和父上讲得更多，也更能理解父母的辛苦。</p>
-<p>有时候就想啊…我现在在上海，他们是什么想法。虽然每次回家都会告诉我洛阳很有发展潜力，未来创业支持我，希望我可以在家乡扎根发展。我能理解，我也想回家，但是在家时间一长就会因为各种问题吵起来，这是我的情绪控制能力不够。</p>
-<p>父母在家的生活还不错，不需要节俭，虽然他们吃过苦，有节俭的习惯。身体也还算健康，这让我很放心。我在上海也尽可能地让家里放心。这样的距离给了我自由，但是给了父母什么…我也不知道该怎么做，定期往家里打点钱，多少分享点生活的近况。但是对他们来说，只要在外地，我就是不可及的。</p>
-<p>养了这么大的孩子终于独立了，却不能长久地在身边。等孩子有能力的时候自己彻底的老了，又不想给孩子添麻烦 orz。这不是我想看到的，太残酷了</p>
-<p>大桥卓弥的<a href="https://music.163.com/#/song?id=492053">ありがとう</a>，反复听过好几遍…</p>
-<h1 id="明年做些什么事"><a href="#明年做些什么事" class="headerlink" title="明年做些什么事"></a>明年做些什么事</h1><p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/2022.jpg"></p>
-<h2 id="安稳又有进步的生活"><a href="#安稳又有进步的生活" class="headerlink" title="安稳又有进步的生活"></a>安稳又有进步的生活</h2><p>想搞一台台式机，虽然说了很久了还没买，手机笔记本什么的都换了一遍，平常忙起来打游戏的时间就很少。台式机对我来说也许是一个很少用的伪需求，但是玩游戏真的很快乐。即使时间很少，还是想玩的。</p>
-<p>换一个稍微紧凑一点，工资更高的工作。多攒一些钱才能出去玩</p>
-<p>想去长沙，广州，重庆。青藏也想去，但是有点难吧。明年要把江南的几个城市玩一遍！</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1873B5E8B62C4EE7F354DFA34A827DF6.jpg" alt="小书柜"></p>
-<p>我想有更多的收藏品，明年我要这些</p>
-<ul>
-<li>终将成为你，安达达与岛村村</li>
-<li>补齐我的魔女之旅</li>
-<li>蘑菇的拟态日常，我好喜欢蘑菇煎蛋啊</li>
-<li>再抱一只 fufu！手办景品什么的不能轻易剁手了</li>
-<li>少女终末旅行，画集</li>
-<li>继续支持我家鹿乃</li>
-</ul>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/fufu.jpg" alt="fufu"></p>
-<p>让自己的 Blog 更加得生活化，技术类文章还是会有的，但是质量要提高！我是有分享欲的，但是就是懒嘛。</p>
-<ul>
-<li>完善相册的功能，会记录一些出去玩的照片，日常生活，还有我家鹿乃！</li>
-<li>我想做一个歌词页面，或者可以记录歌词片段的东西</li>
-<li>看过的作品分享，动画片，电影，galgame 什么的。Hexo 有个豆瓣的插件。我应该会单独做一个系统</li>
-<li>好好地介绍一下自己！</li>
-</ul>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/kano.jpg" alt="Kano"></p>
-<h2 id="自己的创造力"><a href="#自己的创造力" class="headerlink" title="自己的创造力"></a>自己的创造力</h2><p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E5%B0%8F%E5%8E%A8%E5%A8%98Avatar.png"></p>
-<p>我一直觉得创造些什么东西是非常棒的事情。插画师们塑造的一个个角色让我心动不已。GitHub 上好玩的开源代码库也给我带来了很多乐趣。</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/baichuan.jpg"></p>
-<p>明年就是毕业第三年了，工作理所应到的要手到擒来。除此之外，我要明确一下自己的发展方向。目前还在埋头处理业务，我应该能成为一个小团队的 leader，今年一年里思考了很多一个良好的团队应该是什么样子的问题。</p>
-<p>我的理想工作是写自己想要的东西，和几个人一起创作出属于我们自己的 IP 或者产品。即使未来不创业，现在也要为创业积累硬实力</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/shirofune.jpg"></p>
-<p>与创造力相并提的是行动力…今年我本来能做得更好的，行动力不足，很多事情都在拖延。比如墨刀上面的产品原型画了一个又一个，结果都是 demo 级别的…</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/neko.jpg"></p>
-<ul>
-<li>建设一个类似于<a href="https://firenzia.github.io/sakura-ui/">Sakura UI</a>的小组件库，这是一个很简单的组件库，我觉得我能做到</li>
-<li>Memories，一个记录和推荐动画片，galgame 的网站。现在只有前端的简单页面。</li>
-<li>今年最少要啃掉的技术类书籍<ul>
-<li>JavaScript 设计模式</li>
-<li>CSS 世界 / CSS 新世界</li>
-<li>狼书三卷</li>
-</ul>
-</li>
-<li>一个自己的工具库，封装一些 DOM 处理，数据处理之类的函数，以 npm 模块发布</li>
-<li>可以管理网站的后台系统，涉猎一点用前端的技术去开发 App</li>
-<li>python 得玩儿的更熟一点，Renpy 一直都是我的行动力之痛</li>
-<li>mirai robot 再丰富一点，写几个好玩的插件</li>
-</ul>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/mirai.png" alt="Mirai"></p>
-<h2 id="健康和锻炼"><a href="#健康和锻炼" class="headerlink" title="健康和锻炼"></a>健康和锻炼</h2><p>啊我的…腰</p>
-<p>每天起床扭扭屁股弯弯腰 ww</p>
-<p>保证平均七个小时以上的睡眠</p>
-<p>每天一万步，或者一公里跑步</p>
-<p>把牙齿看好，没有一口好用的牙就没有美味！</p>
-<p>年中一次的全身体检</p>
-<p>控制好体重！</p>
-<h2 id="性格和交际"><a href="#性格和交际" class="headerlink" title="性格和交际"></a>性格和交际</h2><p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/neko.jpg"></p>
-<p>提升一点沟通能力吧，降低知识的诅咒，做到更全面的换位思考。</p>
-<p>我觉得自己应该稍微主动一点，把和集中于几个人的聊天和分享扩散到更多的人。每天上班下班的生活中，确实找不到什么亮点。灰色的循环…</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/wuwuwuw.jpg" alt="呜呜呜"></p>
-<p>继续保持自己的简单透明，坦诚对待身边的人</p>
-<p>继续抵制大数据推送，有选择地摄取信息和知识。不随波逐流，不脱离自我</p>
-<p><a href="https://www.pc426.com/">学会思考，停止盲从</a></p>
-<p>抵制大数据推送的同时，我也丧失了很多很多的信息来源。忙碌紧凑的时间还有孤僻的性格，让我放弃了一个又一个曾经很愉快的论坛社区，我已经没有地方玩了。曾经自己建立的群也没有了新的活力。我应该把这些都捡起来。如果眼睛可以初步过滤信息，不让某些东西进入脑子里就好了</p>
-<p>大学以来，我的活动轨迹就越来越小，对线上交流从参与变成了观望和放弃。我也知道自闭是不对的…</p>
-<p>如果有机会像前年一样加入一个字幕组，或者和一群人搞一些什么事情就好了。</p>
-<h2 id="经济上"><a href="#经济上" class="headerlink" title="经济上"></a>经济上</h2><p>我相信钱不是省出来的，而是通过把握机遇和提升自己创造出来的</p>
-<p>但是不必要的开销还是要砍掉</p>
-<p>换一份工作，是最直接的攒钱方式</p>
-<p>今年电子产品换了一个遍儿，所以明年就减少这部分的开销</p>
-<p>吃喝的花销不会继续增加，旅行的比例要增加</p>
-<p>房租是没办法的，上海的房租，呸，呸呸呸</p>
-<p>基金之类的以钱生钱的理财，今年一年还亏了一千块钱 orz，但是找到玩这个东西的感觉了</p>
-<p>放长线，放平心态。今年的目标是把去年的捞回来，然后投资增值百分之 10 吧</p>
-<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/jiayou.jpg"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/%E5%94%94.jpg"></p>
-]]></content>
-      <categories>
-        <category>年末记忆</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>也许是上海最难忘的一年</title>
-    <url>/posts/8052be14/</url>
-    <content><![CDATA[<p>这篇文章拖了太久了… 但是依然有很多事情想要记录下来</p>
-<p>也许大多都不是高兴的吧</p>
-<h1 id="今年都做了什么"><a href="#今年都做了什么" class="headerlink" title="今年都做了什么"></a>今年都做了什么</h1><h2 id="辞去工作准备旅游"><a href="#辞去工作准备旅游" class="headerlink" title="辞去工作准备旅游"></a>辞去工作准备旅游</h2><p>首先就是辞职</p>
-<p>大概二月份的时候提出离职，三月离开了现在这家公司</p>
-<p>辞职的原因很多</p>
-<ul>
-<li>公司技术部团队很小，一个前端（我）一个后端，一个设计师。以前的设计师跳槽了，新的是后来又招的。新的设计师的沟通方式和我俩合不来… 经常闹矛盾 orz 我是会躲避矛盾的那种人，于是小团队不合就成为了辞职的原因之一</li>
-<li>公司社保欠缴一年多，虽然工资有发，但是员工人人都担心着公司是不是快不行了（其实并没有），因为社保的问题，也有些不愉快</li>
-<li>在这家公司一年半，确实开阔了视野（毕竟是坐落在上海市中心的留学公司），技术上也有不小的进步，但是这个公司的项目用的技术并不先进，基本都是在维护。我想找一个新的工作，尝试开阔自己的技术面</li>
-<li>我想玩，上班挺累的，像辞职去旅游，也和朋友约好了时间，已经订好了三月份的机票</li>
-</ul>
-<p>于是我就辞职了…</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/8b336bdf9e74c16aefc2833a5d0117d8.jpg" alt="公司前的成都北路高架"></p>
-<h2 id="遭遇疫情"><a href="#遭遇疫情" class="headerlink" title="遭遇疫情"></a>遭遇疫情</h2><p>但是辞职后马上遇到了天灾人祸，也就是让我感觉最难受最难忘的上海疫情封城</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/4915f01dab18f81145e122706e1e8851.jpg" alt="当时住在上海宝山区"></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/a1df48433b001b350b058e3a01833936.jpg" alt="住处小区"></p>
-<p>维基百科上称这次疫情封城为：<a href="https://zh.m.wikipedia.org/wiki/2022%E5%B9%B43%E6%9C%88%E4%B8%8A%E6%B5%B7%E5%B8%822019%E5%86%A0%E7%8A%B6%E7%97%85%E6%AF%92%E7%97%85%E8%81%9A%E9%9B%86%E6%80%A7%E7%96%AB%E6%83%85">2022 年 3 月上海市 2019 冠状病毒病聚集性疫情</a></p>
-<p>当时和在上海的朋友一起买好了去重庆的机票，也因为重庆市政府发布的通告上海游客落地需要隔离半个月以上而取消了。取而代之，3.17 我们去辰山植物园散了散步，那天还下小雨</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/fe92961d7b5a4ecc12aa3fe0fc2f0328.jpg"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/36f7836b3a52e5eed9472e9e54f22352.jpg"></p>
-<p>内心是很难受的… 谁能想到这次封锁强度之大。</p>
-<p>实际上，从三月底开始，手机里的新照片就少了很多</p>
-<p>封城前的小区，很漂亮</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/4a31e755f49598e5e94ccee4b7987677.jpg" alt="草地落花"></p>
-<p>平日在家里的时候，家门都不让出，每天门口有人来做核酸检测，阳性就会被拉去隔离，后来阳性太多，变成了居家隔离。</p>
-<p>那时候的人们感觉自己好像在玩生化危机…</p>
-<p>在上海还出现了食物供应链问题。不过好在我的仓鼠属性，我在家里囤了许多干货，方便面，干米线，腐竹之类的… 勉强过的还算可以。至少没有挨饿</p>
-<p>因为不能出门，每天除了对着电脑，只能在窗户口看看。满满铁窗泪</p>
-<p>疫情期间，我的窗外<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/03bbf8db1280c20fac34db1093f60f37.jpg"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/0fe7ed3f89527ddd295dcb641ed6abde.jpg"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/0bf9cc3e96d0e34f6465ee531d8821b0.jpg" alt="窗外的大白，我讨厌大白"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/105f0ef3db2fba8c66b52c38a61713ee_720.jpg" alt="我讨厌核酸，但是全都是这东西"></p>
-<p>当时的乐趣来源也就是给小草浇浇水，打打游戏什么的…<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/5714529726c7b53f2311d4ad320863bf.jpg"></p>
-<p>一度还把自己喝醉了，我从来没有喝醉过，那是我长这么大第一次喝醉，大概在四月份，心情非常糟糕<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/be0db404ba0fe632928562d8e96349eb.jpg"></p>
-<p>三月底的时候，我还试过找工作。当时想要入职堆糖网，那个做壁纸图库的网站。</p>
-<p>我在堆糖面试了三轮技术面试，每次都一个多小时，最后以为稳了，结果三月底，大概 27 号的时候开始彻底封城。心仪的工作也因此没有了</p>
-<p>度过了三个月，期间有悲痛欲绝的像失恋一般的伤心，还有浑浑噩噩地打艾尔登法环，最后卡在艾尔登之兽前面。也没有当上艾尔登之王</p>
-<h2 id="解封之后重新找工作"><a href="#解封之后重新找工作" class="headerlink" title="解封之后重新找工作"></a>解封之后重新找工作</h2><p>六月初的时候终于解封了，可以去其他地方</p>
-<p>先去了上海松江区的佘山。和在上海的发小一起去的。之后发小就回家了，也是对上海挺失望的<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/0d2fbf279c66b44afff4783fb77597f3.jpeg" alt="佘山俯瞰，虽然这个山只有二三百米高"></p>
-<p>开始找工作，疫情刚结束，工作实在是很难找。不过依然拿到了 offer</p>
-<p>虽然拿到了 offer，不太想去，因为看起来公司里成员年龄都很大，而且是那种加班光荣的企业文化…</p>
-<p>后来尝试面试米哈游，不过因为学历问题挂掉了初筛（呜呜呜</p>
-<p>抱着对米哈游的好奇心，投了一个外包到米哈游的岗位，面试虽然比其他甲方公司的面试还要难，但是依然拿下了。</p>
-<p>经过一番犹豫，哪怕是外包，还是进了米家</p>
-<ul>
-<li>想要了解大公司的工作模式和流程（虽然大公司的繁文缛节早有耳闻，但是这些对于只在小公司干过的我，确实是很欠缺的东西）</li>
-<li>文化认同，我希望在这里能认识到一些志同道合的朋友（确实结交到了很厉害又合得来的朋友）</li>
-<li>不管怎么说… 我也是崩坏 2 时期就开始玩米家游戏的老玩家，虽然我只玩过崩 2 崩 3</li>
-<li>工作环境，工作时间符合我所期望的，薪资也不错</li>
-</ul>
-<p>入职之后，感觉即使是外包，依然感觉是比小公司要强一点的。哪怕这只是开始………</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/3ce202f2d830419b0c8a0c8d17da9d49.jpeg" alt="因为不好意思问米咖在哪里，所以忘记用掉的迎新卡"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/1614ef4f644869978291c7928a792545.jpeg" alt="办公室里的猫猫"></p>
-<h2 id="新工作稳定，搬家"><a href="#新工作稳定，搬家" class="headerlink" title="新工作稳定，搬家"></a>新工作稳定，搬家</h2><p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/b709ca961e91fa7f6072a9278c0fb03c.jpeg" alt="搬家前的月亮"></p>
-<p>十月份在宝山的租房就到期了，找到了新的室友一起租房，新住址在上海七宝<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/ca8992a3928dc2594b2acee7e866762b.jpeg" alt="小区里的小河"><br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/7b9c23e3eef59078bdafb8c8761a826b.jpeg" alt="刚搬家进去的房间"></p>
-<h2 id="生活平稳向上"><a href="#生活平稳向上" class="headerlink" title="生活平稳向上"></a>生活平稳向上</h2><p>枫林园区<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/3c7ccc3ce4c96bc95d4d6a0410c26bd8.jpeg" alt="呵，米哈游的夕阳"></p>
-<p>十月底的时候，意识到自己缺乏运动了。因为上班距离不到 9 公里，所以打算买一辆自行车</p>
-<p>于是.. 铛铛~ 美利达 Crossway90<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/32a978d63388ee13352c8d5966be34e4.jpeg"></p>
-<p>骑自行车上班确实有不一样的体验<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/885388d949f814bc0744a61d327a5cdd.jpeg" alt="七宝宝龙大蚂蚁"></p>
-<h1 id="今年的旅游足迹"><a href="#今年的旅游足迹" class="headerlink" title="今年的旅游足迹"></a>今年的旅游足迹</h1><h2 id="上海青浦太阳岛"><a href="#上海青浦太阳岛" class="headerlink" title="上海青浦太阳岛"></a>上海青浦太阳岛</h2><p>公司团建去的这个地方，很不错呢。在不用担心花费的时候度假，松弛感确实很舒服。</p>
-<p><a href="/gallery/Album/2022/2022.01%E4%B8%8A%E6%B5%B7%E9%9D%92%E6%B5%A6%E5%A4%AA%E9%98%B3%E5%B2%9B">一些照片</a></p>
-<h2 id="春节回家"><a href="#春节回家" class="headerlink" title="春节回家"></a>春节回家</h2><p>这个大概不算旅游，我也只拍了一张照片。但是非常喜欢<br><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/18c7964e5ba663e5a4a59d102b1fbc60.jpeg" alt="夜晚的洛河岸"></p>
-<h2 id="六月上海闲逛"><a href="#六月上海闲逛" class="headerlink" title="六月上海闲逛"></a>六月上海闲逛</h2><p>六月份解封之后，去了佘山，去了<a href="/gallery/Album/2022/2022.06%E4%B8%8A%E6%B5%B7%E8%B1%AB%E5%9B%AD">豫园</a>，总之就是闲逛，只能在上海本地</p>
-<h2 id="新年旅行-宁波"><a href="#新年旅行-宁波" class="headerlink" title="新年旅行-宁波"></a>新年旅行-宁波</h2><p>在 22 年的结尾，我和朋友一起去了宁波，宁波给我留下了很好的印象呢</p>
-<p>东钱湖的干芦苇，虽然是冬天，但那就是我心中的江南风景卷</p>
-<p>宁波博物馆很好看，不论是内在的文物，还是建筑本身的设计感。《三体》的史强办公室就在这里取的景</p>
-<p>品尝了一下宁波汤圆，缸鸭狗，印象是贵！太贵了…五十一笼的小笼包，吃的我好心疼… 另外缸鸭狗的糖桂花很不错</p>
-<p>然后是印象极其深刻的芥末海蜇… 想起来就头皮发麻！</p>
-<p><a href="/gallery/Album/2022/2022.12.31%E5%AE%81%E6%B3%A2/">照片点这里</a></p>
-]]></content>
-      <categories>
-        <category>年末记忆</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>休息一下继续出发</title>
-    <url>/posts/eb63e3a5/</url>
-    <content><![CDATA[<div class="note orange flat"><p>文章写于 8 月份，这一年还没过完呢，后续还会更新</p>
-</div>
-
-<h1 id="摇曳吼姆"><a href="#摇曳吼姆" class="headerlink" title="摇曳吼姆"></a>摇曳吼姆</h1><p><a href="/gallery/Album/2024">2024 年所有的照片都在这里</a></p>
-<p>封面：《变成菜变成花》</p>
-<h2 id="天冷我不冷，逛街！"><a href="#天冷我不冷，逛街！" class="headerlink" title="天冷我不冷，逛街！"></a>天冷我不冷，逛街！</h2><p>我说谎了，其实我超懒的，我好怕冷，我好懒….</p>
-<p>是有一个朋友把我给拉出来了，一月一号元旦，我们去了徐汇的美罗城</p>
-<p>目的地是橡子共和国，吉卜力的周边专买店，以及美罗城其他的一些二次元店铺（太有活力了！）</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240802193120.png" alt="战利品！呜呜呜，花了七百多！"></p>
-<p>算是给魔女宅急便这个动画片补票，所以相当满足</p>
-<hr>
-<p>之后春节，在武汉的朋友回家之前来上海旅游，我就请了假和他一起逛二次元圣地魔都（？）</p>
-<p>我们在 B 站的会员购上发现了一个 LoveLive 同好会的售票，最初以为是小型漫展。感觉只是逛店也好无聊，所以两个人就一起参加了这个同好会</p>
-<p>这是我头一次去 Live house 在此之前我只在孤独摇滚里见过 Live House</p>
-<p>这个不能被称之为漫展，因为这就是同好会！</p>
-<p>先从检票说起，门口的检票是很无所谓的，甚至… 后面直接把检票给撤了。检票的好处是可以拿电子票换取两张明信片</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240131_201232.jpg" alt="还有一个吧唧"></p>
-<p>因为是 Live House 所以主要是演出，除了演出没有其他的</p>
-<p>这是我参加过最最最有 ACG 氛围的演出了，台上的 coser 用心的表演，台下的每个观众都跟着唱</p>
-<p>刚进去的一瞬间我是震惊的，我是不是来错地方了… 哇！我的浓度远远不够</p>
-<p>后面，我和朋友推测这是一个社团搞的活动，台下的大都是熟人，他们好像都认识？</p>
-<div id="dplayer2" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer2"),"video":{"url":"https://honyan-gallery.oss-cn-hangzhou.aliyuncs.com/Album/2024/2024.01%E6%84%9A%E5%9B%AD%E8%B7%AF%E6%96%B0%E6%AD%8C%E7%A9%BA%E9%97%B4LoveLive%E5%90%8C%E5%A5%BD%E4%BC%9A/VID_20240131_154109.mp4"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
-
-<p>总之，这是我去过最棒的一次 ACG 演出，没有任何一次漫展或者剧场比得上这次！</p>
-<h2 id="自驾舟山，学习开车"><a href="#自驾舟山，学习开车" class="headerlink" title="自驾舟山，学习开车"></a>自驾舟山，学习开车</h2><p>清明节假期的时候，我和两位关系很好的同事一起，租车去舟山自驾游玩。其目的一是玩，二是学习开车。</p>
-<p>我高中毕业的时候就拿到驾照了，但是家里只有手动挡的车，我一开车老爸就骂我。索性不开了，反正我在外面也是打车比较多。目前没有开车的场景</p>
-<p>有计划回家自驾游之后，开车就变成了比较重要的技能，于是下决心自己在上海学车！</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240803101800.png" alt="跨海大桥，自由的空气"></p>
-<p>旁边有老司机同事坐着，也不会像老爸一样怼我。车撞坏了也有全险，没有心理包袱很快就上手了：在舟山三天是我开的，高速上也开了一段。开车还是好玩的~ 稍微有些累</p>
-<p>在舟山前两天玩的蛮开心！去了海滩，第一天吃的鱼很棒，之后去普陀岛逛的有些累。第三天从绍兴回上海</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240803101844.png"></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240803101922.png" alt="背着我的鹿乃一起去的"></p>
-<p>从结交到朋友这方面出发，我还是非常感谢米哈游的</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/2024-%E8%88%9F%E5%B1%B1.jpg" alt="观沧海的两位大哥"><br>在舟山岛留下了不错的回忆</p>
-<h2 id="跑路跑路"><a href="#跑路跑路" class="headerlink" title="跑路跑路"></a>跑路跑路</h2><p>在<a href="/posts/3625dd20/">去年的文章</a>里提到过，现在的工作因为一些没意义的东西变得令人失望。</p>
-<p>到今年三月份的时候，身边的同事都要走光了，原来十几个人的前端团队，现在只剩下五六个了</p>
-<p>三月份我也接到了裁员的通知，意料之中，或者有点期待吧，因为早先熟悉的同事都不在了，大家上班也没有了最初的冲劲，每天打交道的人都满口黑话，不切实际，需求还没进入开发就先推卸未来的事故责任，说几句就令人厌烦。</p>
-<p>二月份的时候就在想，如果离职了，应该好好休息几个月。因为现在工作不好找，既然不好找就更不应该在裁员潮和人竞争。家里也有不少事情，家里在盖房子，而且这几年都没回家，没有关注过家人的生活状态。回家之后也想给自己充充电，学点新技能，寻找一些新的爱好</p>
-<p>和长沙工作的朋友，活力满满的天津友人，以及几个无所不能的网友讨论了上班和休息的事情，也得到了支持</p>
-<p>四月底的时候离职了，把行李打包回家，我在上海的行李好多（我真的是来过日子的，不只是打工），邮寄花了一千还多。</p>
-<p>走之前逛了好多馆子，一直想去但是没去成的天文馆水族馆自然博物馆。上海的展馆还是非常棒的</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240803103021.png" alt="sakana~~~ chinanago~~"></p>
-<h2 id="从杭州回家"><a href="#从杭州回家" class="headerlink" title="从杭州回家"></a>从杭州回家</h2><p>行李寄回家之后，先去了杭州，游玩了西湖和良渚。</p>
-<p>杭州的风景真棒啊！</p>
-<p>吃了传说中无敌难吃的杭帮菜，西湖醋鱼</p>
-<p>但是不够难吃，有点失望，后来问了店家，店家说稍微有些改进，把做醋鱼的西湖草鱼换成了鲈鱼（我就说嘛，吃起来没有土腥味也没有刺）</p>
-<p>群友描述醋鱼的味道是这样的：浓郁的土腥伴随着酸涩不和谐的浓醋在嘴里爆开，漱口都难以清除的味道</p>
-<p>嗯… 出于以上好奇去吃的… 所以稍微有点落差（不够难吃）</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240803103352.png"></p>
-<h2 id="回到洛阳生活"><a href="#回到洛阳生活" class="headerlink" title="回到洛阳生活"></a>回到洛阳生活</h2><p>虽然在外很长时间，但是各种生活习惯还是源自于洛阳的，比如自己做晚饭的话喜欢弄汤菜馍。</p>
-<p>回洛阳之后才知道洛阳的美食是什么，油泼面，烧烤（每个地方的烧烤都不一样），糖葫芦，米皮凉皮擀面皮馄饨细米线，牛肉汤羊肉汤驴肉汤。卤肉和烧饼，烧鸡….</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240628_194847.jpg" alt="emmmmmm"></p>
-<p>回家之后想做的事情</p>
-<ul>
-<li>拿到本科毕业证和学士学位证</li>
-<li>考取摩托车驾照，买摩托车</li>
-<li>装饰一下自己的屋子，搞出一张理想的桌面</li>
-<li>更换证件，身份证，驾照</li>
-<li>开车自驾游</li>
-<li>玩好多我想玩的游戏</li>
-<li>关注一下家里盖房子的事情</li>
-<li>整理网站，更换域名和服务器</li>
-<li>学习一下服务端渲染框架</li>
-<li>思考未来去哪里生活</li>
-</ul>
-<p>事情算是不少的，不过时间很充裕</p>
-<p>基本上是都完成了</p>
-<h1 id="本田小狼与我"><a href="#本田小狼与我" class="headerlink" title="本田小狼与我"></a>本田小狼与我</h1><p>因为今年看了一个动画片，<a href="https://bangumi.tv/subject/294337">本田小狼与我</a></p>
-<p>印象里，摩托车是很猛汉有些危险的东西，但是以这个动画片为契机去深入了解之后，我也懂得了摩托车的魅力</p>
-<p>作为交通工具，有他独特的浪漫，就像小狼说的，Cub 可以带我去任何地方，但是 Cub 也有做不到的事情…</p>
-<p>本田小狼有独特的青春的味道，不同于挥洒汗水映出彩虹的热血，而是温和平静的自我满足和愉悦，发动机的震动和开阔的视野在心里开拓出了一片新世界</p>
-<p>最好的风景在路上</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240624_132101.jpg" alt="我的Cub"></p>
-<p>六月底，拿到驾照之后，骑着摩托车去了一次洛阳陆浑，绕湖骑行的感觉真好</p>
-<h1 id="可爱的安达达和岛村村"><a href="#可爱的安达达和岛村村" class="headerlink" title="可爱的安达达和岛村村"></a>可爱的安达达和岛村村</h1><p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/Image_1707734292627.jpg"></p>
-]]></content>
-      <categories>
-        <category>年末记忆</category>
-      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
   </entry>
   <entry>
     <title>使用PicGo搭建图床（阿里云OSS）</title>
@@ -1592,198 +1620,6 @@
       </categories>
       <tags>
         <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo博客的使用笔记</title>
-    <url>/posts/369146d4/</url>
-    <content><![CDATA[<h1 id="文章置顶与置底"><a href="#文章置顶与置底" class="headerlink" title="文章置顶与置底"></a>文章置顶与置底</h1><p>在 Front-matter 区域添加 sticky 字段可以设定文章的置顶与置底，亦可以设置文章的排列顺序</p>
-<p>这个功能是 <code>hexo-generator-index</code> 插件所提供的</p>
-<p><a href="https://github.com/hexojs/hexo-generator-index">具体文档在这里</a></p>
-<p>将 <code>sticky</code> 设置为 <code>true</code> 或者大于 1 的数字，可以设置置顶</p>
-<p>将 <code>sticky</code> 设置为 <code>-1</code> 可以设置置底</p>
-<h1 id="文章隐藏"><a href="#文章隐藏" class="headerlink" title="文章隐藏"></a>文章隐藏</h1><p>如果有一些文章只想记录不想发布在网站上，可以使用<code>hexo-hide-posts</code>插件</p>
-<p>在 Front-matter 中设置 <code>hidden</code> 属性为 <code>true</code> 即可</p>
-<p><a href="https://github.com/prinsss/hexo-hide-posts">文档在这里</a></p>
-<h1 id="视频标签"><a href="#视频标签" class="headerlink" title="视频标签"></a>视频标签</h1><p>一直用 <code>video</code> 标签插入视频，但是每次都要写好麻烦，而且不同浏览器的原生 video 标签样式是不同的</p>
-<p>于是找到了 <code>hexo-tag-dplayer</code> 这个插件，用法很简单：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% dplayer url=&quot;&quot; key=value ... %&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="hideToggle-标签"><a href="#hideToggle-标签" class="headerlink" title="hideToggle 标签"></a>hideToggle 标签</h1><p>有时候想要隐藏一些内容，手动点击才打开</p>
-<details class="toggle" ><summary class="toggle-button" style="">点我打开</summary><div class="toggle-content"><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% hideToggle 点我打开 %&#125;</span><br><span class="line">&#123;% endhideToggle %&#125;</span><br></pre></td></tr></table></figure>
-</div></details>
-
-<h1 id="更多标签"><a href="#更多标签" class="headerlink" title="更多标签"></a>更多标签</h1><p><a href="https://butterfly.js.org/posts/4aa8abbe/#%E6%A8%99%E7%B1%A4%E5%A4%96%E6%8E%9B%EF%BC%88Tag-Plugins%EF%BC%89">butterfly.org 文档</a></p>
-]]></content>
-      <categories>
-        <category>Blog</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第一次摩旅：洛阳-西安</title>
-    <url>/posts/70ac33cd/</url>
-    <content><![CDATA[<p>写下这篇文章的时候已经是十一假期了</p>
-<p>我已经在西安暂住下来，并且开始逐渐了解这座城市</p>
-<hr>
-<p>我做了一件很不得了的事情，至少我自己觉得很厉害！</p>
-<p>9.24 和 9.25 这两天的时间，骑上我的本田 cc110，从洛阳到达了西安</p>
-<p>完成了人生第一次摩托车旅行</p>
-<h1 id="每年最完美的季节"><a href="#每年最完美的季节" class="headerlink" title="每年最完美的季节"></a>每年最完美的季节</h1><p>小熊说，Cub 可以带我去任何地方，我还想去更远的地方</p>
-<p>芝麻凛的爷爷说，我刚拿到驾照可能会不知道，季节交替的时候正式摩托旅行的好时机</p>
-<div id="dplayer3" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer3"),"video":{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/Yuru%20Camp%20Season%203%2009%20%E7%89%87%E6%AE%B5.mp4"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
-
-<p>摩托旅行是视野最开阔的旅行方式，有速度，有风，眼前所有的东西全是景色</p>
-<h1 id="出发前的心情和准备"><a href="#出发前的心情和准备" class="headerlink" title="出发前的心情和准备"></a>出发前的心情和准备</h1><h2 id="喜欢的事情"><a href="#喜欢的事情" class="headerlink" title="喜欢的事情"></a>喜欢的事情</h2><p>早在今年一月份的时候，看了动画片《本田小狼与我》</p>
-<p>再之后，看了《摇曳露营 3》</p>
-<p>这两个动画片让我知道摩托车可以是生活的一部分，是一种人生态度，是可以陪伴到老的东西</p>
-<p>是接近我的理想，值得我去向往和追求的事物</p>
-<p>七月份拿到驾照和车之后，我就摩拳擦掌想要试一次摩托旅行。于是从家里骑到了陆浑水库</p>
-<p>在陆浑环湖骑行了一圈。我确信我做了正确的决定，我喜欢的就是这样的东西</p>
-<p>我觉得这是给自己放暑假期间做的最有意义的事情了</p>
-<h2 id="悠闲，还有些害怕"><a href="#悠闲，还有些害怕" class="headerlink" title="悠闲，还有些害怕"></a>悠闲，还有些害怕</h2><p>暑假过的很快，弟弟的暑假在九月份结束了，我意识到我差不多也该重新组织自己的生活了</p>
-<p>我想把骑行继续下去，所以目光看向了洛阳旁边的城市西安，我觉得西安应该是一个很舒服的地方，吃得惯住得惯，骑行环境好，机车天堂</p>
-<p>了解长途骑行的知识，护具的选购，防御性驾驶等等</p>
-<p>买了护膝护肘护腰，一个很满意的后座包…</p>
-<p>不害怕是不可能的，我知道国道路况没那么好，国道上非常多的挂车，可能会遇到横风，甚至落石</p>
-<p>我也知道，如果出事故，一切都会结束。是很可怕的事情…</p>
-<p>除此之外，我去西安是找工作的，如果没找到的话会怎样，重新安排之后的事情…</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240923_180908.jpg" alt="前一天的黄昏"></p>
-<p>做出决定的时候，是稍微有些焦虑的，甚至犹豫这趟危险的骑行是不是不对的</p>
-<p>后来朋友一句话把我点醒了</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20241005135813.png" alt="生活是体验"></p>
-<p>在后座包上扣了芙莉莲的吧唧，伊蕾娜和小熊的挂饰，还有友人送的护身符</p>
-<div class="gallery-container" data-type="data" data-button="">
-      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20241005_230238.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20241005_230216.jpg","alt":""}]</div>
-      <div class="gallery-items">
-      </div>
-    </div>
-
-<p>带着些许畏惧，还有许许多多期待，开始了第一次摩旅</p>
-<h1 id="出发，我一直都在路上"><a href="#出发，我一直都在路上" class="headerlink" title="出发，我一直都在路上"></a>出发，我一直都在路上</h1><p>9.24 上午，去邻村喝了碗豆腐脑，吃了两个水煎包回家。把沉重的后座包放在车上</p>
-<p>准备出发的时候遇到老爸，原来是出门给我买了点吃的，几个苹果，一袋玉米肠，还有点心。叮嘱我在路上多休息休息</p>
-<p>由于行李空间有限，我只带了玉米肠和一个苹果还有说不出的感谢</p>
-<p>穿上护具，目标 大雁塔，出发</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_095235.jpg" alt="背景就是我家"></p>
-<h2 id="第一天：洛阳-潼关"><a href="#第一天：洛阳-潼关" class="headerlink" title="第一天：洛阳 - 潼关"></a>第一天：洛阳 - 潼关</h2><p>出发不一会儿就从瀍河上了洛阳段的 310 国道</p>
-<p>一个转弯进入国道，视野开阔起来，洛阳段的国道修得真好，双向六车道，路边是山山水水和村庄</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_112030.jpg"></p>
-<p>也许是因为我的详细计划，选了一个晴天的工作日，国道并没有我想象的那么危险，虽然大车也不少，但是路很宽</p>
-<p>我骑在最右车道最右侧 30 公分的距离，如果左后视镜里有大车出现，我就乖巧地借用非机动车道，然后减速让大车先走</p>
-<p>遵循这样的让车规则，渐渐在国道上稳定下来，不一会儿就到了三门峡</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_115032.jpg"></p>
-<p>中午从义马下了国道，去吃了午饭，在饭店里休息了一个小时，继续出发！</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_123242.jpg"></p>
-<p>下午也是一路骑行，在每个服务区都做了休息</p>
-<p>一下午在服务区一共遇到了五个摩友，他们有来自山西的，来自陕西的，甚至还有江苏的大哥</p>
-<p>在服务区简单聊天十分愉快，大家都会相互夸赞，聊一聊车，聊一聊沿路的景点</p>
-<p>很少和陌生人聊的这么愉快过</p>
-<p>休息之后各自分别，打一个再见的招呼，继续旅行，有几个大哥还会在下个服务区碰面</p>
-<p>实际上，我骑车的速度要比导航计算的速度更慢</p>
-<p>六点的时候太阳落山，骑车是最不舒服的，虽然有遮光镜，但是太阳光依然会直射前方…</p>
-<p>但是有些不服输吧，心里想着第一天要进入陕西界</p>
-<p>终于到了潼关，在此落脚，还吃了个肉夹馍~</p>
-<div class="gallery-container" data-type="data" data-button="">
-      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_144022.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_151821.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_151831.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_154609.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_174457.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_181336.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_185622.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_204858.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_202615.jpg","alt":""}]</div>
-      <div class="gallery-items">
-      </div>
-    </div>
-
-<p>如此，第一天的旅行结束了</p>
-<h2 id="第二天：潼关-西安"><a href="#第二天：潼关-西安" class="headerlink" title="第二天：潼关 - 西安"></a>第二天：潼关 - 西安</h2><p>前一天在酒店提前查了一下陕西段国道的路况（因为在渭南市下国道的时候，那段路实在有些糟糕）</p>
-<p>改变了路线，决定不再走 310 国道，取而代之的是堤顶路</p>
-<p>骑过之后才知道，堤顶路是沿着渭河修建的一条穿过渭南-西安-宝鸡的道路</p>
-<p>这条路简直是为了旅游者而修建的，限高 2.2m，限速 60，意味着没有大车，希望旅行者慢慢走</p>
-<p>这条路两边是田地，村庄，渭河。红绿顶非常少，甚至还有农民在路上晒玉米（毕竟是这个季节嘛</p>
-<p>好在车非常少，景色优美，骑行心情悠然自得，太享受了</p>
-<p>这张照片是从国道走入一条无名道路上，这条道路连接着国道和堤顶路，走上这条无名路我就知道自己选对路了！</p>
-<div class="gallery-container" data-type="data" data-button="">
-      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_110425.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_105154.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_105200.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_105601.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_110015.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_110026.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_110319.jpg","alt":""}]</div>
-      <div class="gallery-items">
-      </div>
-    </div>
-
-<p>如此惬意，美好，自由</p>
-<div class="gallery-container" data-type="data" data-button="">
-      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_111458.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_113452.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_114403.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_114433.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_114758.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_115155.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_120043.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_120051.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_120620.jpg","alt":""}]</div>
-      <div class="gallery-items">
-      </div>
-    </div>
-
-<p>沿着这条路继续走下去，穿过了田野，穿过了华阴，见到渭河</p>
-<p>这一路没有什么饭店，但是休息也没有国道上那么嘈杂，想停就停，停下也很安静</p>
-<p>摘掉头盔，大口呼吸空气，吃点火腿肠，咬一口大苹果</p>
-<p>休息的一刻，我也是自然的一部分</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_121533.jpg" alt="源远流长"></p>
-<p>慢慢悠悠地，西安人民欢迎您</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_125837.jpg" alt="西安界"></p>
-<p>在西安界内，也是先沿着渭河堤走，渭河就在旁边</p>
-<p>到西安之后明显发现摩托车变多了，好多酷炫的摩托佬</p>
-<div class="gallery-container" data-type="data" data-button="">
-      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_133014.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_131734.jpg","alt":""}]</div>
-      <div class="gallery-items">
-      </div>
-    </div>
-
-<p>大概四点半的时候到达大雁塔，大雁塔红绿灯前草草拍了个照片，旅程算是结束了</p>
-<p>我做到了！！</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_154043.jpg" alt="到达！"></p>
-<h1 id="到达后的感想"><a href="#到达后的感想" class="headerlink" title="到达后的感想"></a>到达后的感想</h1><details class="toggle" ><summary class="toggle-button" style="">一点点骑行建议</summary><div class="toggle-content"><p><strong>路线</strong></p>
-<p>第一天：洛阳-潼关：310 国道<br>第二天：潼关-西安：堤顶路</p>
-<div class="gallery-container" data-type="data" data-button="">
-      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/Screenshot_2024-09-19-18-28-21-200_com.autonavi.m.jpg","alt":"原定路线：310国道"},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/Screenshot_2024-10-05-20-21-46-270_com.autonavi.m.jpg","alt":"第二天的路线：堤顶路"}]</div>
-      <div class="gallery-items">
-      </div>
-    </div>
-
-<p><strong>准备</strong></p>
-<p>出发前的准备非常重要，除了头盔护具这些提高生存率的东西之外</p>
-<p>头盔最好是全盔，舒适性方面最重要的是不让眼睛吹风，这个非常非常重要，甚至可以准备一点玻璃酸钠滴眼液</p>
-<p>衣服要考虑防风性能，晚上的时候也要兼顾保暖</p>
-<p>护腰可以尝试一下，骑行是非常累的，想办法减轻自己的疲劳</p>
-<p><strong>休息</strong></p>
-<p>带一点咖啡因饮料也许可以集中精神，牛磺酸饮料对减轻疲劳也有用</p>
-<p>合理安排骑行时间，最好每个小时休息一次，休息的时候吃点东西（带糖分的最好</p>
-<p>关注油耗，国道上加油站比较少，加油很可能要下国道</p>
-<p><strong>时间</strong></p>
-<p>朝西方向骑行的时候，五六点钟太阳会直射眼睛，最好在这个时间前就休息吧</p>
-<p>天黑不骑车，危险倍增，夜晚国道上大车会变得很多，最好的时间是工作日的上午和下午</p>
-<p><strong>防御性驾驶</strong></p>
-<p>防御性驾驶一定要学一下，或者锻炼一下</p>
-<p>摩托车在国道上出事一般都是会转生异世界的….</p>
-<p>而摩托车视野最开阔，天然适合防御性驾驶</p>
-<p>预测未来道路会发生的事情，主动让车</p>
-<p>国道非机动车道最好不要走，路的质量很糟糕，还有玻璃碴子…</p>
-<p><strong>横风</strong></p>
-<p>摩托车避免不了横风问题，国道上没有城市的高楼，横风会强劲又突然</p>
-<p>需要特别注意两类横风</p>
-<p>一个是自然横风，经过山和桥的时候，可能会遭遇很突然的风，甚至吹偏一个车道</p>
-<p>一个是大车从身边穿过的风，挂车从身边过去的时候那个压迫感…. 过去之后会有个向大车方向吸过去的风，这个也不容小觑</p>
-<p>对付横风最好的方法是减速，本田小狼速度上 70 就能感觉到横向风的影响，80 的时候会变得严重，骑帅不骑快就好啦！</p>
-<p>对付大车的横风，就是走最右车道和减速让行（不要停车），走最右车道是因为不会被两个大车夹在中间</p>
-</div></details>
-
-<p>第一次摩旅毕业了！</p>
-<p>出发前是害怕和不安</p>
-<p>出发后是紧张，稳稳骑行，珍惜自己的生命，感慨国道上开阔的视野</p>
-<p>对骑车技术有把握之后，开始欣赏沿路的美景，享受旅行</p>
-<p>到达目的地后，先前的不安和紧张都不再有了，取而代之的是豁然开朗！</p>
-<p>还有对自己的肯定：我做到了！！</p>
-<p>最初考虑，我会在西安住上一个月去找工作</p>
-<p>但是当我到达的时候，已经觉得骑到西安这件事本身的价值已经超越了找工作，担心找不到工作的忧愁也不存在了</p>
-<p>毕竟，西安不是我的终点，只是其中一站而已</p>
-<p>在民宿住下之后去泡了个澡，把疲惫溶解在温泉里…</p>
-<p>真让人脸扁~~</p>
-<p><strong>旅途的风景都在路上，生活是体验。我一直都在路上，我一直都在体验</strong></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20241005223412.png"></p>
-]]></content>
-      <categories>
-        <category>本田小狼与我</category>
-      </categories>
-      <tags>
-        <tag>摩托车</tag>
       </tags>
   </entry>
   <entry>
@@ -2051,56 +1887,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Mapbox难题解决记录</title>
-    <url>/posts/76e49fb1/</url>
-    <content><![CDATA[<h1 id="和后端一起遇到过的麻烦"><a href="#和后端一起遇到过的麻烦" class="headerlink" title="和后端一起遇到过的麻烦"></a>和后端一起遇到过的麻烦</h1><p>本来是想写在上一篇里面的，但是上篇已经写得很长了…</p>
-<p>而且想到未来可能会遇到更多要解决的问题。就重新记录了一篇文章</p>
-<h2 id="优化初始地图打开速度"><a href="#优化初始地图打开速度" class="headerlink" title="优化初始地图打开速度"></a>优化初始地图打开速度</h2><p>数据量的问题通过分层解决，我们做了个全美人种分布的图层，首页显示了百万个点。这些点不仅影响了页面的打开速度，还对服务器造成了压力，同时浏览器渲染这些点也比较吃力</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/mape1.png"></p>
-<p>把后端做了多个 vector 源，前端写多个 layer，初始只展示数据量最小的源</p>
-<p>接着把 script 标签从 api.mapbox.com 的 js 文件迁移到本地，从 network 里看到，mapbox-gl.js 这个文件的加载速度减少了好几秒</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- &lt;script src=&#x27;https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js&#x27;&gt;&lt;/script&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/plugins/mapbox-2.3.1/mapbox-gl.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 搜索框 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;script src=&quot;https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js&quot;&gt;&lt;/script&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/plugins/mapbox-2.3.1/mapbox-gl-geocoder-4.7.2.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="图标卡顿重叠"><a href="#图标卡顿重叠" class="headerlink" title="图标卡顿重叠"></a>图标卡顿重叠</h2><p>另一个数据层有三十多万个数据点，并且用图标分类显示每个点。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// addLayer option</span></span><br><span class="line"><span class="string">&quot;type&quot;</span>: <span class="string">&quot;symbol&quot;</span>,</span><br><span class="line"><span class="string">&quot;layout&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&quot;icon-image&quot;</span>: <span class="string">&quot;xxx-icon&quot;</span>,</span><br><span class="line">  <span class="string">&quot;icon-size&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;stops&quot;</span>: [</span><br><span class="line">      [<span class="number">5</span>, <span class="number">0.6</span>],</span><br><span class="line">      [<span class="number">14</span>, <span class="number">0.8</span>]</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;icon-allow-overlap&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我加了<code>icon-allow-overlap</code>的选项，图标确实不重叠了，页面直接卡爆了…</p>
-<p>经过测试，是<code>&quot;type&quot;: &quot;symbol&quot;</code>渲染的问题，对比 circle，symble 会卡顿很多。</p>
-<p>symble 适合稍微小一点的数据集，大量的数据会造成卡顿。</p>
-<h2 id="添加层控制的按钮"><a href="#添加层控制的按钮" class="headerlink" title="添加层控制的按钮"></a>添加层控制的按钮</h2><p>需求是点击按钮隐藏层，再次点击显示层，<a href="https://docs.mapbox.com/mapbox-gl-js/example/toggle-layers/">这个例子可以拿来参考</a></p>
-<p>关键方法是</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">map.<span class="title function_">setLayoutProperty</span>(</span><br><span class="line">  layerId,</span><br><span class="line">  <span class="string">&quot;visibility&quot;</span>,</span><br><span class="line">  <span class="string">&quot;visible&quot;</span> <span class="comment">// none</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p>但是地图一个功能有多个层，我把层分类和层 id 写在了 button 元素上，点击按钮的时候先处理一下层的属性</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 四个按钮 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">  <span class="attr">class</span>=<span class="string">&quot;active&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">layer</span>=<span class="string">&quot;Ethnicity&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">layer-id</span>=<span class="string">&quot;Ethnicity_5000,Ethnicity_1000,Ethnicity_500,Ethnicity_200&quot;</span></span></span><br><span class="line"><span class="tag">  &gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;iconfont&quot;</span>&gt;</span><span class="symbol">&amp;#xe686;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>人种层开关<span class="tag">&lt;/<span class="name">span</span>&gt;</span>&lt;/a</span><br><span class="line">&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">  <span class="attr">class</span>=<span class="string">&quot;active&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">layer</span>=<span class="string">&quot;Colleges&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">layer-id</span>=<span class="string">&quot;Colleges,Colleges-count&quot;</span></span></span><br><span class="line"><span class="tag">  &gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;iconfont&quot;</span>&gt;</span><span class="symbol">&amp;#xe672;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>院校层开关<span class="tag">&lt;/<span class="name">span</span>&gt;</span>&lt;/a</span><br><span class="line">&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">  <span class="attr">class</span>=<span class="string">&quot;&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">layer</span>=<span class="string">&quot;Companies&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">layer-id</span>=<span class="string">&quot;Companies,Companies-count&quot;</span></span></span><br><span class="line"><span class="tag">  &gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;iconfont&quot;</span>&gt;</span><span class="symbol">&amp;#xe671;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>公司层开关<span class="tag">&lt;/<span class="name">span</span>&gt;</span>&lt;/a</span><br><span class="line">&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;&quot;</span> <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span> <span class="attr">layer</span>=<span class="string">&quot;Crimes&quot;</span> <span class="attr">layer-id</span>=<span class="string">&quot;Crimes&quot;</span></span></span><br><span class="line"><span class="tag">  &gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;iconfont&quot;</span>&gt;</span><span class="symbol">&amp;#xe873;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>犯罪数据层开关<span class="tag">&lt;/<span class="name">span</span>&gt;</span>&lt;/a</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">layerSwitch</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> layerBtns = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;#menu a&#x27;</span>)</span><br><span class="line">    <span class="keyword">const</span> map = <span class="variable language_">this</span>.<span class="property">map</span></span><br><span class="line">    layerBtns.<span class="title function_">forEach</span>(<span class="function"><span class="params">link</span> =&gt;</span> &#123;</span><br><span class="line">      link.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">        e.<span class="title function_">preventDefault</span>()</span><br><span class="line">        e.<span class="title function_">stopPropagation</span>()</span><br><span class="line">        <span class="keyword">const</span> layer = link.<span class="title function_">getAttribute</span>(<span class="string">&#x27;layer&#x27;</span>)</span><br><span class="line">        <span class="keyword">const</span> ids = link.<span class="title function_">getAttribute</span>(<span class="string">&#x27;layer-id&#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">        <span class="keyword">const</span> legendsElement = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`.<span class="subst">$&#123;layer&#125;</span>-legends`</span>)</span><br><span class="line">        ids.<span class="title function_">forEach</span>(<span class="function"><span class="params">name</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> id = name.<span class="title function_">trim</span>()</span><br><span class="line">          <span class="keyword">const</span> visibility = map.<span class="title function_">getLayoutProperty</span>(id, <span class="string">&#x27;visibility&#x27;</span>)</span><br><span class="line">          <span class="keyword">if</span> (visibility === <span class="string">&#x27;visible&#x27;</span> || visibility === <span class="literal">undefined</span>) &#123;</span><br><span class="line">            map.<span class="title function_">setLayoutProperty</span>(id, <span class="string">&#x27;visibility&#x27;</span>, <span class="string">&#x27;none&#x27;</span>)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">className</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line">            legendsElement &amp;&amp; (legendsElement.<span class="property">style</span>.<span class="property">display</span> = <span class="string">&#x27;none&#x27;</span>)</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">className</span> = <span class="string">&#x27;active&#x27;</span></span><br><span class="line">            map.<span class="title function_">setLayoutProperty</span>(id, <span class="string">&#x27;visibility&#x27;</span>, <span class="string">&#x27;visible&#x27;</span>)</span><br><span class="line">            legendsElement &amp;&amp; (legendsElement.<span class="property">style</span>.<span class="property">display</span> = <span class="string">&#x27;flex&#x27;</span>)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="地图对数据集大小的限制，导致数据集只能传递一个参数"><a href="#地图对数据集大小的限制，导致数据集只能传递一个参数" class="headerlink" title="地图对数据集大小的限制，导致数据集只能传递一个参数"></a>地图对数据集大小的限制，导致数据集只能传递一个参数</h2><p>这是后端遇到的问题，好像 vector 的数据集大小每超过一定限制，都会减少数据集中每个 feature 携带的属性。</p>
-<p>传过来的数据集只有一个属性…</p>
-<p>后端把需要展示的数据排列在字符串中，用特殊符号分割。</p>
-<p>前端使用 mapbox 的表达式从这个字符串中根据特殊符号 split 出属性…这是一个不是办法的办法呢</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 我们约定的格式是</span></span><br><span class="line">data = <span class="string">&#x27;id@param1@param2@...&#x27;</span></span><br><span class="line"><span class="comment">// 我需要根据id，把数据分类用不同颜色展示</span></span><br><span class="line"><span class="comment">// 用js切分应该是</span></span><br><span class="line">data.<span class="title function_">split</span>(<span class="string">&#x27;@&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line"><span class="comment">// 但是表达式没有split方法，只有indexof和slice</span></span><br><span class="line">[<span class="string">&#x27;slice&#x27;</span>, [<span class="string">&#x27;get&#x27;</span>, <span class="string">&#x27;data&#x27;</span>], <span class="number">0</span>,[<span class="string">&#x27;index-of&#x27;</span>, <span class="string">&#x27;@&#x27;</span>, [<span class="string">&#x27;get&#x27;</span>, <span class="string">&#x27;data&#x27;</span>]]]</span><br><span class="line"><span class="comment">// 完整的匹配颜色表达式</span></span><br><span class="line"><span class="string">&#x27;circle-color&#x27;</span>: [</span><br><span class="line">  <span class="string">&#x27;match&#x27;</span>,</span><br><span class="line">  [<span class="string">&#x27;slice&#x27;</span>, [<span class="string">&#x27;get&#x27;</span>, <span class="string">&#x27;data&#x27;</span>], <span class="number">0</span>,[<span class="string">&#x27;index-of&#x27;</span>, <span class="string">&#x27;@&#x27;</span>, [<span class="string">&#x27;get&#x27;</span>, <span class="string">&#x27;data&#x27;</span>]]],</span><br><span class="line">  <span class="string">&#x27;2&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#686de0&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;3&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#535c68&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;4&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#6ab04c&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;5&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#eb4d4b&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;6&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#be2edd&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;7&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#f0932b&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;8&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#f9ca24&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;9&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#22a6b3&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;10&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#f9ca24&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#f9ca24&#x27;</span>,</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
-
-<h2 id="鼠标滚轮放在-Popup-上会滚动页面"><a href="#鼠标滚轮放在-Popup-上会滚动页面" class="headerlink" title="鼠标滚轮放在 Popup 上会滚动页面"></a>鼠标滚轮放在 Popup 上会滚动页面</h2><p>mapbox 地图中，滚轮有缩放的功能，但是在地图自带的弹出框上滚动鼠标滚轮，页面会滚动。这是非常不友好的交互…</p>
-<p>这个还蛮简单的，禁用掉滚动就好啦</p>
-<p>审查元素发现 popup 实际上是一个 html 弹出框，是 html 那就简单了。给地图容器元素添加点击事件，冒泡给 popup 包裹的元素，禁用掉滚轮事件</p>
-<p>注意滚轮的事件是<code>wheel</code></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">disablePopupScroll</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">callback</span> = (<span class="params">e</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(e.<span class="property">target</span>.<span class="title function_">closest</span>(<span class="string">&#x27;.mapboxgl-popup&#x27;</span>)) &#123;</span><br><span class="line">      e.<span class="title function_">preventDefault</span>()</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#map&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;wheel&#x27;</span>, callback)</span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#map&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;touchmove&#x27;</span>, callback)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="根据接口数据，初始化隐藏某些点"><a href="#根据接口数据，初始化隐藏某些点" class="headerlink" title="根据接口数据，初始化隐藏某些点"></a>根据接口数据，初始化隐藏某些点</h2><p><code>getHidePoint</code>是一个封装了 Ajax 的 promise</p>
-<p>写一个 match 表达式，匹配数据给到的点，用<code>filter</code>或者<code>icon-image</code>隐藏掉</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> hide = [];</span><br><span class="line"><span class="keyword">const</span> expression = [<span class="string">&quot;match&quot;</span>, [<span class="string">&quot;get&quot;</span>, <span class="string">&quot;code&quot;</span>], <span class="string">&quot;placeholder&quot;</span>, <span class="string">&quot;&quot;</span>];</span><br><span class="line"><span class="title function_">getHidePoint</span>()</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    hide = res;</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">values</span>(hide).<span class="title function_">forEach</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 需要隐藏的code</span></span><br><span class="line">      expression.<span class="title function_">push</span>(item.<span class="property">code</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">      <span class="comment">// [&#x27;match&#x27;, [&#x27;get&#x27;, &#x27;code&#x27;], &#x27;placeholder&#x27;, &#x27;&#x27;, &#x27;hide-code&#x27;, &#x27;&#x27;, &#x27;hide-code2&#x27;, &#x27;&#x27;, ...]</span></span><br><span class="line">      map.<span class="title function_">addLayer</span>(&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="attr">layout</span>: &#123;</span><br><span class="line">          <span class="string">&quot;icon-image&quot;</span>: expression,</span><br><span class="line">          <span class="string">&quot;icon-allow-overlap&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function">(<span class="params">err</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(err));</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>小笔记</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Mapbox</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Mapbox使用笔记</title>
     <url>/posts/2416a3fc/</url>
     <content><![CDATA[<h1 id="什么是-mapbox"><a href="#什么是-mapbox" class="headerlink" title="什么是 mapbox"></a>什么是 mapbox</h1><p>近期公司有一个在地图上展示大量数据的项目。需要可以在国内访问国外的地图，同时可以累加开发</p>
@@ -2210,6 +1996,56 @@
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;paint&#x27;</span>: &#123;</span><br><span class="line">  <span class="string">&#x27;circle-radius&#x27;</span>: <span class="number">1.5</span>,</span><br><span class="line">  <span class="string">&#x27;circle-color&#x27;</span>: [</span><br><span class="line">    <span class="string">&#x27;match&#x27;</span>,</span><br><span class="line">    [<span class="string">&#x27;get&#x27;</span>, <span class="string">&#x27;ethnicity&#x27;</span>],</span><br><span class="line">    <span class="string">&#x27;w&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;#41b3eb&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;b&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;#f38b3c&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;o&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;#81d693&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;a&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;#3453a4&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;h&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;#cb3233&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;#f9e33e&#x27;</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>利用表达式，可以做很多奇妙的事情，比如不同的值显示不同的颜色（上面的）。甚至切割加工字符串，过滤掉某些值等等</p>
+]]></content>
+      <categories>
+        <category>小笔记</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Mapbox</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mapbox难题解决记录</title>
+    <url>/posts/76e49fb1/</url>
+    <content><![CDATA[<h1 id="和后端一起遇到过的麻烦"><a href="#和后端一起遇到过的麻烦" class="headerlink" title="和后端一起遇到过的麻烦"></a>和后端一起遇到过的麻烦</h1><p>本来是想写在上一篇里面的，但是上篇已经写得很长了…</p>
+<p>而且想到未来可能会遇到更多要解决的问题。就重新记录了一篇文章</p>
+<h2 id="优化初始地图打开速度"><a href="#优化初始地图打开速度" class="headerlink" title="优化初始地图打开速度"></a>优化初始地图打开速度</h2><p>数据量的问题通过分层解决，我们做了个全美人种分布的图层，首页显示了百万个点。这些点不仅影响了页面的打开速度，还对服务器造成了压力，同时浏览器渲染这些点也比较吃力</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/mape1.png"></p>
+<p>把后端做了多个 vector 源，前端写多个 layer，初始只展示数据量最小的源</p>
+<p>接着把 script 标签从 api.mapbox.com 的 js 文件迁移到本地，从 network 里看到，mapbox-gl.js 这个文件的加载速度减少了好几秒</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- &lt;script src=&#x27;https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js&#x27;&gt;&lt;/script&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/plugins/mapbox-2.3.1/mapbox-gl.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 搜索框 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;script src=&quot;https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js&quot;&gt;&lt;/script&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/plugins/mapbox-2.3.1/mapbox-gl-geocoder-4.7.2.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="图标卡顿重叠"><a href="#图标卡顿重叠" class="headerlink" title="图标卡顿重叠"></a>图标卡顿重叠</h2><p>另一个数据层有三十多万个数据点，并且用图标分类显示每个点。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// addLayer option</span></span><br><span class="line"><span class="string">&quot;type&quot;</span>: <span class="string">&quot;symbol&quot;</span>,</span><br><span class="line"><span class="string">&quot;layout&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&quot;icon-image&quot;</span>: <span class="string">&quot;xxx-icon&quot;</span>,</span><br><span class="line">  <span class="string">&quot;icon-size&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;stops&quot;</span>: [</span><br><span class="line">      [<span class="number">5</span>, <span class="number">0.6</span>],</span><br><span class="line">      [<span class="number">14</span>, <span class="number">0.8</span>]</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;icon-allow-overlap&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我加了<code>icon-allow-overlap</code>的选项，图标确实不重叠了，页面直接卡爆了…</p>
+<p>经过测试，是<code>&quot;type&quot;: &quot;symbol&quot;</code>渲染的问题，对比 circle，symble 会卡顿很多。</p>
+<p>symble 适合稍微小一点的数据集，大量的数据会造成卡顿。</p>
+<h2 id="添加层控制的按钮"><a href="#添加层控制的按钮" class="headerlink" title="添加层控制的按钮"></a>添加层控制的按钮</h2><p>需求是点击按钮隐藏层，再次点击显示层，<a href="https://docs.mapbox.com/mapbox-gl-js/example/toggle-layers/">这个例子可以拿来参考</a></p>
+<p>关键方法是</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">map.<span class="title function_">setLayoutProperty</span>(</span><br><span class="line">  layerId,</span><br><span class="line">  <span class="string">&quot;visibility&quot;</span>,</span><br><span class="line">  <span class="string">&quot;visible&quot;</span> <span class="comment">// none</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>但是地图一个功能有多个层，我把层分类和层 id 写在了 button 元素上，点击按钮的时候先处理一下层的属性</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 四个按钮 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">  <span class="attr">class</span>=<span class="string">&quot;active&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">layer</span>=<span class="string">&quot;Ethnicity&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">layer-id</span>=<span class="string">&quot;Ethnicity_5000,Ethnicity_1000,Ethnicity_500,Ethnicity_200&quot;</span></span></span><br><span class="line"><span class="tag">  &gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;iconfont&quot;</span>&gt;</span><span class="symbol">&amp;#xe686;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>人种层开关<span class="tag">&lt;/<span class="name">span</span>&gt;</span>&lt;/a</span><br><span class="line">&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">  <span class="attr">class</span>=<span class="string">&quot;active&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">layer</span>=<span class="string">&quot;Colleges&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">layer-id</span>=<span class="string">&quot;Colleges,Colleges-count&quot;</span></span></span><br><span class="line"><span class="tag">  &gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;iconfont&quot;</span>&gt;</span><span class="symbol">&amp;#xe672;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>院校层开关<span class="tag">&lt;/<span class="name">span</span>&gt;</span>&lt;/a</span><br><span class="line">&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">a</span></span></span><br><span class="line"><span class="tag">  <span class="attr">class</span>=<span class="string">&quot;&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">layer</span>=<span class="string">&quot;Companies&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">layer-id</span>=<span class="string">&quot;Companies,Companies-count&quot;</span></span></span><br><span class="line"><span class="tag">  &gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;iconfont&quot;</span>&gt;</span><span class="symbol">&amp;#xe671;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>公司层开关<span class="tag">&lt;/<span class="name">span</span>&gt;</span>&lt;/a</span><br><span class="line">&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;&quot;</span> <span class="attr">href</span>=<span class="string">&quot;javascript:;&quot;</span> <span class="attr">layer</span>=<span class="string">&quot;Crimes&quot;</span> <span class="attr">layer-id</span>=<span class="string">&quot;Crimes&quot;</span></span></span><br><span class="line"><span class="tag">  &gt;</span><span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;iconfont&quot;</span>&gt;</span><span class="symbol">&amp;#xe873;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>犯罪数据层开关<span class="tag">&lt;/<span class="name">span</span>&gt;</span>&lt;/a</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">layerSwitch</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> layerBtns = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;#menu a&#x27;</span>)</span><br><span class="line">    <span class="keyword">const</span> map = <span class="variable language_">this</span>.<span class="property">map</span></span><br><span class="line">    layerBtns.<span class="title function_">forEach</span>(<span class="function"><span class="params">link</span> =&gt;</span> &#123;</span><br><span class="line">      link.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">        e.<span class="title function_">preventDefault</span>()</span><br><span class="line">        e.<span class="title function_">stopPropagation</span>()</span><br><span class="line">        <span class="keyword">const</span> layer = link.<span class="title function_">getAttribute</span>(<span class="string">&#x27;layer&#x27;</span>)</span><br><span class="line">        <span class="keyword">const</span> ids = link.<span class="title function_">getAttribute</span>(<span class="string">&#x27;layer-id&#x27;</span>).<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">        <span class="keyword">const</span> legendsElement = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">`.<span class="subst">$&#123;layer&#125;</span>-legends`</span>)</span><br><span class="line">        ids.<span class="title function_">forEach</span>(<span class="function"><span class="params">name</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> id = name.<span class="title function_">trim</span>()</span><br><span class="line">          <span class="keyword">const</span> visibility = map.<span class="title function_">getLayoutProperty</span>(id, <span class="string">&#x27;visibility&#x27;</span>)</span><br><span class="line">          <span class="keyword">if</span> (visibility === <span class="string">&#x27;visible&#x27;</span> || visibility === <span class="literal">undefined</span>) &#123;</span><br><span class="line">            map.<span class="title function_">setLayoutProperty</span>(id, <span class="string">&#x27;visibility&#x27;</span>, <span class="string">&#x27;none&#x27;</span>)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">className</span> = <span class="string">&#x27;&#x27;</span></span><br><span class="line">            legendsElement &amp;&amp; (legendsElement.<span class="property">style</span>.<span class="property">display</span> = <span class="string">&#x27;none&#x27;</span>)</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">className</span> = <span class="string">&#x27;active&#x27;</span></span><br><span class="line">            map.<span class="title function_">setLayoutProperty</span>(id, <span class="string">&#x27;visibility&#x27;</span>, <span class="string">&#x27;visible&#x27;</span>)</span><br><span class="line">            legendsElement &amp;&amp; (legendsElement.<span class="property">style</span>.<span class="property">display</span> = <span class="string">&#x27;flex&#x27;</span>)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="地图对数据集大小的限制，导致数据集只能传递一个参数"><a href="#地图对数据集大小的限制，导致数据集只能传递一个参数" class="headerlink" title="地图对数据集大小的限制，导致数据集只能传递一个参数"></a>地图对数据集大小的限制，导致数据集只能传递一个参数</h2><p>这是后端遇到的问题，好像 vector 的数据集大小每超过一定限制，都会减少数据集中每个 feature 携带的属性。</p>
+<p>传过来的数据集只有一个属性…</p>
+<p>后端把需要展示的数据排列在字符串中，用特殊符号分割。</p>
+<p>前端使用 mapbox 的表达式从这个字符串中根据特殊符号 split 出属性…这是一个不是办法的办法呢</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 我们约定的格式是</span></span><br><span class="line">data = <span class="string">&#x27;id@param1@param2@...&#x27;</span></span><br><span class="line"><span class="comment">// 我需要根据id，把数据分类用不同颜色展示</span></span><br><span class="line"><span class="comment">// 用js切分应该是</span></span><br><span class="line">data.<span class="title function_">split</span>(<span class="string">&#x27;@&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line"><span class="comment">// 但是表达式没有split方法，只有indexof和slice</span></span><br><span class="line">[<span class="string">&#x27;slice&#x27;</span>, [<span class="string">&#x27;get&#x27;</span>, <span class="string">&#x27;data&#x27;</span>], <span class="number">0</span>,[<span class="string">&#x27;index-of&#x27;</span>, <span class="string">&#x27;@&#x27;</span>, [<span class="string">&#x27;get&#x27;</span>, <span class="string">&#x27;data&#x27;</span>]]]</span><br><span class="line"><span class="comment">// 完整的匹配颜色表达式</span></span><br><span class="line"><span class="string">&#x27;circle-color&#x27;</span>: [</span><br><span class="line">  <span class="string">&#x27;match&#x27;</span>,</span><br><span class="line">  [<span class="string">&#x27;slice&#x27;</span>, [<span class="string">&#x27;get&#x27;</span>, <span class="string">&#x27;data&#x27;</span>], <span class="number">0</span>,[<span class="string">&#x27;index-of&#x27;</span>, <span class="string">&#x27;@&#x27;</span>, [<span class="string">&#x27;get&#x27;</span>, <span class="string">&#x27;data&#x27;</span>]]],</span><br><span class="line">  <span class="string">&#x27;2&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#686de0&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;3&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#535c68&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;4&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#6ab04c&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;5&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#eb4d4b&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;6&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#be2edd&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;7&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#f0932b&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;8&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#f9ca24&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;9&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#22a6b3&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;10&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#f9ca24&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;#f9ca24&#x27;</span>,</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+
+<h2 id="鼠标滚轮放在-Popup-上会滚动页面"><a href="#鼠标滚轮放在-Popup-上会滚动页面" class="headerlink" title="鼠标滚轮放在 Popup 上会滚动页面"></a>鼠标滚轮放在 Popup 上会滚动页面</h2><p>mapbox 地图中，滚轮有缩放的功能，但是在地图自带的弹出框上滚动鼠标滚轮，页面会滚动。这是非常不友好的交互…</p>
+<p>这个还蛮简单的，禁用掉滚动就好啦</p>
+<p>审查元素发现 popup 实际上是一个 html 弹出框，是 html 那就简单了。给地图容器元素添加点击事件，冒泡给 popup 包裹的元素，禁用掉滚轮事件</p>
+<p>注意滚轮的事件是<code>wheel</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">disablePopupScroll</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">callback</span> = (<span class="params">e</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(e.<span class="property">target</span>.<span class="title function_">closest</span>(<span class="string">&#x27;.mapboxgl-popup&#x27;</span>)) &#123;</span><br><span class="line">      e.<span class="title function_">preventDefault</span>()</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#map&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;wheel&#x27;</span>, callback)</span><br><span class="line">  <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#map&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;touchmove&#x27;</span>, callback)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="根据接口数据，初始化隐藏某些点"><a href="#根据接口数据，初始化隐藏某些点" class="headerlink" title="根据接口数据，初始化隐藏某些点"></a>根据接口数据，初始化隐藏某些点</h2><p><code>getHidePoint</code>是一个封装了 Ajax 的 promise</p>
+<p>写一个 match 表达式，匹配数据给到的点，用<code>filter</code>或者<code>icon-image</code>隐藏掉</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> hide = [];</span><br><span class="line"><span class="keyword">const</span> expression = [<span class="string">&quot;match&quot;</span>, [<span class="string">&quot;get&quot;</span>, <span class="string">&quot;code&quot;</span>], <span class="string">&quot;placeholder&quot;</span>, <span class="string">&quot;&quot;</span>];</span><br><span class="line"><span class="title function_">getHidePoint</span>()</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">    hide = res;</span><br><span class="line">    <span class="title class_">Object</span>.<span class="title function_">values</span>(hide).<span class="title function_">forEach</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 需要隐藏的code</span></span><br><span class="line">      expression.<span class="title function_">push</span>(item.<span class="property">code</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">      <span class="comment">// [&#x27;match&#x27;, [&#x27;get&#x27;, &#x27;code&#x27;], &#x27;placeholder&#x27;, &#x27;&#x27;, &#x27;hide-code&#x27;, &#x27;&#x27;, &#x27;hide-code2&#x27;, &#x27;&#x27;, ...]</span></span><br><span class="line">      map.<span class="title function_">addLayer</span>(&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="attr">layout</span>: &#123;</span><br><span class="line">          <span class="string">&quot;icon-image&quot;</span>: expression,</span><br><span class="line">          <span class="string">&quot;icon-allow-overlap&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function">(<span class="params">err</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(err));</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>小笔记</category>
@@ -2909,6 +2745,170 @@
       </categories>
       <tags>
         <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第一次摩旅：洛阳-西安</title>
+    <url>/posts/70ac33cd/</url>
+    <content><![CDATA[<p>写下这篇文章的时候已经是十一假期了</p>
+<p>我已经在西安暂住下来，并且开始逐渐了解这座城市</p>
+<hr>
+<p>我做了一件很不得了的事情，至少我自己觉得很厉害！</p>
+<p>9.24 和 9.25 这两天的时间，骑上我的本田 cc110，从洛阳到达了西安</p>
+<p>完成了人生第一次摩托车旅行</p>
+<h1 id="每年最完美的季节"><a href="#每年最完美的季节" class="headerlink" title="每年最完美的季节"></a>每年最完美的季节</h1><p>小熊说，Cub 可以带我去任何地方，我还想去更远的地方</p>
+<p>芝麻凛的爷爷说，我刚拿到驾照可能会不知道，季节交替的时候正式摩托旅行的好时机</p>
+<div id="dplayer3" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer3"),"video":{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/Yuru%20Camp%20Season%203%2009%20%E7%89%87%E6%AE%B5.mp4"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
+
+<p>摩托旅行是视野最开阔的旅行方式，有速度，有风，眼前所有的东西全是景色</p>
+<h1 id="出发前的心情和准备"><a href="#出发前的心情和准备" class="headerlink" title="出发前的心情和准备"></a>出发前的心情和准备</h1><h2 id="喜欢的事情"><a href="#喜欢的事情" class="headerlink" title="喜欢的事情"></a>喜欢的事情</h2><p>早在今年一月份的时候，看了动画片《本田小狼与我》</p>
+<p>再之后，看了《摇曳露营 3》</p>
+<p>这两个动画片让我知道摩托车可以是生活的一部分，是一种人生态度，是可以陪伴到老的东西</p>
+<p>是接近我的理想，值得我去向往和追求的事物</p>
+<p>七月份拿到驾照和车之后，我就摩拳擦掌想要试一次摩托旅行。于是从家里骑到了陆浑水库</p>
+<p>在陆浑环湖骑行了一圈。我确信我做了正确的决定，我喜欢的就是这样的东西</p>
+<p>我觉得这是给自己放暑假期间做的最有意义的事情了</p>
+<h2 id="悠闲，还有些害怕"><a href="#悠闲，还有些害怕" class="headerlink" title="悠闲，还有些害怕"></a>悠闲，还有些害怕</h2><p>暑假过的很快，弟弟的暑假在九月份结束了，我意识到我差不多也该重新组织自己的生活了</p>
+<p>我想把骑行继续下去，所以目光看向了洛阳旁边的城市西安，我觉得西安应该是一个很舒服的地方，吃得惯住得惯，骑行环境好，机车天堂</p>
+<p>了解长途骑行的知识，护具的选购，防御性驾驶等等</p>
+<p>买了护膝护肘护腰，一个很满意的后座包…</p>
+<p>不害怕是不可能的，我知道国道路况没那么好，国道上非常多的挂车，可能会遇到横风，甚至落石</p>
+<p>我也知道，如果出事故，一切都会结束。是很可怕的事情…</p>
+<p>除此之外，我去西安是找工作的，如果没找到的话会怎样，重新安排之后的事情…</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240923_180908.jpg" alt="前一天的黄昏"></p>
+<p>做出决定的时候，是稍微有些焦虑的，甚至犹豫这趟危险的骑行是不是不对的</p>
+<p>后来朋友一句话把我点醒了</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20241005135813.png" alt="生活是体验"></p>
+<p>在后座包上扣了芙莉莲的吧唧，伊蕾娜和小熊的挂饰，还有友人送的护身符</p>
+<div class="gallery-container" data-type="data" data-button="">
+      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20241005_230238.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20241005_230216.jpg","alt":""}]</div>
+      <div class="gallery-items">
+      </div>
+    </div>
+
+<p>带着些许畏惧，还有许许多多期待，开始了第一次摩旅</p>
+<h1 id="出发，我一直都在路上"><a href="#出发，我一直都在路上" class="headerlink" title="出发，我一直都在路上"></a>出发，我一直都在路上</h1><p>9.24 上午，去邻村喝了碗豆腐脑，吃了两个水煎包回家。把沉重的后座包放在车上</p>
+<p>准备出发的时候遇到老爸，原来是出门给我买了点吃的，几个苹果，一袋玉米肠，还有点心。叮嘱我在路上多休息休息</p>
+<p>由于行李空间有限，我只带了玉米肠和一个苹果还有说不出的感谢</p>
+<p>穿上护具，目标 大雁塔，出发</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_095235.jpg" alt="背景就是我家"></p>
+<h2 id="第一天：洛阳-潼关"><a href="#第一天：洛阳-潼关" class="headerlink" title="第一天：洛阳 - 潼关"></a>第一天：洛阳 - 潼关</h2><p>出发不一会儿就从瀍河上了洛阳段的 310 国道</p>
+<p>一个转弯进入国道，视野开阔起来，洛阳段的国道修得真好，双向六车道，路边是山山水水和村庄</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_112030.jpg"></p>
+<p>也许是因为我的详细计划，选了一个晴天的工作日，国道并没有我想象的那么危险，虽然大车也不少，但是路很宽</p>
+<p>我骑在最右车道最右侧 30 公分的距离，如果左后视镜里有大车出现，我就乖巧地借用非机动车道，然后减速让大车先走</p>
+<p>遵循这样的让车规则，渐渐在国道上稳定下来，不一会儿就到了三门峡</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_115032.jpg"></p>
+<p>中午从义马下了国道，去吃了午饭，在饭店里休息了一个小时，继续出发！</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_123242.jpg"></p>
+<p>下午也是一路骑行，在每个服务区都做了休息</p>
+<p>一下午在服务区一共遇到了五个摩友，他们有来自山西的，来自陕西的，甚至还有江苏的大哥</p>
+<p>在服务区简单聊天十分愉快，大家都会相互夸赞，聊一聊车，聊一聊沿路的景点</p>
+<p>很少和陌生人聊的这么愉快过</p>
+<p>休息之后各自分别，打一个再见的招呼，继续旅行，有几个大哥还会在下个服务区碰面</p>
+<p>实际上，我骑车的速度要比导航计算的速度更慢</p>
+<p>六点的时候太阳落山，骑车是最不舒服的，虽然有遮光镜，但是太阳光依然会直射前方…</p>
+<p>但是有些不服输吧，心里想着第一天要进入陕西界</p>
+<p>终于到了潼关，在此落脚，还吃了个肉夹馍~</p>
+<div class="gallery-container" data-type="data" data-button="">
+      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_144022.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_151821.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_151831.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_154609.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_174457.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_181336.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_185622.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_204858.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_202615.jpg","alt":""}]</div>
+      <div class="gallery-items">
+      </div>
+    </div>
+
+<p>如此，第一天的旅行结束了</p>
+<h2 id="第二天：潼关-西安"><a href="#第二天：潼关-西安" class="headerlink" title="第二天：潼关 - 西安"></a>第二天：潼关 - 西安</h2><p>前一天在酒店提前查了一下陕西段国道的路况（因为在渭南市下国道的时候，那段路实在有些糟糕）</p>
+<p>改变了路线，决定不再走 310 国道，取而代之的是堤顶路</p>
+<p>骑过之后才知道，堤顶路是沿着渭河修建的一条穿过渭南-西安-宝鸡的道路</p>
+<p>这条路简直是为了旅游者而修建的，限高 2.2m，限速 60，意味着没有大车，希望旅行者慢慢走</p>
+<p>这条路两边是田地，村庄，渭河。红绿顶非常少，甚至还有农民在路上晒玉米（毕竟是这个季节嘛</p>
+<p>好在车非常少，景色优美，骑行心情悠然自得，太享受了</p>
+<p>这张照片是从国道走入一条无名道路上，这条道路连接着国道和堤顶路，走上这条无名路我就知道自己选对路了！</p>
+<div class="gallery-container" data-type="data" data-button="">
+      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_110425.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_105154.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_105200.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_105601.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_110015.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_110026.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_110319.jpg","alt":""}]</div>
+      <div class="gallery-items">
+      </div>
+    </div>
+
+<p>如此惬意，美好，自由</p>
+<div class="gallery-container" data-type="data" data-button="">
+      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_111458.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_113452.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_114403.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_114433.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_114758.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_115155.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_120043.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_120051.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_120620.jpg","alt":""}]</div>
+      <div class="gallery-items">
+      </div>
+    </div>
+
+<p>沿着这条路继续走下去，穿过了田野，穿过了华阴，见到渭河</p>
+<p>这一路没有什么饭店，但是休息也没有国道上那么嘈杂，想停就停，停下也很安静</p>
+<p>摘掉头盔，大口呼吸空气，吃点火腿肠，咬一口大苹果</p>
+<p>休息的一刻，我也是自然的一部分</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_121533.jpg" alt="源远流长"></p>
+<p>慢慢悠悠地，西安人民欢迎您</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_125837.jpg" alt="西安界"></p>
+<p>在西安界内，也是先沿着渭河堤走，渭河就在旁边</p>
+<p>到西安之后明显发现摩托车变多了，好多酷炫的摩托佬</p>
+<div class="gallery-container" data-type="data" data-button="">
+      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_133014.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_131734.jpg","alt":""}]</div>
+      <div class="gallery-items">
+      </div>
+    </div>
+
+<p>大概四点半的时候到达大雁塔，大雁塔红绿灯前草草拍了个照片，旅程算是结束了</p>
+<p>我做到了！！</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_154043.jpg" alt="到达！"></p>
+<h1 id="到达后的感想"><a href="#到达后的感想" class="headerlink" title="到达后的感想"></a>到达后的感想</h1><details class="toggle" ><summary class="toggle-button" style="">一点点骑行建议</summary><div class="toggle-content"><p><strong>路线</strong></p>
+<p>第一天：洛阳-潼关：310 国道<br>第二天：潼关-西安：堤顶路</p>
+<div class="gallery-container" data-type="data" data-button="">
+      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/Screenshot_2024-09-19-18-28-21-200_com.autonavi.m.jpg","alt":"原定路线：310国道"},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/Screenshot_2024-10-05-20-21-46-270_com.autonavi.m.jpg","alt":"第二天的路线：堤顶路"}]</div>
+      <div class="gallery-items">
+      </div>
+    </div>
+
+<p><strong>准备</strong></p>
+<p>出发前的准备非常重要，除了头盔护具这些提高生存率的东西之外</p>
+<p>头盔最好是全盔，舒适性方面最重要的是不让眼睛吹风，这个非常非常重要，甚至可以准备一点玻璃酸钠滴眼液</p>
+<p>衣服要考虑防风性能，晚上的时候也要兼顾保暖</p>
+<p>护腰可以尝试一下，骑行是非常累的，想办法减轻自己的疲劳</p>
+<p><strong>休息</strong></p>
+<p>带一点咖啡因饮料也许可以集中精神，牛磺酸饮料对减轻疲劳也有用</p>
+<p>合理安排骑行时间，最好每个小时休息一次，休息的时候吃点东西（带糖分的最好</p>
+<p>关注油耗，国道上加油站比较少，加油很可能要下国道</p>
+<p><strong>时间</strong></p>
+<p>朝西方向骑行的时候，五六点钟太阳会直射眼睛，最好在这个时间前就休息吧</p>
+<p>天黑不骑车，危险倍增，夜晚国道上大车会变得很多，最好的时间是工作日的上午和下午</p>
+<p><strong>防御性驾驶</strong></p>
+<p>防御性驾驶一定要学一下，或者锻炼一下</p>
+<p>摩托车在国道上出事一般都是会转生异世界的….</p>
+<p>而摩托车视野最开阔，天然适合防御性驾驶</p>
+<p>预测未来道路会发生的事情，主动让车</p>
+<p>国道非机动车道最好不要走，路的质量很糟糕，还有玻璃碴子…</p>
+<p><strong>横风</strong></p>
+<p>摩托车避免不了横风问题，国道上没有城市的高楼，横风会强劲又突然</p>
+<p>需要特别注意两类横风</p>
+<p>一个是自然横风，经过山和桥的时候，可能会遭遇很突然的风，甚至吹偏一个车道</p>
+<p>一个是大车从身边穿过的风，挂车从身边过去的时候那个压迫感…. 过去之后会有个向大车方向吸过去的风，这个也不容小觑</p>
+<p>对付横风最好的方法是减速，本田小狼速度上 70 就能感觉到横向风的影响，80 的时候会变得严重，骑帅不骑快就好啦！</p>
+<p>对付大车的横风，就是走最右车道和减速让行（不要停车），走最右车道是因为不会被两个大车夹在中间</p>
+</div></details>
+
+<p>第一次摩旅毕业了！</p>
+<p>出发前是害怕和不安</p>
+<p>出发后是紧张，稳稳骑行，珍惜自己的生命，感慨国道上开阔的视野</p>
+<p>对骑车技术有把握之后，开始欣赏沿路的美景，享受旅行</p>
+<p>到达目的地后，先前的不安和紧张都不再有了，取而代之的是豁然开朗！</p>
+<p>还有对自己的肯定：我做到了！！</p>
+<p>最初考虑，我会在西安住上一个月去找工作</p>
+<p>但是当我到达的时候，已经觉得骑到西安这件事本身的价值已经超越了找工作，担心找不到工作的忧愁也不存在了</p>
+<p>毕竟，西安不是我的终点，只是其中一站而已</p>
+<p>在民宿住下之后去泡了个澡，把疲惫溶解在温泉里…</p>
+<p>真让人脸扁~~</p>
+<p><strong>旅途的风景都在路上，生活是体验。我一直都在路上，我一直都在体验</strong></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20241005223412.png"></p>
+]]></content>
+      <categories>
+        <category>本田小狼与我</category>
+      </categories>
+      <tags>
+        <tag>摩托车</tag>
       </tags>
   </entry>
   <entry>
@@ -3684,6 +3684,23 @@
       </tags>
   </entry>
   <entry>
+    <title>策略模式的表单校验</title>
+    <url>/posts/311eacd8/</url>
+    <content><![CDATA[<h1 id="策略模式在表单验证中的应用"><a href="#策略模式在表单验证中的应用" class="headerlink" title="策略模式在表单验证中的应用"></a>策略模式在表单验证中的应用</h1><p>最近想要封装一个校验表单的方法，没有什么很优雅的解决思路。<br>今天偶然看到了这篇文章，学到了一种新的设计模式….<br>实现也很容易理解。<br>原文链接： <a href="http://hcysun.me/2016/02/21/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E5%9C%A8%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">http://hcysun.me/2016/02/21/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E5%9C%A8%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</a><br>作者： HcySunYang</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">FormValidation</span>(<span class="params">VerifiPolicy</span>) &#123;</span><br><span class="line">  <span class="comment">// 保存策略对象</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">strategies</span> = <span class="title class_">VerifiPolicy</span>;</span><br><span class="line">  <span class="comment">// 验证缓存</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">validationFns</span> = [];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">FormValidation</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">add</span> = <span class="keyword">function</span> (<span class="params">dom, rule, errMsg</span>) &#123;</span><br><span class="line">  <span class="comment">// 因为传入的是一个字符串，如&#x27;maxLength: 16&#x27;，所以将其拆成数组方便操作</span></span><br><span class="line">  <span class="keyword">var</span> ary = rule.<span class="title function_">split</span>(<span class="string">&quot;:&quot;</span>);</span><br><span class="line">  <span class="comment">// 策略函数的参数</span></span><br><span class="line">  <span class="keyword">var</span> arg = [];</span><br><span class="line">  <span class="keyword">var</span> self = <span class="variable language_">this</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">validationFns</span>.<span class="title function_">push</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 重置参数</span></span><br><span class="line">    arg = [];</span><br><span class="line">    <span class="keyword">var</span> ruleName = ary[<span class="number">0</span>];</span><br><span class="line">    arg.<span class="title function_">push</span>(dom.<span class="property">value</span>);</span><br><span class="line">    <span class="comment">// 组装参数</span></span><br><span class="line">    <span class="keyword">if</span> (ary[<span class="number">1</span>]) &#123;</span><br><span class="line">      arg.<span class="title function_">push</span>(ary[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    arg.<span class="title function_">push</span>(errMsg);</span><br><span class="line">    arg.<span class="title function_">push</span>(dom);</span><br><span class="line">    <span class="comment">// 调用策略函数</span></span><br><span class="line">    <span class="keyword">return</span> self.<span class="property">strategies</span>[ruleName].<span class="title function_">apply</span>(dom, arg);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 一键校验的方法</span></span><br><span class="line"><span class="title class_">FormValidation</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">start</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> msgs = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">validationFns</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> msg = <span class="variable language_">this</span>.<span class="property">validationFns</span>[i]();</span><br><span class="line">    <span class="keyword">if</span> (msg) &#123;</span><br><span class="line">      msgs.<span class="title function_">push</span>(msg);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (msgs.<span class="property">length</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> msgs;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">&quot;wrapper&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;&quot;</span>&gt;</span>USERNAME<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;&quot;</span>&gt;</span>PASSWORD<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;button&quot;</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 策略对象</span></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">VerifiPolicy</span> = &#123;</span><br><span class="line">  <span class="comment">// 判断是否为空</span></span><br><span class="line">  <span class="attr">isNoEmpty</span>: <span class="keyword">function</span> (<span class="params">value, errorMsg, el</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value == <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; errorMsg, el &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 判断最小长度</span></span><br><span class="line">  <span class="attr">minLength</span>: <span class="keyword">function</span> (<span class="params">value, length, errorMsg, el</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value.<span class="property">length</span> &lt; length) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; errorMsg, el &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">maxLength</span>: <span class="keyword">function</span> (<span class="params">value, length, errorMsg, el</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value.<span class="property">length</span> &gt; length) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; errorMsg, el &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 判断是否为手机号</span></span><br><span class="line">  <span class="attr">isMobile</span>: <span class="keyword">function</span> (<span class="params">value, errorMsg</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="regexp">/(^1[3|5|8][0-9]&#123;9&#125;$)/</span>.<span class="title function_">test</span>(value)) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; errorMsg, el &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 其他</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> validation = <span class="keyword">new</span> <span class="title class_">FormValidation</span>(<span class="title class_">VerifiPolicy</span>);</span><br><span class="line"><span class="keyword">var</span> form = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.wrapper&quot;</span>);</span><br><span class="line">validation.<span class="title function_">add</span>(form.<span class="property">username</span>, <span class="string">&quot;isNoEmpty&quot;</span>, <span class="string">&quot;用户名错误&quot;</span>);</span><br><span class="line">validation.<span class="title function_">add</span>(form.<span class="property">password</span>, <span class="string">&quot;minLength: 6&quot;</span>, <span class="string">&quot;密码太短&quot;</span>);</span><br><span class="line">validation.<span class="title function_">add</span>(form.<span class="property">password</span>, <span class="string">&quot;maxLength: 4&quot;</span>, <span class="string">&quot;密码太长&quot;</span>);</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.button&quot;</span>).<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> errmsg = validation.<span class="title function_">start</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(errmsg);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/* (3) [&#123;…&#125;, &#123;…&#125;, &#123;…&#125;]</span></span><br><span class="line"><span class="comment">0: &#123;errorMsg: &quot;用户名错误&quot;, el: input&#125;</span></span><br><span class="line"><span class="comment">1: &#123;errorMsg: &quot;密码太短&quot;, el: input&#125;</span></span><br><span class="line"><span class="comment">2: &#123;errorMsg: &quot;密码太长&quot;, el: input&#125;</span></span><br><span class="line"><span class="comment">length: 3</span></span><br><span class="line"><span class="comment">__proto__: Array(0) */</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>小笔记</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>封装使用Axios</title>
     <url>/posts/c765d66f/</url>
     <content><![CDATA[<h1 id="封装-Axios"><a href="#封装-Axios" class="headerlink" title="封装 Axios"></a>封装 Axios</h1><h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">axios</span>(<span class="string">&#x27;url&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">method</span>: <span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">  <span class="attr">timeout</span>: <span class="number">3000</span>,</span><br><span class="line">  <span class="attr">headers</span>: &#123;...&#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 错误处理</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
@@ -3697,23 +3714,6 @@
 <li>设置拦截器，处理所有请求共有的错误</li>
 </ol>
 <h2 id="文档链接"><a href="#文档链接" class="headerlink" title="文档链接"></a>文档链接</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://www.axios-js.com/</span><br><span class="line">node_modules/axios/readme</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>小笔记</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>策略模式的表单校验</title>
-    <url>/posts/311eacd8/</url>
-    <content><![CDATA[<h1 id="策略模式在表单验证中的应用"><a href="#策略模式在表单验证中的应用" class="headerlink" title="策略模式在表单验证中的应用"></a>策略模式在表单验证中的应用</h1><p>最近想要封装一个校验表单的方法，没有什么很优雅的解决思路。<br>今天偶然看到了这篇文章，学到了一种新的设计模式….<br>实现也很容易理解。<br>原文链接： <a href="http://hcysun.me/2016/02/21/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E5%9C%A8%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">http://hcysun.me/2016/02/21/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E5%9C%A8%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</a><br>作者： HcySunYang</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">FormValidation</span>(<span class="params">VerifiPolicy</span>) &#123;</span><br><span class="line">  <span class="comment">// 保存策略对象</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">strategies</span> = <span class="title class_">VerifiPolicy</span>;</span><br><span class="line">  <span class="comment">// 验证缓存</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">validationFns</span> = [];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">FormValidation</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">add</span> = <span class="keyword">function</span> (<span class="params">dom, rule, errMsg</span>) &#123;</span><br><span class="line">  <span class="comment">// 因为传入的是一个字符串，如&#x27;maxLength: 16&#x27;，所以将其拆成数组方便操作</span></span><br><span class="line">  <span class="keyword">var</span> ary = rule.<span class="title function_">split</span>(<span class="string">&quot;:&quot;</span>);</span><br><span class="line">  <span class="comment">// 策略函数的参数</span></span><br><span class="line">  <span class="keyword">var</span> arg = [];</span><br><span class="line">  <span class="keyword">var</span> self = <span class="variable language_">this</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">validationFns</span>.<span class="title function_">push</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 重置参数</span></span><br><span class="line">    arg = [];</span><br><span class="line">    <span class="keyword">var</span> ruleName = ary[<span class="number">0</span>];</span><br><span class="line">    arg.<span class="title function_">push</span>(dom.<span class="property">value</span>);</span><br><span class="line">    <span class="comment">// 组装参数</span></span><br><span class="line">    <span class="keyword">if</span> (ary[<span class="number">1</span>]) &#123;</span><br><span class="line">      arg.<span class="title function_">push</span>(ary[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    arg.<span class="title function_">push</span>(errMsg);</span><br><span class="line">    arg.<span class="title function_">push</span>(dom);</span><br><span class="line">    <span class="comment">// 调用策略函数</span></span><br><span class="line">    <span class="keyword">return</span> self.<span class="property">strategies</span>[ruleName].<span class="title function_">apply</span>(dom, arg);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 一键校验的方法</span></span><br><span class="line"><span class="title class_">FormValidation</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">start</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> msgs = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">validationFns</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> msg = <span class="variable language_">this</span>.<span class="property">validationFns</span>[i]();</span><br><span class="line">    <span class="keyword">if</span> (msg) &#123;</span><br><span class="line">      msgs.<span class="title function_">push</span>(msg);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (msgs.<span class="property">length</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> msgs;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">&quot;wrapper&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;&quot;</span>&gt;</span>USERNAME<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;&quot;</span>&gt;</span>PASSWORD<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;button&quot;</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 策略对象</span></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">VerifiPolicy</span> = &#123;</span><br><span class="line">  <span class="comment">// 判断是否为空</span></span><br><span class="line">  <span class="attr">isNoEmpty</span>: <span class="keyword">function</span> (<span class="params">value, errorMsg, el</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value == <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; errorMsg, el &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 判断最小长度</span></span><br><span class="line">  <span class="attr">minLength</span>: <span class="keyword">function</span> (<span class="params">value, length, errorMsg, el</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value.<span class="property">length</span> &lt; length) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; errorMsg, el &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">maxLength</span>: <span class="keyword">function</span> (<span class="params">value, length, errorMsg, el</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value.<span class="property">length</span> &gt; length) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; errorMsg, el &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 判断是否为手机号</span></span><br><span class="line">  <span class="attr">isMobile</span>: <span class="keyword">function</span> (<span class="params">value, errorMsg</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="regexp">/(^1[3|5|8][0-9]&#123;9&#125;$)/</span>.<span class="title function_">test</span>(value)) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; errorMsg, el &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 其他</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> validation = <span class="keyword">new</span> <span class="title class_">FormValidation</span>(<span class="title class_">VerifiPolicy</span>);</span><br><span class="line"><span class="keyword">var</span> form = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.wrapper&quot;</span>);</span><br><span class="line">validation.<span class="title function_">add</span>(form.<span class="property">username</span>, <span class="string">&quot;isNoEmpty&quot;</span>, <span class="string">&quot;用户名错误&quot;</span>);</span><br><span class="line">validation.<span class="title function_">add</span>(form.<span class="property">password</span>, <span class="string">&quot;minLength: 6&quot;</span>, <span class="string">&quot;密码太短&quot;</span>);</span><br><span class="line">validation.<span class="title function_">add</span>(form.<span class="property">password</span>, <span class="string">&quot;maxLength: 4&quot;</span>, <span class="string">&quot;密码太长&quot;</span>);</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.button&quot;</span>).<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> errmsg = validation.<span class="title function_">start</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(errmsg);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/* (3) [&#123;…&#125;, &#123;…&#125;, &#123;…&#125;]</span></span><br><span class="line"><span class="comment">0: &#123;errorMsg: &quot;用户名错误&quot;, el: input&#125;</span></span><br><span class="line"><span class="comment">1: &#123;errorMsg: &quot;密码太短&quot;, el: input&#125;</span></span><br><span class="line"><span class="comment">2: &#123;errorMsg: &quot;密码太长&quot;, el: input&#125;</span></span><br><span class="line"><span class="comment">length: 3</span></span><br><span class="line"><span class="comment">__proto__: Array(0) */</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>小笔记</category>
