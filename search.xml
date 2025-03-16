@@ -1,6 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>做一个好玩的聊天机器人</title>
+    <url>/posts/a590ccae/</url>
+    <content><![CDATA[<h1 id="一些准备"><a href="#一些准备" class="headerlink" title="一些准备"></a>一些准备</h1><ul>
+<li>服务器（运行机器人等物理设备）</li>
+<li>机器人账号和登录状态（提供运行环境和 Api）</li>
+<li>Api：OneBot 等（提供与机器人框架对接的方式以及功能开发接口）</li>
+<li>机器人框架：Koishi，Nonebot，Mirai 等</li>
+</ul>
+<h1 id="Koishi"><a href="#Koishi" class="headerlink" title="Koishi"></a>Koishi</h1><p><a href="https://koishi.chat/zh-CN/">Koishi 是一个开源的跨平台机器人框架</a></p>
+<p><a href="https://thwiki.cc/%E5%8F%A4%E6%98%8E%E5%9C%B0%E6%81%8B">Koishi 的意思是古明地恋，东方 Project 中的角色</a></p>
+<h1 id="docker-部署一个对接-qq-的机器人"><a href="#docker-部署一个对接-qq-的机器人" class="headerlink" title="docker 部署一个对接 qq 的机器人"></a>docker 部署一个对接 qq 的机器人</h1><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">bot:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">koishi</span></span><br><span class="line">    <span class="comment"># 如果服务器性能不佳，或者确认完全不需要puppeteer功能，那么可以不安装chromium</span></span><br><span class="line">    <span class="comment"># https://koishi.chat/zh-CN/manual/starter/docker.html#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.1ms.run/koishijs/koishi</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./koishi-data:/koishi</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">TZ=Asia/Shanghai</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">    <span class="comment"># ports:</span></span><br><span class="line">    <span class="comment">#   - &quot;5140:5140&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">qq:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">llonebot</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.1ms.run/initialencounter/llonebot:latest</span></span><br><span class="line">    <span class="attr">privileged:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">VNC_PASSWD=llonebotpass</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">    <span class="comment"># ports:</span></span><br><span class="line">    <span class="comment">#   - &quot;7081:7081&quot; # login</span></span><br><span class="line">    <span class="comment">#   - &quot;3000:3000&quot; # http</span></span><br><span class="line">    <span class="comment">#   - &quot;3001:3001&quot; # ws</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="聊天机器人的控制台"><a href="#聊天机器人的控制台" class="headerlink" title="聊天机器人的控制台"></a>聊天机器人的控制台</h1><p>docker 服务成功运行后，浏览器访问云服务器的 5140 端口，可以看到控制台</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20250309133457188.png"></p>
+<p>控制台提供了对 bot 的所有管理能力，比如运行状态，插件安装卸载，日志等</p>
+<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><p>相关文档：<a href="https://koishi.chat/zh-CN/manual/usage/market.html">安装和配置插件</a></p>
+<p>插件系统是 Koishi 的核心，bot 所有的功能都来自于插件</p>
+<p>Koishi 的插件是以”koishi-plugin-“开头的 npm 包，安装插件的过程实际上也是安装了一个 npm 包</p>
+<p>由于 Koishi 官方插件市场镜像长期没有更新，可以使用官方插件提供的社区镜像源</p>
+<p>进入插件配置，找到分组：console 下的 market（插件市场本身也是插件，可以在插件配置中修改）</p>
+<p>可以看到说明中会提供几个社区镜像，选择一个填入 search.endpoint 就可以了</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20250309151110390.png"></p>
+<p>因为现在 Koishi 控制台部署在公网上，任何人都可以通过 ip:5140 访问到控制台，会有安全隐患</p>
+<p>现在尝试在控制台种安装<code>auth</code>插件，这个插件可以给控制台提供用户和密码登录的功能</p>
+<p>在插件市场里搜索<code>auth</code>，安装后进入插件配置页面</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1741506958020.png"></p>
+<p>进入<code>auth</code>的插件配置，设置密码，点击右上角的三角形按钮启用插件</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1741507006519.png"></p>
+<p>至此，完成了一次插件的安装和配置，以及控制台的密码登录设置</p>
+<p>koishi 的插件大致可以分为以下几类：</p>
+<ul>
+<li>适配器（adapter），用来对接不同的 IM 平台或者 API 协议，如 qq、telegram、onebot 等</li>
+<li>控制台（console）增强控制台功能的插件，如 auth 等</li>
+<li>服务类，不直接在聊天中体现，但是给其他插件添加依赖，如 puppeteer，mysql，webdav 等</li>
+<li>功能类，直接在聊天中体现，如 翻译、图片搜索、天气查询等</li>
+</ul>
+<h1 id="对接-qq"><a href="#对接-qq" class="headerlink" title="对接 qq"></a>对接 qq</h1><h2 id="登录-qq（llonebot）"><a href="#登录-qq（llonebot）" class="headerlink" title="登录 qq（llonebot）"></a>登录 qq（llonebot）</h2><p>在终端中输入 <code>docker logs llonebot</code> 可以获取二维码，用手机 qq 扫描后就可以登录</p>
+<p>登录后，使用 vnc 连接到服务器地址的 7081 端口，输入密码<code>llonebotpassword</code>，可以对 docker 中的 qq 进行设置</p>
+<p>这里我用的是 <a href="https://nxshell.github.io/">NxShell</a> 进行 vnc 连接</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/b1e6cc7f8ba18afa936a62e74be12ab0.png"></p>
+<p>设置 ws 反向监听地址（不设置也没问题，可以在适配器里设置正向 ws 监听。不同的适配器会要求不同的监听方式）</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1738331009172.png"></p>
+<h2 id="连接-onebot"><a href="#连接-onebot" class="headerlink" title="连接 onebot"></a>连接 onebot</h2><p>配置 adapter-onebot</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1738331334759.png"></p>
+<p>启用插件之后，会发现控制台右下角变绿，并出现上下行流量的变化。表示已经配置成功，koishi 平台已经与 qq 建立联系</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1741508101862.png"></p>
+<h2 id="排错"><a href="#排错" class="headerlink" title="排错"></a>排错</h2><p>如果是首次设置，可以进入依赖管理中更新官方插件版本</p>
+<p>如果是连接问题，则需要考虑 qq 是否在有 llonebot 的客户端中登录，以及对接的 ip 和端口是否正确</p>
+<p>如果是功能性插件出现错误，可以在控制台中查看日志</p>
+<p>koishi 的插件的可用性和安全性并不可靠，有些甚至需要去查看源码，安装的时候需要仔细甄别</p>
+<h1 id="使用插件市场里的插件丰富-bot-的功能"><a href="#使用插件市场里的插件丰富-bot-的功能" class="headerlink" title="使用插件市场里的插件丰富 bot 的功能"></a>使用插件市场里的插件丰富 bot 的功能</h1><p>接下来就可以进入插件市场挑选自己想加入的插件</p>
+<p>在论坛中可以找到有趣的推荐，以及一些问题的解决方式</p>
+<p><a href="https://forum.koishi.xyz/">Koishi 论坛</a></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/424a0512db78bd1815dc9d1b5be4d7c8.jpeg"></p>
+<h1 id="开发自己的插件"><a href="#开发自己的插件" class="headerlink" title="开发自己的插件"></a>开发自己的插件</h1><p>插件市场虽然很丰富，但是很难完全满足自己的定制化需求，这个时候就需要自己开发插件了</p>
+<p><a href="https://koishi.chat/zh-CN/guide/">插件开发文档</a></p>
+<p>创建一个本地的 koishi 插件开发环境</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">yarn create koishi</span><br><span class="line"></span><br><span class="line">yarn dev</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在工作区创建插件</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">yarn setup [name]</span><br></pre></td></tr></table></figure>
+
+<p>为插件添加依赖</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">yarn workspace koishi-plugin-[name] add [...deps]</span><br></pre></td></tr></table></figure>
+
+<p>koishi 的开发工作区默认是 monorepo 的结构，创建好的插件在 external 文件夹下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root</span><br><span class="line">├── external</span><br><span class="line">│   └── example</span><br><span class="line">│       ├── src</span><br><span class="line">│       │   └── index.ts</span><br><span class="line">│       └── package.json</span><br><span class="line">├── koishi.yml</span><br><span class="line">└── package.json</span><br></pre></td></tr></table></figure>
+
+<p>开发完成后，可以<a href="https://koishi.chat/zh-CN/guide/develop/publish.html">把插件发布到插件市场上</a></p>
+<p>在发布之前，为插件的 package.json 补充信息，所补充的信息会在插件市场中展示</p>
+<p>其中比较值得注意的是 koishi 字段，这个字段会影响到插件配置页面的展示以及其所依赖的其他服务</p>
+<p>在 koishi.service 中可以声明此插件所依赖的服务</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;koishi-plugin-example&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;contributors&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="comment">// 贡献者</span></span><br><span class="line">    <span class="string">&quot;Alice &lt;alice@gmail.com&gt;&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;Bob &lt;bob@gmail.com&gt;&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;license&quot;</span><span class="punctuation">:</span> <span class="string">&quot;MIT&quot;</span><span class="punctuation">,</span> <span class="comment">// 许可证</span></span><br><span class="line">  <span class="attr">&quot;homepage&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://example.com&quot;</span><span class="punctuation">,</span> <span class="comment">// 主页</span></span><br><span class="line">  <span class="attr">&quot;repository&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">// 源码仓库</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;git&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;git+https://github.com/alice/koishi-plugin-example.git&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;keywords&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;example&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="comment">// 关键词</span></span><br><span class="line">  <span class="attr">&quot;peerDependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;koishi&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^4.3.2&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;koishi&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="comment">// 不同语言的插件描述</span></span><br><span class="line">      <span class="attr">&quot;en&quot;</span><span class="punctuation">:</span> <span class="string">&quot;English Description&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;zh&quot;</span><span class="punctuation">:</span> <span class="string">&quot;中文描述&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;service&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;required&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;database&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="comment">// 必需的服务</span></span><br><span class="line">      <span class="attr">&quot;optional&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;assets&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="comment">// 可选的服务</span></span><br><span class="line">      <span class="attr">&quot;implements&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;dialogue&quot;</span><span class="punctuation">]</span> <span class="comment">// 实现的服务</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="获取表情图并存到云盘的插件"><a href="#获取表情图并存到云盘的插件" class="headerlink" title="获取表情图并存到云盘的插件"></a>获取表情图并存到云盘的插件</h2><h3 id="动机和期望"><a href="#动机和期望" class="headerlink" title="动机和期望"></a>动机和期望</h3><p>由于 qq 和微信的某次更新，无法直接保存其他人发送的表情包，所以我就想把自己的表情图独立于平台，保存到自己的网盘上，可以在任何设备任何软件上使用。</p>
+<p>可以说是盗图的终极方案</p>
+<p><strong>期望</strong></p>
+<p>我想象中的这个插件的用法大概是这样的：</p>
+<ol>
+<li>我看到了一张表情图，摩拳擦掌想塞进自己的口袋</li>
+<li>我把这张表情图发给 bot，（用指令）告诉 bot，把这张图片存下来</li>
+<li>bot 获取到这张图片，并且对图片做统一处理（尺寸，质量，格式）</li>
+<li>将处理好的图片保存在云盘上，云盘同步设备文件夹。</li>
+<li>使用的时候直接选择图片发送，图片不会被放大，动画效果不会丢失</li>
+<li>可以存官方表情图，也可以存自己的表情图</li>
+</ol>
+<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><p>通过引用消息告诉 bot 要存哪张图片：session.quote.elements</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">quote.<span class="property">elements</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">el</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (el.<span class="property">type</span> === <span class="string">&quot;img&quot;</span>) &#123;</span><br><span class="line">    images.<span class="title function_">push</span>(el.<span class="property">attrs</span> <span class="keyword">as</span> <span class="title class_">ImageElement</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (el.<span class="property">type</span> === <span class="string">&quot;mface&quot;</span>) &#123;</span><br><span class="line">    mfaces.<span class="title function_">push</span>(el.<span class="property">attrs</span> <span class="keyword">as</span> <span class="title class_">MfaceElement</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>注册指令，然后在控制台中配置别名，增加参数可以指定存储到云盘的某个子文件夹</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">ctx</span><br><span class="line">  .<span class="title function_">command</span>(<span class="string">&quot;save-sticker &lt;folder:text&gt;&quot;</span>, <span class="string">&quot;获取表情包&quot;</span>, &#123;</span><br><span class="line">    <span class="comment">// @ts-ignore-next-line</span></span><br><span class="line">    <span class="attr">hidden</span>: <span class="literal">true</span>, <span class="comment">// 隐藏指令，不会在help指令中被发送</span></span><br><span class="line">    <span class="attr">captureQuote</span>: <span class="literal">false</span>, <span class="comment">// 运行指令避免捕获引用内容 https://github.com/koishijs/koishi/issues/1432</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">alias</span>(<span class="string">&quot;盗图&quot;</span>, <span class="string">&quot;保存图片&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>使用 webdav 的方式连接云盘（坚果云），并将图片上传到云盘</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入纯ESM包</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">loadWebDAV</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> webdav = <span class="keyword">await</span> <span class="keyword">import</span>(<span class="string">&quot;webdav&quot;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(webdav);</span><br><span class="line">  <span class="keyword">return</span> webdav;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> &#123; createClient &#125; = <span class="keyword">await</span> <span class="title function_">loadWebDAV</span>();</span><br><span class="line"><span class="comment">// 创建webdav客户端</span></span><br><span class="line"><span class="keyword">const</span> webdavClient = <span class="title function_">createClient</span>(webDavUrl, &#123;</span><br><span class="line">  <span class="attr">username</span>: ctx.<span class="property">config</span>.<span class="property">webdavUsername</span>,</span><br><span class="line">  <span class="attr">password</span>: ctx.<span class="property">config</span>.<span class="property">webdavPassword</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>将图片处理成特定格式，默认 gif，并且将宽度固定到 300px，提供两个配置项，可以在控制台中配置</p>
+<p>为什么要处理成 gif 和 300px</p>
+<ol>
+<li>透明度：gif 可以保留表情图的透明度，同时不会变黑（经测试 png 会出现背景变黑的问题，qq 应该不支持 png 的复杂透明度）</li>
+<li>gif 是官方表情包（mface）的格式</li>
+<li>gif 支持动图</li>
+<li>300 像素是比较通用的尺寸，发送后不会被放大，不太清楚 qq 和微信识别表情包的逻辑，经过尝试得到的结果</li>
+</ol>
+<h2 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h2><p><img src="https://oss.homu.space/imgs/2569b559fd71d9a8af6435c729b6d283.jpg"></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="keyword">type</span> <span class="title class_">Context</span>, <span class="title class_">Random</span>, <span class="title class_">Schema</span>, <span class="title class_">Session</span> &#125; <span class="keyword">from</span> <span class="string">&quot;koishi&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> sharp <span class="keyword">from</span> <span class="string">&quot;sharp&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; imageSize &#125; <span class="keyword">from</span> <span class="string">&quot;image-size&quot;</span>;</span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">loadWebDAV</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> webdav = <span class="keyword">await</span> <span class="keyword">import</span>(<span class="string">&quot;webdav&quot;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(webdav);</span><br><span class="line">  <span class="comment">// 这里可以使用 webdav</span></span><br><span class="line">  <span class="keyword">return</span> webdav;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">loadImageType</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> imageType = <span class="keyword">await</span> <span class="keyword">import</span>(<span class="string">&quot;image-type&quot;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(imageType);</span><br><span class="line">  <span class="keyword">return</span> imageType.<span class="property">default</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> name = <span class="string">&quot;webdav-stickers&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> usage = <span class="string">`</span></span><br><span class="line"><span class="string">### 你这图很不错，可惜下一秒就是我的了！</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">这个插件可以把你看上的表情图片保存到支持 WebDAV 的云盘上，通过云盘，你可以将图片分享给其他朋友，或者同步到自己的其他设备上。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;a href=&quot;https://oss.homu.space/imgs/2569b559fd71d9a8af6435c729b6d283.jpg&quot; target=&quot;_blank&quot;&gt;使用效果&lt;/a&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">使用方法：</span></span><br><span class="line"><span class="string">1. 从支持 WebDAV 的云盘（如坚果云等）获取 WebDAV 地址和授权密码，并设置一个存放图片的根目录</span></span><br><span class="line"><span class="string">2. 配置允许使用该插件的用户</span></span><br><span class="line"><span class="string">3. 为命令[设置别名](/commands/save-sticker)</span></span><br><span class="line"><span class="string">4. 把表情图发送给bot可以接收到的地方。引用表情图，使用命令</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">---</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">特性：</span></span><br><span class="line"><span class="string">- 支持批量保存和动图保存</span></span><br><span class="line"><span class="string">- 静态图片统一使用了png格式（支持透明背景）</span></span><br><span class="line"><span class="string">- 可设置表情包的最大宽度，避免了表情包尺寸很大的情况</span></span><br><span class="line"><span class="string">- 支持保存mface表情（官方表情图片）</span></span><br><span class="line"><span class="string">- 可以通过 folder 参数，将表情图保存到云盘的不同文件夹中</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> inject = [<span class="string">&quot;http&quot;</span>];</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> <span class="title class_">Config</span> &#123;</span><br><span class="line">  <span class="attr">webdavUrl</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">webdavUsername</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">webdavPassword</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">rootFolder</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">allowUsers</span>: <span class="built_in">string</span>[];</span><br><span class="line">  <span class="comment">// triggerWords: string[];</span></span><br><span class="line">  <span class="attr">successMessage</span>: <span class="built_in">string</span>[];</span><br><span class="line">  <span class="attr">stickerWidth</span>: <span class="built_in">number</span>;</span><br><span class="line">  <span class="attr">staticImageFormat</span>: <span class="string">&quot;png&quot;</span> | <span class="string">&quot;gif&quot;</span> | <span class="string">&quot;jpg&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">ImageElement</span> &#123;</span><br><span class="line">  <span class="attr">file</span>: <span class="built_in">string</span>; <span class="comment">// 文件名</span></span><br><span class="line">  <span class="attr">fileSize</span>: <span class="built_in">string</span>; <span class="comment">// 文件大小</span></span><br><span class="line">  <span class="attr">src</span>: <span class="built_in">string</span>; <span class="comment">// 文件地址</span></span><br><span class="line">  <span class="attr">subType</span>: <span class="built_in">string</span>; <span class="comment">// 文件类型</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">MfaceElement</span> &#123;</span><br><span class="line">  <span class="attr">emojiId</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">emojiPackageId</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">key</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">summary</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">url</span>: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">Config</span>: <span class="title class_">Schema</span>&lt;<span class="title class_">Config</span>&gt; = <span class="title class_">Schema</span>.<span class="title function_">intersect</span>([</span><br><span class="line">  <span class="title class_">Schema</span>.<span class="title function_">object</span>(&#123;</span><br><span class="line">    <span class="attr">webdavUrl</span>: <span class="title class_">Schema</span>.<span class="title function_">string</span>().<span class="title function_">required</span>().<span class="title function_">description</span>(<span class="string">&quot;WebDAV 服务器地址&quot;</span>),</span><br><span class="line">    <span class="attr">webdavUsername</span>: <span class="title class_">Schema</span>.<span class="title function_">string</span>().<span class="title function_">required</span>().<span class="title function_">description</span>(<span class="string">&quot;WebDAV 用户名&quot;</span>),</span><br><span class="line">    <span class="attr">webdavPassword</span>: <span class="title class_">Schema</span>.<span class="title function_">string</span>()</span><br><span class="line">      .<span class="title function_">role</span>(<span class="string">&quot;secret&quot;</span>)</span><br><span class="line">      .<span class="title function_">required</span>()</span><br><span class="line">      .<span class="title function_">description</span>(<span class="string">&quot;WebDAV 授权密码&quot;</span>),</span><br><span class="line">    <span class="attr">rootFolder</span>: <span class="title class_">Schema</span>.<span class="title function_">string</span>()</span><br><span class="line">      .<span class="title function_">default</span>(<span class="string">&quot;Stickers&quot;</span>)</span><br><span class="line">      .<span class="title function_">description</span>(<span class="string">&quot;设定一个存放图片的根目录&quot;</span>),</span><br><span class="line">  &#125;).<span class="title function_">description</span>(<span class="string">&quot;WebDAV 配置&quot;</span>),</span><br><span class="line">  <span class="title class_">Schema</span>.<span class="title function_">object</span>(&#123;</span><br><span class="line">    <span class="attr">allowUsers</span>: <span class="title class_">Schema</span>.<span class="title function_">array</span>(<span class="title class_">Schema</span>.<span class="title function_">string</span>())</span><br><span class="line">      .<span class="title function_">required</span>()</span><br><span class="line">      .<span class="title function_">description</span>(<span class="string">&quot;允许使用该插件的用户（qq号）&quot;</span>),</span><br><span class="line">    <span class="attr">successMessage</span>: <span class="title class_">Schema</span>.<span class="title function_">array</span>(<span class="title class_">Schema</span>.<span class="title function_">string</span>())</span><br><span class="line">      .<span class="title function_">default</span>([<span class="string">&quot;搞定！&quot;</span>])</span><br><span class="line">      .<span class="title function_">description</span>(<span class="string">&quot;获取成功后的消息&quot;</span>),</span><br><span class="line">  &#125;).<span class="title function_">description</span>(<span class="string">&quot;用户配置&quot;</span>),</span><br><span class="line">  <span class="title class_">Schema</span>.<span class="title function_">object</span>(&#123;</span><br><span class="line">    <span class="attr">stickerWidth</span>: <span class="title class_">Schema</span>.<span class="title function_">number</span>()</span><br><span class="line">      .<span class="title function_">default</span>(<span class="number">300</span>)</span><br><span class="line">      .<span class="title function_">description</span>(<span class="string">&quot;表情包的宽度，默认300px，超过尺寸的静态图片会被压缩&quot;</span>),</span><br><span class="line">    <span class="attr">staticImageFormat</span>: <span class="title class_">Schema</span>.<span class="title function_">union</span>([<span class="string">&quot;png&quot;</span>, <span class="string">&quot;gif&quot;</span>, <span class="string">&quot;jpg&quot;</span>])</span><br><span class="line">      .<span class="title function_">default</span>(<span class="string">&quot;gif&quot;</span>)</span><br><span class="line">      .<span class="title function_">description</span>(<span class="string">&quot;静态图片的格式，默认gif，不会处理mface&quot;</span>),</span><br><span class="line">  &#125;).<span class="title function_">description</span>(<span class="string">&quot;图片配置&quot;</span>),</span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">apply</span>(<span class="params"><span class="attr">ctx</span>: <span class="title class_">Context</span></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; createClient &#125; = <span class="keyword">await</span> <span class="title function_">loadWebDAV</span>();</span><br><span class="line">  <span class="keyword">const</span> imageType = <span class="keyword">await</span> <span class="title function_">loadImageType</span>();</span><br><span class="line">  ctx.<span class="property">logger</span>.<span class="title function_">info</span>(<span class="string">&quot;成功加载 imageType 和 webdav&quot;</span>);</span><br><span class="line">  <span class="keyword">const</span> webDavUrl = ctx.<span class="property">config</span>.<span class="property">webdavUrl</span>.<span class="title function_">endsWith</span>(<span class="string">&quot;/&quot;</span>)</span><br><span class="line">    ? ctx.<span class="property">config</span>.<span class="property">webdavUrl</span></span><br><span class="line">    : ctx.<span class="property">config</span>.<span class="property">webdavUrl</span> + <span class="string">&quot;/&quot;</span> + ctx.<span class="property">config</span>.<span class="property">rootFolder</span>;</span><br><span class="line">  ctx.<span class="property">logger</span>.<span class="title function_">info</span>(<span class="string">&quot;webDavUrl: &quot;</span> + webDavUrl);</span><br><span class="line">  <span class="keyword">const</span> webdavClient = <span class="title function_">createClient</span>(webDavUrl, &#123;</span><br><span class="line">    <span class="attr">username</span>: ctx.<span class="property">config</span>.<span class="property">webdavUsername</span>,</span><br><span class="line">    <span class="attr">password</span>: ctx.<span class="property">config</span>.<span class="property">webdavPassword</span>,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">saveImage</span>(<span class="params"><span class="attr">image</span>: <span class="title class_">ImageElement</span>, folder?: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (folder &amp;&amp; !(<span class="keyword">await</span> webdavClient.<span class="title function_">exists</span>(<span class="string">`/<span class="subst">$&#123;folder&#125;</span>`</span>))) &#123;</span><br><span class="line">      <span class="keyword">await</span> webdavClient.<span class="title function_">createDirectory</span>(<span class="string">`/<span class="subst">$&#123;folder&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> buffer = <span class="keyword">await</span> ctx.<span class="property">http</span>.<span class="title function_">get</span>(image.<span class="property">src</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检测文件是否是gif</span></span><br><span class="line">    <span class="keyword">const</span> fileType = <span class="keyword">await</span> <span class="title function_">imageType</span>(buffer);</span><br><span class="line">    ctx.<span class="property">logger</span>.<span class="title function_">info</span>(<span class="string">`文件类型: <span class="subst">$&#123;fileType.ext&#125;</span>`</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="attr">filename</span>: <span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (fileType.<span class="property">ext</span> === <span class="string">&quot;gif&quot;</span>) &#123;</span><br><span class="line">      filename = <span class="string">`<span class="subst">$&#123;<span class="built_in">Date</span>.now()&#125;</span>.gif`</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      filename = <span class="string">`<span class="subst">$&#123;<span class="built_in">Date</span>.now()&#125;</span>.<span class="subst">$&#123;ctx.config.staticImageFormat&#125;</span>`</span>;</span><br><span class="line">      <span class="keyword">const</span> size = <span class="title function_">imageSize</span>(<span class="keyword">new</span> <span class="title class_">Uint8Array</span>(buffer));</span><br><span class="line">      <span class="keyword">if</span> (size.<span class="property">width</span> &gt; ctx.<span class="property">config</span>.<span class="property">stickerWidth</span>) &#123;</span><br><span class="line">        buffer = <span class="keyword">await</span> <span class="title function_">sharp</span>(buffer)</span><br><span class="line">          .<span class="title function_">resize</span>(&#123; <span class="attr">width</span>: ctx.<span class="property">config</span>.<span class="property">stickerWidth</span> &#125;)</span><br><span class="line">          .<span class="title function_">toFormat</span>(ctx.<span class="property">config</span>.<span class="property">staticImageFormat</span>)</span><br><span class="line">          .<span class="title function_">toBuffer</span>();</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        buffer = <span class="keyword">await</span> <span class="title function_">sharp</span>(buffer)</span><br><span class="line">          .<span class="title function_">toFormat</span>(ctx.<span class="property">config</span>.<span class="property">staticImageFormat</span>)</span><br><span class="line">          .<span class="title function_">toBuffer</span>();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果图片大于设定大小，并且不是gif，则压缩</span></span><br><span class="line">    <span class="keyword">const</span> savePath = <span class="string">`<span class="subst">$&#123;folder ? folder + <span class="string">&quot;/&quot;</span> : <span class="string">&quot;&quot;</span>&#125;</span><span class="subst">$&#123;filename&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">await</span> webdavClient.<span class="title function_">putFileContents</span>(savePath, buffer, &#123;</span><br><span class="line">      <span class="attr">overwrite</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    ctx.<span class="property">logger</span>.<span class="title function_">info</span>(</span><br><span class="line">      <span class="string">`<span class="subst">$&#123;filename&#125;</span> 已保存至 <span class="subst">$&#123;ctx.config.webdavUrl&#125;</span>/<span class="subst">$&#123;ctx.config.rootFolder&#125;</span>/<span class="subst">$&#123;savePath&#125;</span>`</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">saveMface</span>(<span class="params"><span class="attr">mface</span>: <span class="title class_">MfaceElement</span>, folder?: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (folder &amp;&amp; !(<span class="keyword">await</span> webdavClient.<span class="title function_">exists</span>(<span class="string">`/<span class="subst">$&#123;folder&#125;</span>`</span>))) &#123;</span><br><span class="line">      <span class="keyword">await</span> webdavClient.<span class="title function_">createDirectory</span>(<span class="string">`/<span class="subst">$&#123;folder&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> extension = mface.<span class="property">url</span>.<span class="title function_">split</span>(<span class="string">&quot;.&quot;</span>).<span class="title function_">pop</span>();</span><br><span class="line">    <span class="keyword">const</span> filename = <span class="string">`<span class="subst">$&#123;mface.emojiPackageId&#125;</span>-<span class="subst">$&#123;mface.summary&#125;</span>.<span class="subst">$&#123;extension&#125;</span>`</span>;</span><br><span class="line">    <span class="keyword">const</span> savePath = <span class="string">`<span class="subst">$&#123;folder ? folder + <span class="string">&quot;/&quot;</span> : <span class="string">&quot;&quot;</span>&#125;</span><span class="subst">$&#123;filename&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> buffer = <span class="keyword">await</span> ctx.<span class="property">http</span>.<span class="title function_">get</span>(mface.<span class="property">url</span>);</span><br><span class="line">    <span class="keyword">await</span> webdavClient.<span class="title function_">putFileContents</span>(savePath, buffer, &#123;</span><br><span class="line">      <span class="attr">overwrite</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    ctx.<span class="property">logger</span>.<span class="title function_">info</span>(</span><br><span class="line">      <span class="string">`<span class="subst">$&#123;filename&#125;</span> 已保存至 <span class="subst">$&#123;ctx.config.webdavUrl&#125;</span>/<span class="subst">$&#123;ctx.config.rootFolder&#125;</span>/<span class="subst">$&#123;savePath&#125;</span>`</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ctx</span><br><span class="line">    .<span class="title function_">user</span>(...ctx.<span class="property">config</span>.<span class="property">allowUsers</span>)</span><br><span class="line">    .<span class="title function_">command</span>(<span class="string">&quot;save-sticker &lt;folder:text&gt;&quot;</span>, <span class="string">&quot;获取表情包&quot;</span>, &#123;</span><br><span class="line">      <span class="comment">// @ts-ignore-next-line</span></span><br><span class="line">      <span class="attr">hidden</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">captureQuote</span>: <span class="literal">false</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">    .<span class="title function_">alias</span>(<span class="string">&quot;盗图&quot;</span>, <span class="string">&quot;保存图片&quot;</span>)</span><br><span class="line">    .<span class="title function_">action</span>(<span class="title function_">async</span> (&#123; session &#125;, folder) =&gt; &#123;</span><br><span class="line">      <span class="keyword">const</span> quote = session.<span class="property">quote</span>;</span><br><span class="line">      ctx.<span class="property">logger</span>.<span class="title function_">info</span>(quote, <span class="string">&quot;quote&quot;</span>);</span><br><span class="line">      <span class="keyword">if</span> (!quote) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> <span class="attr">images</span>: <span class="title class_">Array</span>&lt;<span class="title class_">ImageElement</span>&gt; = [];</span><br><span class="line">      <span class="keyword">const</span> <span class="attr">mfaces</span>: <span class="title class_">Array</span>&lt;<span class="title class_">MfaceElement</span>&gt; = [];</span><br><span class="line"></span><br><span class="line">      quote.<span class="property">elements</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">el</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (el.<span class="property">type</span> === <span class="string">&quot;img&quot;</span>) &#123;</span><br><span class="line">          images.<span class="title function_">push</span>(el.<span class="property">attrs</span> <span class="keyword">as</span> <span class="title class_">ImageElement</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (el.<span class="property">type</span> === <span class="string">&quot;mface&quot;</span>) &#123;</span><br><span class="line">          mfaces.<span class="title function_">push</span>(el.<span class="property">attrs</span> <span class="keyword">as</span> <span class="title class_">MfaceElement</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (images.<span class="property">length</span> === <span class="number">0</span> &amp;&amp; mfaces.<span class="property">length</span> === <span class="number">0</span>) &#123;</span><br><span class="line">        session.<span class="title function_">send</span>(<span class="string">&quot;引用的消息里没有图片吧&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      ctx.<span class="property">logger</span>.<span class="title function_">info</span>(&#123; images, mfaces, folder &#125;);</span><br><span class="line">      <span class="keyword">const</span> promises = [</span><br><span class="line">        ...images.<span class="title function_">map</span>(<span class="function">(<span class="params">image</span>) =&gt;</span> <span class="title function_">saveImage</span>(image, folder)),</span><br><span class="line">        ...mfaces.<span class="title function_">map</span>(<span class="function">(<span class="params">mface</span>) =&gt;</span> <span class="title function_">saveMface</span>(mface, folder)),</span><br><span class="line">      ];</span><br><span class="line"></span><br><span class="line">      <span class="title class_">Promise</span>.<span class="title function_">allSettled</span>(promises).<span class="title function_">then</span>(<span class="function">(<span class="params">results</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> rejected = results.<span class="title function_">filter</span>(<span class="function">(<span class="params">r</span>) =&gt;</span> r.<span class="property">status</span> === <span class="string">&quot;rejected&quot;</span>);</span><br><span class="line">        <span class="keyword">const</span> fulfilled = results.<span class="title function_">filter</span>(<span class="function">(<span class="params">r</span>) =&gt;</span> r.<span class="property">status</span> === <span class="string">&quot;fulfilled&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (fulfilled.<span class="property">length</span> === <span class="number">0</span>) &#123;</span><br><span class="line">          session.<span class="title function_">send</span>(<span class="string">&quot;没有拿到图片，好像出了点问题...&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (fulfilled.<span class="property">length</span> &gt; <span class="number">0</span> &amp;&amp; rejected.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">          session.<span class="title function_">send</span>(<span class="string">&quot;部分图片没有拿到...&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          session.<span class="title function_">send</span>(<span class="title class_">Random</span>.<span class="title function_">pick</span>(ctx.<span class="property">config</span>.<span class="property">successMessage</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (rejected.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">          ctx.<span class="property">logger</span>.<span class="title function_">error</span>(rejected.<span class="title function_">map</span>(<span class="function">(<span class="params">r</span>) =&gt;</span> r.<span class="property">reason</span>));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="抽签"><a href="#抽签" class="headerlink" title="抽签"></a>抽签</h2>]]></content>
+      <categories>
+        <category>魔女的帽子</category>
+      </categories>
+  </entry>
+  <entry>
     <title>react18学习笔记</title>
     <url>/posts/a1fbfde1/</url>
     <content><![CDATA[<p>为最新的 next.js 做点基础功课，学习 react18 的文档</p>
@@ -180,118 +292,6 @@
       <tags>
         <tag>react</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>做一个好玩的聊天机器人</title>
-    <url>/posts/a590ccae/</url>
-    <content><![CDATA[<h1 id="一些准备"><a href="#一些准备" class="headerlink" title="一些准备"></a>一些准备</h1><ul>
-<li>服务器（运行机器人等物理设备）</li>
-<li>机器人账号和登录状态（提供运行环境和 Api）</li>
-<li>Api：OneBot 等（提供与机器人框架对接的方式以及功能开发接口）</li>
-<li>机器人框架：Koishi，Nonebot，Mirai 等</li>
-</ul>
-<h1 id="Koishi"><a href="#Koishi" class="headerlink" title="Koishi"></a>Koishi</h1><p><a href="https://koishi.chat/zh-CN/">Koishi 是一个开源的跨平台机器人框架</a></p>
-<p><a href="https://thwiki.cc/%E5%8F%A4%E6%98%8E%E5%9C%B0%E6%81%8B">Koishi 的意思是古明地恋，东方 Project 中的角色</a></p>
-<h1 id="docker-部署一个对接-qq-的机器人"><a href="#docker-部署一个对接-qq-的机器人" class="headerlink" title="docker 部署一个对接 qq 的机器人"></a>docker 部署一个对接 qq 的机器人</h1><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">bot:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">koishi</span></span><br><span class="line">    <span class="comment"># 如果服务器性能不佳，或者确认完全不需要puppeteer功能，那么可以不安装chromium</span></span><br><span class="line">    <span class="comment"># https://koishi.chat/zh-CN/manual/starter/docker.html#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.1ms.run/koishijs/koishi</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./koishi-data:/koishi</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">TZ=Asia/Shanghai</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">    <span class="comment"># ports:</span></span><br><span class="line">    <span class="comment">#   - &quot;5140:5140&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">qq:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">llonebot</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.1ms.run/initialencounter/llonebot:latest</span></span><br><span class="line">    <span class="attr">privileged:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">VNC_PASSWD=llonebotpass</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">host</span></span><br><span class="line">    <span class="comment"># ports:</span></span><br><span class="line">    <span class="comment">#   - &quot;7081:7081&quot; # login</span></span><br><span class="line">    <span class="comment">#   - &quot;3000:3000&quot; # http</span></span><br><span class="line">    <span class="comment">#   - &quot;3001:3001&quot; # ws</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="聊天机器人的控制台"><a href="#聊天机器人的控制台" class="headerlink" title="聊天机器人的控制台"></a>聊天机器人的控制台</h1><p>docker 服务成功运行后，浏览器访问云服务器的 5140 端口，可以看到控制台</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20250309133457188.png"></p>
-<p>控制台提供了对 bot 的所有管理能力，比如运行状态，插件安装卸载，日志等</p>
-<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><p>相关文档：<a href="https://koishi.chat/zh-CN/manual/usage/market.html">安装和配置插件</a></p>
-<p>插件系统是 Koishi 的核心，bot 所有的功能都来自于插件</p>
-<p>Koishi 的插件是以”koishi-plugin-“开头的 npm 包，安装插件的过程实际上也是安装了一个 npm 包</p>
-<p>由于 Koishi 官方插件市场镜像长期没有更新，可以使用官方插件提供的社区镜像源</p>
-<p>进入插件配置，找到分组：console 下的 market（插件市场本身也是插件，可以在插件配置中修改）</p>
-<p>可以看到说明中会提供几个社区镜像，选择一个填入 search.endpoint 就可以了</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20250309151110390.png"></p>
-<p>因为现在 Koishi 控制台部署在公网上，任何人都可以通过 ip:5140 访问到控制台，会有安全隐患</p>
-<p>现在尝试在控制台种安装<code>auth</code>插件，这个插件可以给控制台提供用户和密码登录的功能</p>
-<p>在插件市场里搜索<code>auth</code>，安装后进入插件配置页面</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1741506958020.png"></p>
-<p>进入<code>auth</code>的插件配置，设置密码，点击右上角的三角形按钮启用插件</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1741507006519.png"></p>
-<p>至此，完成了一次插件的安装和配置，以及控制台的密码登录设置</p>
-<p>koishi 的插件大致可以分为以下几类：</p>
-<ul>
-<li>适配器（adapter），用来对接不同的 IM 平台或者 API 协议，如 qq、telegram、onebot 等</li>
-<li>控制台（console）增强控制台功能的插件，如 auth 等</li>
-<li>服务类，不直接在聊天中体现，但是给其他插件添加依赖，如 puppeteer，mysql，webdav 等</li>
-<li>功能类，直接在聊天中体现，如 翻译、图片搜索、天气查询等</li>
-</ul>
-<h1 id="对接-qq"><a href="#对接-qq" class="headerlink" title="对接 qq"></a>对接 qq</h1><h2 id="登录-qq（llonebot）"><a href="#登录-qq（llonebot）" class="headerlink" title="登录 qq（llonebot）"></a>登录 qq（llonebot）</h2><p>在终端中输入 <code>docker logs llonebot</code> 可以获取二维码，用手机 qq 扫描后就可以登录</p>
-<p>登录后，使用 vnc 连接到服务器地址的 7081 端口，输入密码<code>llonebotpassword</code>，可以对 docker 中的 qq 进行设置</p>
-<p>这里我用的是 <a href="https://nxshell.github.io/">NxShell</a> 进行 vnc 连接</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/b1e6cc7f8ba18afa936a62e74be12ab0.png"></p>
-<p>设置 ws 反向监听地址（不设置也没问题，可以在适配器里设置正向 ws 监听。不同的适配器会要求不同的监听方式）</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1738331009172.png"></p>
-<h2 id="连接-onebot"><a href="#连接-onebot" class="headerlink" title="连接 onebot"></a>连接 onebot</h2><p>配置 adapter-onebot</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1738331334759.png"></p>
-<p>启用插件之后，会发现控制台右下角变绿，并出现上下行流量的变化。表示已经配置成功，koishi 平台已经与 qq 建立联系</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1741508101862.png"></p>
-<h2 id="排错"><a href="#排错" class="headerlink" title="排错"></a>排错</h2><p>如果是首次设置，可以进入依赖管理中更新官方插件版本</p>
-<p>如果是连接问题，则需要考虑 qq 是否在有 llonebot 的客户端中登录，以及对接的 ip 和端口是否正确</p>
-<p>如果是功能性插件出现错误，可以在控制台中查看日志</p>
-<p>koishi 的插件的可用性和安全性并不可靠，有些甚至需要去查看源码，安装的时候需要仔细甄别</p>
-<h1 id="使用插件市场里的插件丰富-bot-的功能"><a href="#使用插件市场里的插件丰富-bot-的功能" class="headerlink" title="使用插件市场里的插件丰富 bot 的功能"></a>使用插件市场里的插件丰富 bot 的功能</h1><p>接下来就可以进入插件市场挑选自己想加入的插件</p>
-<p>在论坛中可以找到有趣的推荐，以及一些问题的解决方式</p>
-<p><a href="https://forum.koishi.xyz/">Koishi 论坛</a></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/424a0512db78bd1815dc9d1b5be4d7c8.jpeg"></p>
-<h1 id="开发自己的插件"><a href="#开发自己的插件" class="headerlink" title="开发自己的插件"></a>开发自己的插件</h1><p>插件市场虽然很丰富，但是很难完全满足自己的定制化需求，这个时候就需要自己开发插件了</p>
-<p><a href="https://koishi.chat/zh-CN/guide/">插件开发文档</a></p>
-<p>创建一个本地的 koishi 插件开发环境</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">yarn create koishi</span><br><span class="line"></span><br><span class="line">yarn dev</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>在工作区创建插件</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">yarn setup [name]</span><br></pre></td></tr></table></figure>
-
-<p>为插件添加依赖</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">yarn workspace koishi-plugin-[name] add [...deps]</span><br></pre></td></tr></table></figure>
-
-<p>koishi 的开发工作区默认是 monorepo 的结构，创建好的插件在 external 文件夹下</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root</span><br><span class="line">├── external</span><br><span class="line">│   └── example</span><br><span class="line">│       ├── src</span><br><span class="line">│       │   └── index.ts</span><br><span class="line">│       └── package.json</span><br><span class="line">├── koishi.yml</span><br><span class="line">└── package.json</span><br></pre></td></tr></table></figure>
-
-<p>开发完成后，可以<a href="https://koishi.chat/zh-CN/guide/develop/publish.html">把插件发布到插件市场上</a></p>
-<p>在发布之前，为插件的 package.json 补充信息，所补充的信息会在插件市场中展示</p>
-<p>其中比较值得注意的是 koishi 字段，这个字段会影响到插件配置页面的展示以及其所依赖的其他服务</p>
-<p>在 koishi.service 中可以声明此插件所依赖的服务</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;koishi-plugin-example&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;contributors&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="comment">// 贡献者</span></span><br><span class="line">    <span class="string">&quot;Alice &lt;alice@gmail.com&gt;&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;Bob &lt;bob@gmail.com&gt;&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;license&quot;</span><span class="punctuation">:</span> <span class="string">&quot;MIT&quot;</span><span class="punctuation">,</span> <span class="comment">// 许可证</span></span><br><span class="line">  <span class="attr">&quot;homepage&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://example.com&quot;</span><span class="punctuation">,</span> <span class="comment">// 主页</span></span><br><span class="line">  <span class="attr">&quot;repository&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">// 源码仓库</span></span><br><span class="line">    <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;git&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;git+https://github.com/alice/koishi-plugin-example.git&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;keywords&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;example&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="comment">// 关键词</span></span><br><span class="line">  <span class="attr">&quot;peerDependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;koishi&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^4.3.2&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;koishi&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="comment">// 不同语言的插件描述</span></span><br><span class="line">      <span class="attr">&quot;en&quot;</span><span class="punctuation">:</span> <span class="string">&quot;English Description&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;zh&quot;</span><span class="punctuation">:</span> <span class="string">&quot;中文描述&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;service&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;required&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;database&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="comment">// 必需的服务</span></span><br><span class="line">      <span class="attr">&quot;optional&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;assets&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="comment">// 可选的服务</span></span><br><span class="line">      <span class="attr">&quot;implements&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;dialogue&quot;</span><span class="punctuation">]</span> <span class="comment">// 实现的服务</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="koishi-插件开发的基础概念"><a href="#koishi-插件开发的基础概念" class="headerlink" title="koishi 插件开发的基础概念"></a>koishi 插件开发的基础概念</h2><h3 id="上下文"><a href="#上下文" class="headerlink" title="上下文"></a>上下文</h3><h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><h3 id="参数（配置构型）"><a href="#参数（配置构型）" class="headerlink" title="参数（配置构型）"></a>参数（配置构型）</h3><h3 id="消息元素"><a href="#消息元素" class="headerlink" title="消息元素"></a>消息元素</h3><h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><h3 id="服务和依赖"><a href="#服务和依赖" class="headerlink" title="服务和依赖"></a>服务和依赖</h3><h2 id="获取表情图并存到云盘的插件"><a href="#获取表情图并存到云盘的插件" class="headerlink" title="获取表情图并存到云盘的插件"></a>获取表情图并存到云盘的插件</h2><h3 id="动机和期望"><a href="#动机和期望" class="headerlink" title="动机和期望"></a>动机和期望</h3><p>由于 qq 和微信的某次更新，无法直接保存其他人发送的表情包，所以我就想把自己的表情图独立于平台，保存到自己的网盘上，可以在任何设备任何软件上使用。</p>
-<p>可以说是盗图的终极方案</p>
-<p><strong>期望</strong></p>
-<p>我想象中的这个插件的用法大概是这样的：</p>
-<ol>
-<li>我看到了一张表情图，摩拳擦掌想塞进自己的口袋</li>
-<li>我把这张表情图发给 bot，（用指令）告诉 bot，把这张图片存下来</li>
-<li>bot 获取到这张图片，并且对图片做统一处理（尺寸，质量，格式）</li>
-<li>将处理好的图片保存在云盘上，云盘同步设备文件夹。</li>
-<li>使用的时候直接选择图片发送，图片不会被放大，动画效果不会丢失</li>
-<li>可以存官方表情图，也可以存自己的表情图</li>
-</ol>
-<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><p>通过引用消息告诉 bot 要存哪张图片：session.quote.elements</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">quote.<span class="property">elements</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">el</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (el.<span class="property">type</span> === <span class="string">&quot;img&quot;</span>) &#123;</span><br><span class="line">    images.<span class="title function_">push</span>(el.<span class="property">attrs</span> <span class="keyword">as</span> <span class="title class_">ImageElement</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (el.<span class="property">type</span> === <span class="string">&quot;mface&quot;</span>) &#123;</span><br><span class="line">    mfaces.<span class="title function_">push</span>(el.<span class="property">attrs</span> <span class="keyword">as</span> <span class="title class_">MfaceElement</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>注册指令，然后在控制台中配置别名，增加参数可以指定存储到云盘的某个子文件夹</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">ctx</span><br><span class="line">  .<span class="title function_">command</span>(<span class="string">&quot;save-sticker &lt;folder:text&gt;&quot;</span>, <span class="string">&quot;获取表情包&quot;</span>, &#123;</span><br><span class="line">    <span class="comment">// @ts-ignore-next-line</span></span><br><span class="line">    <span class="attr">hidden</span>: <span class="literal">true</span>, <span class="comment">// 隐藏指令，不会在help指令中被发送</span></span><br><span class="line">    <span class="attr">captureQuote</span>: <span class="literal">false</span>, <span class="comment">// 运行指令避免捕获引用内容 https://github.com/koishijs/koishi/issues/1432</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">alias</span>(<span class="string">&quot;盗图&quot;</span>, <span class="string">&quot;保存图片&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>使用 webdav 的方式连接云盘（坚果云），并将图片上传到云盘</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 引入纯ESM包</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">loadWebDAV</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> webdav = <span class="keyword">await</span> <span class="keyword">import</span>(<span class="string">&quot;webdav&quot;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(webdav);</span><br><span class="line">  <span class="keyword">return</span> webdav;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> &#123; createClient &#125; = <span class="keyword">await</span> <span class="title function_">loadWebDAV</span>();</span><br><span class="line"><span class="comment">// 创建webdav客户端</span></span><br><span class="line"><span class="keyword">const</span> webdavClient = <span class="title function_">createClient</span>(webDavUrl, &#123;</span><br><span class="line">  <span class="attr">username</span>: ctx.<span class="property">config</span>.<span class="property">webdavUsername</span>,</span><br><span class="line">  <span class="attr">password</span>: ctx.<span class="property">config</span>.<span class="property">webdavPassword</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>将图片处理成特定格式，默认 gif，并且将宽度固定到 300px，提供两个配置项，可以在控制台中配置</p>
-<p>为什么要处理成 gif 和 300px</p>
-<ol>
-<li>透明度：gif 可以保留表情图的透明度，同时不会变黑（经测试 png 会出现背景变黑的问题，qq 应该不支持 png 的复杂透明度）</li>
-<li>gif 是官方表情包（mface）的格式</li>
-<li>gif 支持动图</li>
-<li>300 像素是比较通用的尺寸，发送后不会被放大，不太清楚 qq 和微信识别表情包的逻辑，经过尝试得到的结果</li>
-</ol>
-<h2 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h2><p><img src="https://oss.homu.space/imgs/2569b559fd71d9a8af6435c729b6d283.jpg"></p>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="keyword">type</span> <span class="title class_">Context</span>, <span class="title class_">Random</span>, <span class="title class_">Schema</span>, <span class="title class_">Session</span> &#125; <span class="keyword">from</span> <span class="string">&quot;koishi&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> sharp <span class="keyword">from</span> <span class="string">&quot;sharp&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; imageSize &#125; <span class="keyword">from</span> <span class="string">&quot;image-size&quot;</span>;</span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">loadWebDAV</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> webdav = <span class="keyword">await</span> <span class="keyword">import</span>(<span class="string">&quot;webdav&quot;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(webdav);</span><br><span class="line">  <span class="comment">// 这里可以使用 webdav</span></span><br><span class="line">  <span class="keyword">return</span> webdav;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">loadImageType</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> imageType = <span class="keyword">await</span> <span class="keyword">import</span>(<span class="string">&quot;image-type&quot;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(imageType);</span><br><span class="line">  <span class="keyword">return</span> imageType.<span class="property">default</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> name = <span class="string">&quot;webdav-stickers&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> usage = <span class="string">`</span></span><br><span class="line"><span class="string">### 你这图很不错，可惜下一秒就是我的了！</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">这个插件可以把你看上的表情图片保存到支持 WebDAV 的云盘上，通过云盘，你可以将图片分享给其他朋友，或者同步到自己的其他设备上。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;a href=&quot;https://oss.homu.space/imgs/2569b559fd71d9a8af6435c729b6d283.jpg&quot; target=&quot;_blank&quot;&gt;使用效果&lt;/a&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">使用方法：</span></span><br><span class="line"><span class="string">1. 从支持 WebDAV 的云盘（如坚果云等）获取 WebDAV 地址和授权密码，并设置一个存放图片的根目录</span></span><br><span class="line"><span class="string">2. 配置允许使用该插件的用户</span></span><br><span class="line"><span class="string">3. 为命令[设置别名](/commands/save-sticker)</span></span><br><span class="line"><span class="string">4. 把表情图发送给bot可以接收到的地方。引用表情图，使用命令</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">---</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">特性：</span></span><br><span class="line"><span class="string">- 支持批量保存和动图保存</span></span><br><span class="line"><span class="string">- 静态图片统一使用了png格式（支持透明背景）</span></span><br><span class="line"><span class="string">- 可设置表情包的最大宽度，避免了表情包尺寸很大的情况</span></span><br><span class="line"><span class="string">- 支持保存mface表情（官方表情图片）</span></span><br><span class="line"><span class="string">- 可以通过 folder 参数，将表情图保存到云盘的不同文件夹中</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> inject = [<span class="string">&quot;http&quot;</span>];</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> <span class="title class_">Config</span> &#123;</span><br><span class="line">  <span class="attr">webdavUrl</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">webdavUsername</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">webdavPassword</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">rootFolder</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">allowUsers</span>: <span class="built_in">string</span>[];</span><br><span class="line">  <span class="comment">// triggerWords: string[];</span></span><br><span class="line">  <span class="attr">successMessage</span>: <span class="built_in">string</span>[];</span><br><span class="line">  <span class="attr">stickerWidth</span>: <span class="built_in">number</span>;</span><br><span class="line">  <span class="attr">staticImageFormat</span>: <span class="string">&quot;png&quot;</span> | <span class="string">&quot;gif&quot;</span> | <span class="string">&quot;jpg&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">ImageElement</span> &#123;</span><br><span class="line">  <span class="attr">file</span>: <span class="built_in">string</span>; <span class="comment">// 文件名</span></span><br><span class="line">  <span class="attr">fileSize</span>: <span class="built_in">string</span>; <span class="comment">// 文件大小</span></span><br><span class="line">  <span class="attr">src</span>: <span class="built_in">string</span>; <span class="comment">// 文件地址</span></span><br><span class="line">  <span class="attr">subType</span>: <span class="built_in">string</span>; <span class="comment">// 文件类型</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">MfaceElement</span> &#123;</span><br><span class="line">  <span class="attr">emojiId</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">emojiPackageId</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">key</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">summary</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="attr">url</span>: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">Config</span>: <span class="title class_">Schema</span>&lt;<span class="title class_">Config</span>&gt; = <span class="title class_">Schema</span>.<span class="title function_">intersect</span>([</span><br><span class="line">  <span class="title class_">Schema</span>.<span class="title function_">object</span>(&#123;</span><br><span class="line">    <span class="attr">webdavUrl</span>: <span class="title class_">Schema</span>.<span class="title function_">string</span>().<span class="title function_">required</span>().<span class="title function_">description</span>(<span class="string">&quot;WebDAV 服务器地址&quot;</span>),</span><br><span class="line">    <span class="attr">webdavUsername</span>: <span class="title class_">Schema</span>.<span class="title function_">string</span>().<span class="title function_">required</span>().<span class="title function_">description</span>(<span class="string">&quot;WebDAV 用户名&quot;</span>),</span><br><span class="line">    <span class="attr">webdavPassword</span>: <span class="title class_">Schema</span>.<span class="title function_">string</span>()</span><br><span class="line">      .<span class="title function_">role</span>(<span class="string">&quot;secret&quot;</span>)</span><br><span class="line">      .<span class="title function_">required</span>()</span><br><span class="line">      .<span class="title function_">description</span>(<span class="string">&quot;WebDAV 授权密码&quot;</span>),</span><br><span class="line">    <span class="attr">rootFolder</span>: <span class="title class_">Schema</span>.<span class="title function_">string</span>()</span><br><span class="line">      .<span class="title function_">default</span>(<span class="string">&quot;Stickers&quot;</span>)</span><br><span class="line">      .<span class="title function_">description</span>(<span class="string">&quot;设定一个存放图片的根目录&quot;</span>),</span><br><span class="line">  &#125;).<span class="title function_">description</span>(<span class="string">&quot;WebDAV 配置&quot;</span>),</span><br><span class="line">  <span class="title class_">Schema</span>.<span class="title function_">object</span>(&#123;</span><br><span class="line">    <span class="attr">allowUsers</span>: <span class="title class_">Schema</span>.<span class="title function_">array</span>(<span class="title class_">Schema</span>.<span class="title function_">string</span>())</span><br><span class="line">      .<span class="title function_">required</span>()</span><br><span class="line">      .<span class="title function_">description</span>(<span class="string">&quot;允许使用该插件的用户（qq号）&quot;</span>),</span><br><span class="line">    <span class="attr">successMessage</span>: <span class="title class_">Schema</span>.<span class="title function_">array</span>(<span class="title class_">Schema</span>.<span class="title function_">string</span>())</span><br><span class="line">      .<span class="title function_">default</span>([<span class="string">&quot;搞定！&quot;</span>])</span><br><span class="line">      .<span class="title function_">description</span>(<span class="string">&quot;获取成功后的消息&quot;</span>),</span><br><span class="line">  &#125;).<span class="title function_">description</span>(<span class="string">&quot;用户配置&quot;</span>),</span><br><span class="line">  <span class="title class_">Schema</span>.<span class="title function_">object</span>(&#123;</span><br><span class="line">    <span class="attr">stickerWidth</span>: <span class="title class_">Schema</span>.<span class="title function_">number</span>()</span><br><span class="line">      .<span class="title function_">default</span>(<span class="number">300</span>)</span><br><span class="line">      .<span class="title function_">description</span>(<span class="string">&quot;表情包的宽度，默认300px，超过尺寸的静态图片会被压缩&quot;</span>),</span><br><span class="line">    <span class="attr">staticImageFormat</span>: <span class="title class_">Schema</span>.<span class="title function_">union</span>([<span class="string">&quot;png&quot;</span>, <span class="string">&quot;gif&quot;</span>, <span class="string">&quot;jpg&quot;</span>])</span><br><span class="line">      .<span class="title function_">default</span>(<span class="string">&quot;gif&quot;</span>)</span><br><span class="line">      .<span class="title function_">description</span>(<span class="string">&quot;静态图片的格式，默认gif，不会处理mface&quot;</span>),</span><br><span class="line">  &#125;).<span class="title function_">description</span>(<span class="string">&quot;图片配置&quot;</span>),</span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">apply</span>(<span class="params"><span class="attr">ctx</span>: <span class="title class_">Context</span></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; createClient &#125; = <span class="keyword">await</span> <span class="title function_">loadWebDAV</span>();</span><br><span class="line">  <span class="keyword">const</span> imageType = <span class="keyword">await</span> <span class="title function_">loadImageType</span>();</span><br><span class="line">  ctx.<span class="property">logger</span>.<span class="title function_">info</span>(<span class="string">&quot;成功加载 imageType 和 webdav&quot;</span>);</span><br><span class="line">  <span class="keyword">const</span> webDavUrl = ctx.<span class="property">config</span>.<span class="property">webdavUrl</span>.<span class="title function_">endsWith</span>(<span class="string">&quot;/&quot;</span>)</span><br><span class="line">    ? ctx.<span class="property">config</span>.<span class="property">webdavUrl</span></span><br><span class="line">    : ctx.<span class="property">config</span>.<span class="property">webdavUrl</span> + <span class="string">&quot;/&quot;</span> + ctx.<span class="property">config</span>.<span class="property">rootFolder</span>;</span><br><span class="line">  ctx.<span class="property">logger</span>.<span class="title function_">info</span>(<span class="string">&quot;webDavUrl: &quot;</span> + webDavUrl);</span><br><span class="line">  <span class="keyword">const</span> webdavClient = <span class="title function_">createClient</span>(webDavUrl, &#123;</span><br><span class="line">    <span class="attr">username</span>: ctx.<span class="property">config</span>.<span class="property">webdavUsername</span>,</span><br><span class="line">    <span class="attr">password</span>: ctx.<span class="property">config</span>.<span class="property">webdavPassword</span>,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">saveImage</span>(<span class="params"><span class="attr">image</span>: <span class="title class_">ImageElement</span>, folder?: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (folder &amp;&amp; !(<span class="keyword">await</span> webdavClient.<span class="title function_">exists</span>(<span class="string">`/<span class="subst">$&#123;folder&#125;</span>`</span>))) &#123;</span><br><span class="line">      <span class="keyword">await</span> webdavClient.<span class="title function_">createDirectory</span>(<span class="string">`/<span class="subst">$&#123;folder&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> buffer = <span class="keyword">await</span> ctx.<span class="property">http</span>.<span class="title function_">get</span>(image.<span class="property">src</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检测文件是否是gif</span></span><br><span class="line">    <span class="keyword">const</span> fileType = <span class="keyword">await</span> <span class="title function_">imageType</span>(buffer);</span><br><span class="line">    ctx.<span class="property">logger</span>.<span class="title function_">info</span>(<span class="string">`文件类型: <span class="subst">$&#123;fileType.ext&#125;</span>`</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="attr">filename</span>: <span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (fileType.<span class="property">ext</span> === <span class="string">&quot;gif&quot;</span>) &#123;</span><br><span class="line">      filename = <span class="string">`<span class="subst">$&#123;<span class="built_in">Date</span>.now()&#125;</span>.gif`</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      filename = <span class="string">`<span class="subst">$&#123;<span class="built_in">Date</span>.now()&#125;</span>.<span class="subst">$&#123;ctx.config.staticImageFormat&#125;</span>`</span>;</span><br><span class="line">      <span class="keyword">const</span> size = <span class="title function_">imageSize</span>(<span class="keyword">new</span> <span class="title class_">Uint8Array</span>(buffer));</span><br><span class="line">      <span class="keyword">if</span> (size.<span class="property">width</span> &gt; ctx.<span class="property">config</span>.<span class="property">stickerWidth</span>) &#123;</span><br><span class="line">        buffer = <span class="keyword">await</span> <span class="title function_">sharp</span>(buffer)</span><br><span class="line">          .<span class="title function_">resize</span>(&#123; <span class="attr">width</span>: ctx.<span class="property">config</span>.<span class="property">stickerWidth</span> &#125;)</span><br><span class="line">          .<span class="title function_">toFormat</span>(ctx.<span class="property">config</span>.<span class="property">staticImageFormat</span>)</span><br><span class="line">          .<span class="title function_">toBuffer</span>();</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        buffer = <span class="keyword">await</span> <span class="title function_">sharp</span>(buffer)</span><br><span class="line">          .<span class="title function_">toFormat</span>(ctx.<span class="property">config</span>.<span class="property">staticImageFormat</span>)</span><br><span class="line">          .<span class="title function_">toBuffer</span>();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果图片大于设定大小，并且不是gif，则压缩</span></span><br><span class="line">    <span class="keyword">const</span> savePath = <span class="string">`<span class="subst">$&#123;folder ? folder + <span class="string">&quot;/&quot;</span> : <span class="string">&quot;&quot;</span>&#125;</span><span class="subst">$&#123;filename&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">await</span> webdavClient.<span class="title function_">putFileContents</span>(savePath, buffer, &#123;</span><br><span class="line">      <span class="attr">overwrite</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    ctx.<span class="property">logger</span>.<span class="title function_">info</span>(</span><br><span class="line">      <span class="string">`<span class="subst">$&#123;filename&#125;</span> 已保存至 <span class="subst">$&#123;ctx.config.webdavUrl&#125;</span>/<span class="subst">$&#123;ctx.config.rootFolder&#125;</span>/<span class="subst">$&#123;savePath&#125;</span>`</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">saveMface</span>(<span class="params"><span class="attr">mface</span>: <span class="title class_">MfaceElement</span>, folder?: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (folder &amp;&amp; !(<span class="keyword">await</span> webdavClient.<span class="title function_">exists</span>(<span class="string">`/<span class="subst">$&#123;folder&#125;</span>`</span>))) &#123;</span><br><span class="line">      <span class="keyword">await</span> webdavClient.<span class="title function_">createDirectory</span>(<span class="string">`/<span class="subst">$&#123;folder&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> extension = mface.<span class="property">url</span>.<span class="title function_">split</span>(<span class="string">&quot;.&quot;</span>).<span class="title function_">pop</span>();</span><br><span class="line">    <span class="keyword">const</span> filename = <span class="string">`<span class="subst">$&#123;mface.emojiPackageId&#125;</span>-<span class="subst">$&#123;mface.summary&#125;</span>.<span class="subst">$&#123;extension&#125;</span>`</span>;</span><br><span class="line">    <span class="keyword">const</span> savePath = <span class="string">`<span class="subst">$&#123;folder ? folder + <span class="string">&quot;/&quot;</span> : <span class="string">&quot;&quot;</span>&#125;</span><span class="subst">$&#123;filename&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> buffer = <span class="keyword">await</span> ctx.<span class="property">http</span>.<span class="title function_">get</span>(mface.<span class="property">url</span>);</span><br><span class="line">    <span class="keyword">await</span> webdavClient.<span class="title function_">putFileContents</span>(savePath, buffer, &#123;</span><br><span class="line">      <span class="attr">overwrite</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    ctx.<span class="property">logger</span>.<span class="title function_">info</span>(</span><br><span class="line">      <span class="string">`<span class="subst">$&#123;filename&#125;</span> 已保存至 <span class="subst">$&#123;ctx.config.webdavUrl&#125;</span>/<span class="subst">$&#123;ctx.config.rootFolder&#125;</span>/<span class="subst">$&#123;savePath&#125;</span>`</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ctx</span><br><span class="line">    .<span class="title function_">user</span>(...ctx.<span class="property">config</span>.<span class="property">allowUsers</span>)</span><br><span class="line">    .<span class="title function_">command</span>(<span class="string">&quot;save-sticker &lt;folder:text&gt;&quot;</span>, <span class="string">&quot;获取表情包&quot;</span>, &#123;</span><br><span class="line">      <span class="comment">// @ts-ignore-next-line</span></span><br><span class="line">      <span class="attr">hidden</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">captureQuote</span>: <span class="literal">false</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">    .<span class="title function_">alias</span>(<span class="string">&quot;盗图&quot;</span>, <span class="string">&quot;保存图片&quot;</span>)</span><br><span class="line">    .<span class="title function_">action</span>(<span class="title function_">async</span> (&#123; session &#125;, folder) =&gt; &#123;</span><br><span class="line">      <span class="keyword">const</span> quote = session.<span class="property">quote</span>;</span><br><span class="line">      ctx.<span class="property">logger</span>.<span class="title function_">info</span>(quote, <span class="string">&quot;quote&quot;</span>);</span><br><span class="line">      <span class="keyword">if</span> (!quote) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> <span class="attr">images</span>: <span class="title class_">Array</span>&lt;<span class="title class_">ImageElement</span>&gt; = [];</span><br><span class="line">      <span class="keyword">const</span> <span class="attr">mfaces</span>: <span class="title class_">Array</span>&lt;<span class="title class_">MfaceElement</span>&gt; = [];</span><br><span class="line"></span><br><span class="line">      quote.<span class="property">elements</span>.<span class="title function_">forEach</span>(<span class="function">(<span class="params">el</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (el.<span class="property">type</span> === <span class="string">&quot;img&quot;</span>) &#123;</span><br><span class="line">          images.<span class="title function_">push</span>(el.<span class="property">attrs</span> <span class="keyword">as</span> <span class="title class_">ImageElement</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (el.<span class="property">type</span> === <span class="string">&quot;mface&quot;</span>) &#123;</span><br><span class="line">          mfaces.<span class="title function_">push</span>(el.<span class="property">attrs</span> <span class="keyword">as</span> <span class="title class_">MfaceElement</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (images.<span class="property">length</span> === <span class="number">0</span> &amp;&amp; mfaces.<span class="property">length</span> === <span class="number">0</span>) &#123;</span><br><span class="line">        session.<span class="title function_">send</span>(<span class="string">&quot;引用的消息里没有图片吧&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      ctx.<span class="property">logger</span>.<span class="title function_">info</span>(&#123; images, mfaces, folder &#125;);</span><br><span class="line">      <span class="keyword">const</span> promises = [</span><br><span class="line">        ...images.<span class="title function_">map</span>(<span class="function">(<span class="params">image</span>) =&gt;</span> <span class="title function_">saveImage</span>(image, folder)),</span><br><span class="line">        ...mfaces.<span class="title function_">map</span>(<span class="function">(<span class="params">mface</span>) =&gt;</span> <span class="title function_">saveMface</span>(mface, folder)),</span><br><span class="line">      ];</span><br><span class="line"></span><br><span class="line">      <span class="title class_">Promise</span>.<span class="title function_">allSettled</span>(promises).<span class="title function_">then</span>(<span class="function">(<span class="params">results</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> rejected = results.<span class="title function_">filter</span>(<span class="function">(<span class="params">r</span>) =&gt;</span> r.<span class="property">status</span> === <span class="string">&quot;rejected&quot;</span>);</span><br><span class="line">        <span class="keyword">const</span> fulfilled = results.<span class="title function_">filter</span>(<span class="function">(<span class="params">r</span>) =&gt;</span> r.<span class="property">status</span> === <span class="string">&quot;fulfilled&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (fulfilled.<span class="property">length</span> === <span class="number">0</span>) &#123;</span><br><span class="line">          session.<span class="title function_">send</span>(<span class="string">&quot;没有拿到图片，好像出了点问题...&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (fulfilled.<span class="property">length</span> &gt; <span class="number">0</span> &amp;&amp; rejected.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">          session.<span class="title function_">send</span>(<span class="string">&quot;部分图片没有拿到...&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          session.<span class="title function_">send</span>(<span class="title class_">Random</span>.<span class="title function_">pick</span>(ctx.<span class="property">config</span>.<span class="property">successMessage</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (rejected.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">          ctx.<span class="property">logger</span>.<span class="title function_">error</span>(rejected.<span class="title function_">map</span>(<span class="function">(<span class="params">r</span>) =&gt;</span> r.<span class="property">reason</span>));</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="抽签"><a href="#抽签" class="headerlink" title="抽签"></a>抽签</h2>]]></content>
-      <categories>
-        <category>魔女的帽子</category>
-      </categories>
   </entry>
   <entry>
     <title>Ubuntu部署hexo记录</title>
@@ -1623,170 +1623,6 @@
       </tags>
   </entry>
   <entry>
-    <title>第一次摩旅：洛阳-西安</title>
-    <url>/posts/70ac33cd/</url>
-    <content><![CDATA[<p>写下这篇文章的时候已经是十一假期了</p>
-<p>我已经在西安暂住下来，并且开始逐渐了解这座城市</p>
-<hr>
-<p>我做了一件很不得了的事情，至少我自己觉得很厉害！</p>
-<p>9.24 和 9.25 这两天的时间，骑上我的本田 cc110，从洛阳到达了西安</p>
-<p>完成了人生第一次摩托车旅行</p>
-<h1 id="每年最完美的季节"><a href="#每年最完美的季节" class="headerlink" title="每年最完美的季节"></a>每年最完美的季节</h1><p>小熊说，Cub 可以带我去任何地方，我还想去更远的地方</p>
-<p>芝麻凛的爷爷说，我刚拿到驾照可能会不知道，季节交替的时候正式摩托旅行的好时机</p>
-<div id="dplayer3" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer3"),"video":{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/Yuru%20Camp%20Season%203%2009%20%E7%89%87%E6%AE%B5.mp4"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
-
-<p>摩托旅行是视野最开阔的旅行方式，有速度，有风，眼前所有的东西全是景色</p>
-<h1 id="出发前的心情和准备"><a href="#出发前的心情和准备" class="headerlink" title="出发前的心情和准备"></a>出发前的心情和准备</h1><h2 id="喜欢的事情"><a href="#喜欢的事情" class="headerlink" title="喜欢的事情"></a>喜欢的事情</h2><p>早在今年一月份的时候，看了动画片《本田小狼与我》</p>
-<p>再之后，看了《摇曳露营 3》</p>
-<p>这两个动画片让我知道摩托车可以是生活的一部分，是一种人生态度，是可以陪伴到老的东西</p>
-<p>是接近我的理想，值得我去向往和追求的事物</p>
-<p>七月份拿到驾照和车之后，我就摩拳擦掌想要试一次摩托旅行。于是从家里骑到了陆浑水库</p>
-<p>在陆浑环湖骑行了一圈。我确信我做了正确的决定，我喜欢的就是这样的东西</p>
-<p>我觉得这是给自己放暑假期间做的最有意义的事情了</p>
-<h2 id="悠闲，还有些害怕"><a href="#悠闲，还有些害怕" class="headerlink" title="悠闲，还有些害怕"></a>悠闲，还有些害怕</h2><p>暑假过的很快，弟弟的暑假在九月份结束了，我意识到我差不多也该重新组织自己的生活了</p>
-<p>我想把骑行继续下去，所以目光看向了洛阳旁边的城市西安，我觉得西安应该是一个很舒服的地方，吃得惯住得惯，骑行环境好，机车天堂</p>
-<p>了解长途骑行的知识，护具的选购，防御性驾驶等等</p>
-<p>买了护膝护肘护腰，一个很满意的后座包…</p>
-<p>不害怕是不可能的，我知道国道路况没那么好，国道上非常多的挂车，可能会遇到横风，甚至落石</p>
-<p>我也知道，如果出事故，一切都会结束。是很可怕的事情…</p>
-<p>除此之外，我去西安是找工作的，如果没找到的话会怎样，重新安排之后的事情…</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240923_180908.jpg" alt="前一天的黄昏"></p>
-<p>做出决定的时候，是稍微有些焦虑的，甚至犹豫这趟危险的骑行是不是不对的</p>
-<p>后来朋友一句话把我点醒了</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20241005135813.png" alt="生活是体验"></p>
-<p>在后座包上扣了芙莉莲的吧唧，伊蕾娜和小熊的挂饰，还有友人送的护身符</p>
-<div class="gallery-container" data-type="data" data-button="">
-      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20241005_230238.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20241005_230216.jpg","alt":""}]</div>
-      <div class="gallery-items">
-      </div>
-    </div>
-
-<p>带着些许畏惧，还有许许多多期待，开始了第一次摩旅</p>
-<h1 id="出发，我一直都在路上"><a href="#出发，我一直都在路上" class="headerlink" title="出发，我一直都在路上"></a>出发，我一直都在路上</h1><p>9.24 上午，去邻村喝了碗豆腐脑，吃了两个水煎包回家。把沉重的后座包放在车上</p>
-<p>准备出发的时候遇到老爸，原来是出门给我买了点吃的，几个苹果，一袋玉米肠，还有点心。叮嘱我在路上多休息休息</p>
-<p>由于行李空间有限，我只带了玉米肠和一个苹果还有说不出的感谢</p>
-<p>穿上护具，目标 大雁塔，出发</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_095235.jpg" alt="背景就是我家"></p>
-<h2 id="第一天：洛阳-潼关"><a href="#第一天：洛阳-潼关" class="headerlink" title="第一天：洛阳 - 潼关"></a>第一天：洛阳 - 潼关</h2><p>出发不一会儿就从瀍河上了洛阳段的 310 国道</p>
-<p>一个转弯进入国道，视野开阔起来，洛阳段的国道修得真好，双向六车道，路边是山山水水和村庄</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_112030.jpg"></p>
-<p>也许是因为我的详细计划，选了一个晴天的工作日，国道并没有我想象的那么危险，虽然大车也不少，但是路很宽</p>
-<p>我骑在最右车道最右侧 30 公分的距离，如果左后视镜里有大车出现，我就乖巧地借用非机动车道，然后减速让大车先走</p>
-<p>遵循这样的让车规则，渐渐在国道上稳定下来，不一会儿就到了三门峡</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_115032.jpg"></p>
-<p>中午从义马下了国道，去吃了午饭，在饭店里休息了一个小时，继续出发！</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_123242.jpg"></p>
-<p>下午也是一路骑行，在每个服务区都做了休息</p>
-<p>一下午在服务区一共遇到了五个摩友，他们有来自山西的，来自陕西的，甚至还有江苏的大哥</p>
-<p>在服务区简单聊天十分愉快，大家都会相互夸赞，聊一聊车，聊一聊沿路的景点</p>
-<p>很少和陌生人聊的这么愉快过</p>
-<p>休息之后各自分别，打一个再见的招呼，继续旅行，有几个大哥还会在下个服务区碰面</p>
-<p>实际上，我骑车的速度要比导航计算的速度更慢</p>
-<p>六点的时候太阳落山，骑车是最不舒服的，虽然有遮光镜，但是太阳光依然会直射前方…</p>
-<p>但是有些不服输吧，心里想着第一天要进入陕西界</p>
-<p>终于到了潼关，在此落脚，还吃了个肉夹馍~</p>
-<div class="gallery-container" data-type="data" data-button="">
-      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_144022.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_151821.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_151831.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_154609.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_174457.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_181336.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_185622.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_204858.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_202615.jpg","alt":""}]</div>
-      <div class="gallery-items">
-      </div>
-    </div>
-
-<p>如此，第一天的旅行结束了</p>
-<h2 id="第二天：潼关-西安"><a href="#第二天：潼关-西安" class="headerlink" title="第二天：潼关 - 西安"></a>第二天：潼关 - 西安</h2><p>前一天在酒店提前查了一下陕西段国道的路况（因为在渭南市下国道的时候，那段路实在有些糟糕）</p>
-<p>改变了路线，决定不再走 310 国道，取而代之的是堤顶路</p>
-<p>骑过之后才知道，堤顶路是沿着渭河修建的一条穿过渭南-西安-宝鸡的道路</p>
-<p>这条路简直是为了旅游者而修建的，限高 2.2m，限速 60，意味着没有大车，希望旅行者慢慢走</p>
-<p>这条路两边是田地，村庄，渭河。红绿顶非常少，甚至还有农民在路上晒玉米（毕竟是这个季节嘛</p>
-<p>好在车非常少，景色优美，骑行心情悠然自得，太享受了</p>
-<p>这张照片是从国道走入一条无名道路上，这条道路连接着国道和堤顶路，走上这条无名路我就知道自己选对路了！</p>
-<div class="gallery-container" data-type="data" data-button="">
-      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_110425.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_105154.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_105200.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_105601.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_110015.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_110026.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_110319.jpg","alt":""}]</div>
-      <div class="gallery-items">
-      </div>
-    </div>
-
-<p>如此惬意，美好，自由</p>
-<div class="gallery-container" data-type="data" data-button="">
-      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_111458.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_113452.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_114403.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_114433.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_114758.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_115155.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_120043.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_120051.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_120620.jpg","alt":""}]</div>
-      <div class="gallery-items">
-      </div>
-    </div>
-
-<p>沿着这条路继续走下去，穿过了田野，穿过了华阴，见到渭河</p>
-<p>这一路没有什么饭店，但是休息也没有国道上那么嘈杂，想停就停，停下也很安静</p>
-<p>摘掉头盔，大口呼吸空气，吃点火腿肠，咬一口大苹果</p>
-<p>休息的一刻，我也是自然的一部分</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_121533.jpg" alt="源远流长"></p>
-<p>慢慢悠悠地，西安人民欢迎您</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_125837.jpg" alt="西安界"></p>
-<p>在西安界内，也是先沿着渭河堤走，渭河就在旁边</p>
-<p>到西安之后明显发现摩托车变多了，好多酷炫的摩托佬</p>
-<div class="gallery-container" data-type="data" data-button="">
-      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_133014.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_131734.jpg","alt":""}]</div>
-      <div class="gallery-items">
-      </div>
-    </div>
-
-<p>大概四点半的时候到达大雁塔，大雁塔红绿灯前草草拍了个照片，旅程算是结束了</p>
-<p>我做到了！！</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_154043.jpg" alt="到达！"></p>
-<h1 id="到达后的感想"><a href="#到达后的感想" class="headerlink" title="到达后的感想"></a>到达后的感想</h1><details class="toggle" ><summary class="toggle-button" style="">一点点骑行建议</summary><div class="toggle-content"><p><strong>路线</strong></p>
-<p>第一天：洛阳-潼关：310 国道<br>第二天：潼关-西安：堤顶路</p>
-<div class="gallery-container" data-type="data" data-button="">
-      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/Screenshot_2024-09-19-18-28-21-200_com.autonavi.m.jpg","alt":"原定路线：310国道"},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/Screenshot_2024-10-05-20-21-46-270_com.autonavi.m.jpg","alt":"第二天的路线：堤顶路"}]</div>
-      <div class="gallery-items">
-      </div>
-    </div>
-
-<p><strong>准备</strong></p>
-<p>出发前的准备非常重要，除了头盔护具这些提高生存率的东西之外</p>
-<p>头盔最好是全盔，舒适性方面最重要的是不让眼睛吹风，这个非常非常重要，甚至可以准备一点玻璃酸钠滴眼液</p>
-<p>衣服要考虑防风性能，晚上的时候也要兼顾保暖</p>
-<p>护腰可以尝试一下，骑行是非常累的，想办法减轻自己的疲劳</p>
-<p><strong>休息</strong></p>
-<p>带一点咖啡因饮料也许可以集中精神，牛磺酸饮料对减轻疲劳也有用</p>
-<p>合理安排骑行时间，最好每个小时休息一次，休息的时候吃点东西（带糖分的最好</p>
-<p>关注油耗，国道上加油站比较少，加油很可能要下国道</p>
-<p><strong>时间</strong></p>
-<p>朝西方向骑行的时候，五六点钟太阳会直射眼睛，最好在这个时间前就休息吧</p>
-<p>天黑不骑车，危险倍增，夜晚国道上大车会变得很多，最好的时间是工作日的上午和下午</p>
-<p><strong>防御性驾驶</strong></p>
-<p>防御性驾驶一定要学一下，或者锻炼一下</p>
-<p>摩托车在国道上出事一般都是会转生异世界的….</p>
-<p>而摩托车视野最开阔，天然适合防御性驾驶</p>
-<p>预测未来道路会发生的事情，主动让车</p>
-<p>国道非机动车道最好不要走，路的质量很糟糕，还有玻璃碴子…</p>
-<p><strong>横风</strong></p>
-<p>摩托车避免不了横风问题，国道上没有城市的高楼，横风会强劲又突然</p>
-<p>需要特别注意两类横风</p>
-<p>一个是自然横风，经过山和桥的时候，可能会遭遇很突然的风，甚至吹偏一个车道</p>
-<p>一个是大车从身边穿过的风，挂车从身边过去的时候那个压迫感…. 过去之后会有个向大车方向吸过去的风，这个也不容小觑</p>
-<p>对付横风最好的方法是减速，本田小狼速度上 70 就能感觉到横向风的影响，80 的时候会变得严重，骑帅不骑快就好啦！</p>
-<p>对付大车的横风，就是走最右车道和减速让行（不要停车），走最右车道是因为不会被两个大车夹在中间</p>
-</div></details>
-
-<p>第一次摩旅毕业了！</p>
-<p>出发前是害怕和不安</p>
-<p>出发后是紧张，稳稳骑行，珍惜自己的生命，感慨国道上开阔的视野</p>
-<p>对骑车技术有把握之后，开始欣赏沿路的美景，享受旅行</p>
-<p>到达目的地后，先前的不安和紧张都不再有了，取而代之的是豁然开朗！</p>
-<p>还有对自己的肯定：我做到了！！</p>
-<p>最初考虑，我会在西安住上一个月去找工作</p>
-<p>但是当我到达的时候，已经觉得骑到西安这件事本身的价值已经超越了找工作，担心找不到工作的忧愁也不存在了</p>
-<p>毕竟，西安不是我的终点，只是其中一站而已</p>
-<p>在民宿住下之后去泡了个澡，把疲惫溶解在温泉里…</p>
-<p>真让人脸扁~~</p>
-<p><strong>旅途的风景都在路上，生活是体验。我一直都在路上，我一直都在体验</strong></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20241005223412.png"></p>
-]]></content>
-      <categories>
-        <category>本田小狼与我</category>
-      </categories>
-      <tags>
-        <tag>摩托车</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Laravel-Homestead使用记录</title>
     <url>/posts/a2d4eabf/</url>
     <content><![CDATA[<h2 id="文档地址"><a href="#文档地址" class="headerlink" title="文档地址"></a>文档地址</h2><p><a href="https://learnku.com/docs/laravel/6.x">laravel6</a><br><a href="https://learnku.com/docs/laravel/6.x/homestead/5127">Homestead</a></p>
@@ -1831,6 +1667,102 @@
       </categories>
       <tags>
         <tag>Laravel</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git rebase和cherry-pick</title>
+    <url>/posts/71e03861/</url>
+    <content><![CDATA[<h1 id="认识-rebase"><a href="#认识-rebase" class="headerlink" title="认识 rebase"></a>认识 rebase</h1><p>rebase，正如字面意思，重新选择基点</p>
+<p>比如下面这个图，这张图片里有两个分支 <code>feature</code> 和 <code>master</code></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240803123427.png"></p>
+<p>起初，两个分支均为 <code>commit A</code> 为基点，<code>feature</code> 分支延伸出了 <code>D</code> 和 <code>E</code> 两个 commit，<code>master</code>分支延伸出了<code>B</code>和<code>C</code>两个 commit</p>
+<p>如果执行了在<code>master</code>分支执行</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># at branch feature</span></span><br><span class="line">git rebase master</span><br></pre></td></tr></table></figure>
+
+<p>则<code>feature</code>分支的基点会从<code>A</code>变成 <code>master</code>的最新 commit <code>C</code>。这就是 rebase</p>
+<p>rebase 之后，不论是 <code>feature</code> 还是 <code>master</code> ，他们都在同一条提交线上</p>
+<h2 id="对比-rebase-和-merge"><a href="#对比-rebase-和-merge" class="headerlink" title="对比 rebase 和 merge"></a>对比 rebase 和 merge</h2><p>还用上面的例子</p>
+<p>有这样的一个提交例子</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1722661693998.png"></p>
+<p>现在试一下不同的操作对提交树产生的影响</p>
+<p><strong>如果使用 rebase</strong></p>
+<p>为保证相同的顺序 <code>(ABCDE)</code>，需要切换到 <code>feature</code> 分支，<code>rebase master</code> 分支</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># at branch feature</span></span><br><span class="line">git rebase master</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1722662018352.png"></p>
+<p><strong>如果使用 merge</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># at branch master</span></span><br><span class="line">git merge feature</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1722662097912.png"></p>
+<p>使用 merge 依然是两条线，使用 rebase 则是一条线</p>
+<p>使用 merge 还多出了一个 commit</p>
+<h1 id="使用-rebase-整理提交历史"><a href="#使用-rebase-整理提交历史" class="headerlink" title="使用 rebase 整理提交历史"></a>使用 rebase 整理提交历史</h1><p>除了用来合并代码，rebase 还可以用来整理提交历史</p>
+<p>触发交互式 rebase：<code>--interactive</code> <code>-i</code></p>
+<p>继续上面的例子，选定 commit <code>A</code> 为基点，执行命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git rebase -i `commit A`</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1722664224265.png"></p>
+<p>执行命令后会进入一个编辑界面</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1722664299381.png"></p>
+<p>pick（或 p）：保留该提交。<br>reword（或 r）：保留提交但修改提交消息。<br>edit（或 e）：暂停 rebase 并允许你修改该提交，比如修改内容、添加文件等。<br>squash（或 s）：将该提交与前一个提交合并。你可以修改合并后的提交信息。<br>fixup（或 f）：与 squash 类似，但丢弃当前提交的提交信息，直接合并到前一个提交。<br>exec（或 x）：在当前提交点执行一个 shell 命令。<br>drop（或 d）：删除该提交。</p>
+<p>假设希望删除 commit <code>E</code> 这次提交，把 <code>C</code> 和 <code>D</code> 压缩成一个 commit，并且修改 commit 消息为 <code>CD</code>，可以这样做</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1722664784869.png"></p>
+<p>保存之后，会提示修改 commit 消息</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1722664834165.png"></p>
+<p>之后，提交历史会变成这个样子</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1722664903294.png"></p>
+<h1 id="cherry-pick"><a href="#cherry-pick" class="headerlink" title="cherry-pick"></a>cherry-pick</h1><p>cherry-pick，摘樱桃。很形象地表示这个命令是要从提交树上删除掉一些 commit，和 <code>git rebase -i</code> 中的 <code>drop</code> 操作类似</p>
+<p>这个命令经常配合 rebase 使用，比如某次提交的代码有问题，可以先备份一下，然后从主分支 cherry-pick 掉</p>
+<p>cherry-pick 多个 commit 的时候，需要按照与原始顺序相反的顺序来删除</p>
+<p>如果 commit1 依赖于 commit2，那么应该是</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git cherry-pick &lt;commit1&gt; &lt;commit2&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这样有利于减少冲突，避免依赖性问题</p>
+<h1 id="冲突解决"><a href="#冲突解决" class="headerlink" title="冲突解决"></a>冲突解决</h1><p>rebase 和 cherry-pick 也会产生冲突，并且解决步骤和 merge 不同</p>
+<p>merge 是将一条分支上的所有代码汇入另一条分支，其操作的维度是分支，所以只会有一次冲突</p>
+<p>而 rebase 不同，rebase 的操作维度是 commit，以上面 ABCDE 的 rebase 过程为例，<code>D</code>和<code>E</code> 在 rebase 到 <code>C</code> 上面的时候，如果 <code>D</code> 和 <code>E</code> 对比 <code>BC</code> 均有冲突，那么应该解决 <code>D</code> 和 <code>E</code> 造成的两次冲突，rebase 的分支有几个 commit 就可能最多产生多少次的冲突</p>
+<p>如果一条分支不需要 commit 的每个细节，则可以利用 <code>rebase -i</code> 压缩(<code>squash</code>) 掉 commit</p>
+<p>解决冲突的方式也和 merge 的重新提交不同，应该先把冲突的解决结果使用 <code>add</code> 命令提交到暂存区，然后使用 continue 解决下一个 rebase 的冲突。如此循环，直到没有冲突为准</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="rebase-的优点和缺点"><a href="#rebase-的优点和缺点" class="headerlink" title="rebase 的优点和缺点"></a>rebase 的优点和缺点</h1><p><strong>rebase 的优点</strong></p>
+<ul>
+<li>rebase 保持了提交历史的线性和简洁，方便管理</li>
+<li>有效减少了合并提交，让每个 commit 都有意义</li>
+</ul>
+<p><strong>rebase 的缺点</strong></p>
+<ul>
+<li>操作不当会丢代码，如果没有分支备份，在解决冲突的时候，以及使用 drop 和 cherry-pick 的时候，会造成代码的丢失</li>
+<li>解决冲突的过程比较复杂</li>
+<li>依赖历史 commit 的线性结构</li>
+<li>开发过程中断的情况，如果某个分支被搁置了很久，这个分支再去 rebase 最新代码的时候，可能会产生巨量的冲突需要解决</li>
+</ul>
+<hr>
+<p><strong>分支管理和使用经历</strong></p>
+<p>在米哈游的平台组工作时，前端团队用的就是 rebase 的管理方式。</p>
+<p>维护协作分支 develop(ci 对应 test 环境)，pre 和 master 分支(ci 对应 pre 环境)，tag 为线上环境发布。</p>
+<p>在进行需求开发的时候，每个人会从 develop 分支拉出自己的开发分支，在提测的时候，会将自己的开发分支 rebase 一下 develop，通过 git lab 提交 merge request 进入 develop 测试环境。</p>
+<p>团队大约十几个人，同时开发多个模块，使用 merge 的话会让提交树变得非常复杂，难以从中间摘掉某个提交，或者快速定位和解决问题。rebase 是非常好的管理方式。</p>
+]]></content>
+      <categories>
+        <category>小笔记</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git查看文件差异：diff</title>
+    <url>/posts/b9cda84/</url>
+    <content><![CDATA[<h1 id="使用-git-diff-查看-pull-之后的文件有哪些修改"><a href="#使用-git-diff-查看-pull-之后的文件有哪些修改" class="headerlink" title="使用 git diff 查看 pull 之后的文件有哪些修改"></a>使用 git diff 查看 pull 之后的文件有哪些修改</h1><p>git pull 对于拉下来的修改文件自动对其进行 git add /rm 及 git commit 操作。所以拉下来的文件有那些修改，查看的方式可把它们归结于上一次提交的比较。</p>
+<p>git diff HEAD 显示工作目录与 git 仓库之间的差异，而 git diff HEAD^ 则显示上一次提交之前工作目录与 git 仓库之间的差异。所以我们在 git pull 后，可以通过 git diff HEAD^ 来查看拉下来的文件有那些具体的修改。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git diff 显示工作目录与索引文件之间的差异</span><br><span class="line"></span><br><span class="line">git diff –cached显示索引文件与git仓库之间的差异</span><br><span class="line"></span><br><span class="line">git diff HEAD 显示工作目录与git仓库之间的差异</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>小笔记</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -2418,6 +2350,52 @@
       </tags>
   </entry>
   <entry>
+    <title>Renpy学习：定义角色</title>
+    <url>/posts/1bbafc1e/</url>
+    <content><![CDATA[<h1 id="学习来源"><a href="#学习来源" class="headerlink" title="学习来源"></a>学习来源</h1><blockquote>
+<p><a href="https://zhuanlan.zhihu.com/p/54693281">成功定义一个角色</a><br>SDK 版本 7.1.2</p>
+</blockquote>
+<h1 id="定义一个角色-Character-和一小段对话-dialogue"><a href="#定义一个角色-Character-和一小段对话-dialogue" class="headerlink" title="定义一个角色(Character)和一小段对话(dialogue)"></a>定义一个角色(Character)和一小段对话(dialogue)</h1><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># script.rpy里有这样一段</span></span><br><span class="line">define e = Character(<span class="string">&#x27;艾琳&#x27;</span>)</span><br><span class="line"></span><br><span class="line">e <span class="string">&quot;您已创建一个新的 Ren&#x27;Py 游戏。&quot;</span></span><br><span class="line">e <span class="string">&quot;当您完善了故事、图片和音乐之后，您就可以向全世界发布了！&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>一般情况下,脚本中角色的每段话都会导致对话窗口内容更新并暂停, 需要一个鼠标点击事件继续</p>
+<h1 id="定制化角色"><a href="#定制化角色" class="headerlink" title="定制化角色"></a>定制化角色</h1><h2 id="角色对话内容可以进一步定制化"><a href="#角色对话内容可以进一步定制化" class="headerlink" title="角色对话内容可以进一步定制化"></a>角色对话内容可以进一步定制化</h2><figure class="highlight py"><table><tr><td class="code"><pre><span class="line">define e = Character(<span class="string">&quot;艾琳&quot;</span>, who_color=<span class="string">&quot;#c8ffc8&quot;</span>, window_background=<span class="string">&quot;frame.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这样定义角色的话,名字的文本颜色是#c8ffc8, 角色对话窗口背景使用图片”frame.png”<br><a href="https://renpy.cn/doc/dialogue.html?highlight=character#character">更多配置参考文档</a></p>
+<h2 id="立绘"><a href="#立绘" class="headerlink" title="立绘"></a>立绘</h2><figure class="highlight py"><table><tr><td class="code"><pre><span class="line">define e = Character(<span class="string">&#x27;艾琳&#x27;</span>, image=<span class="string">&quot;eileen&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>renpy 在处理带有图像标签的角色定义时,会自动搜索 game/images 目录下所有文件名满足”eileen *“格式的图片文件,并与角色’e’关联<br>教程工程中,有三个’eileen’开头的图片文件,分别是</p>
+<blockquote>
+<p>eileen concerned.png<br>eileen happy.png<br>eileen vhappy.png</p>
+</blockquote>
+<p>图片标签都是 eileen, 后面的部分称作图像属性(attribute)<br>角色图像显示可以用 show 语句, 也可以用角色+图片属性的形式:</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">define e = Character(<span class="string">&#x27;艾琳&#x27;</span>, image=<span class="string">&quot;eileen&quot;</span>)</span><br><span class="line">label start:</span><br><span class="line">  show eileen happy</span><br><span class="line">  e <span class="string">&quot;很高兴认识你&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以写成:</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">define e = Character(<span class="string">&#x27;艾琳&#x27;</span>, image=<span class="string">&quot;eileen&quot;</span>)</span><br><span class="line">label start:</span><br><span class="line">  e happy <span class="string">&quot;很高兴认识你&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">define e = Character(<span class="string">&quot;艾琳&quot;</span>, image=<span class="string">&quot;eileen&quot;</span>)</span><br><span class="line"></span><br><span class="line">label start:</span><br><span class="line">  show eileen mad</span><br><span class="line">  e <span class="string">&quot;我对你有点失望。&quot;</span></span><br><span class="line">  <span class="comment"># 如果在图像属性前面加一个 @ 符号，图像属性的改变将是临时性的，在执行完这行对话脚本后会恢复成上一个图像属性</span></span><br><span class="line">  e @ happy <span class="string">&quot;虽然还挺有趣的。&quot;</span></span><br><span class="line">  <span class="comment"># 两种语法可以混用，在 @ 符号之前表示永久改变，符号后面表示临时改变一次。</span></span><br><span class="line">  e happy @ vhappy <span class="string">&quot;真的！一切都改变了。&quot;</span></span><br><span class="line">  e <span class="string">&quot;不过别想我帮你从这档子破事里抽身。&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="独白模式-monologue-mode"><a href="#独白模式-monologue-mode" class="headerlink" title="独白模式(monologue mode)"></a>独白模式(monologue mode)</h2><p>将角色的对话内容放进成对的三引号里 用空行分隔:</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">define e = Character(<span class="string">&#x27;艾琳&#x27;</span>, image=<span class="string">&quot;eileen&quot;</span>)</span><br><span class="line"></span><br><span class="line">label start:</span><br><span class="line">  e <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    学习Ren&#x27;Py第一步是看文档。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    学习Ren&#x27;Py第二步是练习样例。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    学习Ren&#x27;Py第三步是放弃。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    或者……女装！</span></span><br><span class="line"><span class="string">  &quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h1><h2 id="what-prefix-amp-what-suffix"><a href="#what-prefix-amp-what-suffix" class="headerlink" title="what_prefix &amp; what_suffix"></a>what_prefix &amp; what_suffix</h2><p>角色对话内容在开头或结尾自动加上前缀或后缀</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">define e = Character(<span class="string">&#x27;艾琳&#x27;</span>, what_prefix=<span class="string">&quot;唔嗯&quot;</span>, what_suffix=<span class="string">&quot;是也&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="内插-interpolation-图片"><a href="#内插-interpolation-图片" class="headerlink" title="内插(interpolation)图片"></a>内插(interpolation)图片</h2><p>举例来讲, 如果我们有个雪花的图片, 名叫 snowflake.png, 开头先定义一个 image:</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 图片两秒顺时针旋转一圈</span></span><br><span class="line">image end_pic:</span><br><span class="line">  <span class="string">&quot;snowflake.png&quot;</span></span><br><span class="line">  size (<span class="number">16</span>, <span class="number">16</span>)</span><br><span class="line">  block:</span><br><span class="line">    rotate <span class="number">0</span></span><br><span class="line">    linear <span class="number">2.0</span> rotate <span class="number">360</span></span><br><span class="line">    repeat</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">define e = Character(<span class="string">&#x27;艾琳&#x27;</span>, what_suffix=<span class="string">&quot;&#123;image=endpic&#125;&quot;</span>)</span><br><span class="line"></span><br><span class="line">label start:</span><br><span class="line">  e <span class="string">&quot;嗯哼~&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic3.zhimg.com/80/v2-831f218349a751ca7fdbc4e05725a5c6_720w.jpg"></p>
+]]></content>
+      <categories>
+        <category>Renpy</category>
+      </categories>
+      <tags>
+        <tag>Renpy</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>记录各种各样的面试题</title>
     <url>/posts/a8791436/</url>
     <content><![CDATA[<div class="note skyblue flat"><p>这个文章主要用来收集一些面试题目</p>
@@ -2557,148 +2535,6 @@
       </tags>
   </entry>
   <entry>
-    <title>git查看文件差异：diff</title>
-    <url>/posts/b9cda84/</url>
-    <content><![CDATA[<h1 id="使用-git-diff-查看-pull-之后的文件有哪些修改"><a href="#使用-git-diff-查看-pull-之后的文件有哪些修改" class="headerlink" title="使用 git diff 查看 pull 之后的文件有哪些修改"></a>使用 git diff 查看 pull 之后的文件有哪些修改</h1><p>git pull 对于拉下来的修改文件自动对其进行 git add /rm 及 git commit 操作。所以拉下来的文件有那些修改，查看的方式可把它们归结于上一次提交的比较。</p>
-<p>git diff HEAD 显示工作目录与 git 仓库之间的差异，而 git diff HEAD^ 则显示上一次提交之前工作目录与 git 仓库之间的差异。所以我们在 git pull 后，可以通过 git diff HEAD^ 来查看拉下来的文件有那些具体的修改。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git diff 显示工作目录与索引文件之间的差异</span><br><span class="line"></span><br><span class="line">git diff –cached显示索引文件与git仓库之间的差异</span><br><span class="line"></span><br><span class="line">git diff HEAD 显示工作目录与git仓库之间的差异</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>小笔记</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git rebase和cherry-pick</title>
-    <url>/posts/71e03861/</url>
-    <content><![CDATA[<h1 id="认识-rebase"><a href="#认识-rebase" class="headerlink" title="认识 rebase"></a>认识 rebase</h1><p>rebase，正如字面意思，重新选择基点</p>
-<p>比如下面这个图，这张图片里有两个分支 <code>feature</code> 和 <code>master</code></p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20240803123427.png"></p>
-<p>起初，两个分支均为 <code>commit A</code> 为基点，<code>feature</code> 分支延伸出了 <code>D</code> 和 <code>E</code> 两个 commit，<code>master</code>分支延伸出了<code>B</code>和<code>C</code>两个 commit</p>
-<p>如果执行了在<code>master</code>分支执行</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># at branch feature</span></span><br><span class="line">git rebase master</span><br></pre></td></tr></table></figure>
-
-<p>则<code>feature</code>分支的基点会从<code>A</code>变成 <code>master</code>的最新 commit <code>C</code>。这就是 rebase</p>
-<p>rebase 之后，不论是 <code>feature</code> 还是 <code>master</code> ，他们都在同一条提交线上</p>
-<h2 id="对比-rebase-和-merge"><a href="#对比-rebase-和-merge" class="headerlink" title="对比 rebase 和 merge"></a>对比 rebase 和 merge</h2><p>还用上面的例子</p>
-<p>有这样的一个提交例子</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1722661693998.png"></p>
-<p>现在试一下不同的操作对提交树产生的影响</p>
-<p><strong>如果使用 rebase</strong></p>
-<p>为保证相同的顺序 <code>(ABCDE)</code>，需要切换到 <code>feature</code> 分支，<code>rebase master</code> 分支</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># at branch feature</span></span><br><span class="line">git rebase master</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1722662018352.png"></p>
-<p><strong>如果使用 merge</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># at branch master</span></span><br><span class="line">git merge feature</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1722662097912.png"></p>
-<p>使用 merge 依然是两条线，使用 rebase 则是一条线</p>
-<p>使用 merge 还多出了一个 commit</p>
-<h1 id="使用-rebase-整理提交历史"><a href="#使用-rebase-整理提交历史" class="headerlink" title="使用 rebase 整理提交历史"></a>使用 rebase 整理提交历史</h1><p>除了用来合并代码，rebase 还可以用来整理提交历史</p>
-<p>触发交互式 rebase：<code>--interactive</code> <code>-i</code></p>
-<p>继续上面的例子，选定 commit <code>A</code> 为基点，执行命令</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git rebase -i `commit A`</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1722664224265.png"></p>
-<p>执行命令后会进入一个编辑界面</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1722664299381.png"></p>
-<p>pick（或 p）：保留该提交。<br>reword（或 r）：保留提交但修改提交消息。<br>edit（或 e）：暂停 rebase 并允许你修改该提交，比如修改内容、添加文件等。<br>squash（或 s）：将该提交与前一个提交合并。你可以修改合并后的提交信息。<br>fixup（或 f）：与 squash 类似，但丢弃当前提交的提交信息，直接合并到前一个提交。<br>exec（或 x）：在当前提交点执行一个 shell 命令。<br>drop（或 d）：删除该提交。</p>
-<p>假设希望删除 commit <code>E</code> 这次提交，把 <code>C</code> 和 <code>D</code> 压缩成一个 commit，并且修改 commit 消息为 <code>CD</code>，可以这样做</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1722664784869.png"></p>
-<p>保存之后，会提示修改 commit 消息</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1722664834165.png"></p>
-<p>之后，提交历史会变成这个样子</p>
-<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/QQ_1722664903294.png"></p>
-<h1 id="cherry-pick"><a href="#cherry-pick" class="headerlink" title="cherry-pick"></a>cherry-pick</h1><p>cherry-pick，摘樱桃。很形象地表示这个命令是要从提交树上删除掉一些 commit，和 <code>git rebase -i</code> 中的 <code>drop</code> 操作类似</p>
-<p>这个命令经常配合 rebase 使用，比如某次提交的代码有问题，可以先备份一下，然后从主分支 cherry-pick 掉</p>
-<p>cherry-pick 多个 commit 的时候，需要按照与原始顺序相反的顺序来删除</p>
-<p>如果 commit1 依赖于 commit2，那么应该是</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git cherry-pick &lt;commit1&gt; &lt;commit2&gt;</span><br></pre></td></tr></table></figure>
-
-<p>这样有利于减少冲突，避免依赖性问题</p>
-<h1 id="冲突解决"><a href="#冲突解决" class="headerlink" title="冲突解决"></a>冲突解决</h1><p>rebase 和 cherry-pick 也会产生冲突，并且解决步骤和 merge 不同</p>
-<p>merge 是将一条分支上的所有代码汇入另一条分支，其操作的维度是分支，所以只会有一次冲突</p>
-<p>而 rebase 不同，rebase 的操作维度是 commit，以上面 ABCDE 的 rebase 过程为例，<code>D</code>和<code>E</code> 在 rebase 到 <code>C</code> 上面的时候，如果 <code>D</code> 和 <code>E</code> 对比 <code>BC</code> 均有冲突，那么应该解决 <code>D</code> 和 <code>E</code> 造成的两次冲突，rebase 的分支有几个 commit 就可能最多产生多少次的冲突</p>
-<p>如果一条分支不需要 commit 的每个细节，则可以利用 <code>rebase -i</code> 压缩(<code>squash</code>) 掉 commit</p>
-<p>解决冲突的方式也和 merge 的重新提交不同，应该先把冲突的解决结果使用 <code>add</code> 命令提交到暂存区，然后使用 continue 解决下一个 rebase 的冲突。如此循环，直到没有冲突为准</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git rebase --<span class="built_in">continue</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="rebase-的优点和缺点"><a href="#rebase-的优点和缺点" class="headerlink" title="rebase 的优点和缺点"></a>rebase 的优点和缺点</h1><p><strong>rebase 的优点</strong></p>
-<ul>
-<li>rebase 保持了提交历史的线性和简洁，方便管理</li>
-<li>有效减少了合并提交，让每个 commit 都有意义</li>
-</ul>
-<p><strong>rebase 的缺点</strong></p>
-<ul>
-<li>操作不当会丢代码，如果没有分支备份，在解决冲突的时候，以及使用 drop 和 cherry-pick 的时候，会造成代码的丢失</li>
-<li>解决冲突的过程比较复杂</li>
-<li>依赖历史 commit 的线性结构</li>
-<li>开发过程中断的情况，如果某个分支被搁置了很久，这个分支再去 rebase 最新代码的时候，可能会产生巨量的冲突需要解决</li>
-</ul>
-<hr>
-<p><strong>分支管理和使用经历</strong></p>
-<p>在米哈游的平台组工作时，前端团队用的就是 rebase 的管理方式。</p>
-<p>维护协作分支 develop(ci 对应 test 环境)，pre 和 master 分支(ci 对应 pre 环境)，tag 为线上环境发布。</p>
-<p>在进行需求开发的时候，每个人会从 develop 分支拉出自己的开发分支，在提测的时候，会将自己的开发分支 rebase 一下 develop，通过 git lab 提交 merge request 进入 develop 测试环境。</p>
-<p>团队大约十几个人，同时开发多个模块，使用 merge 的话会让提交树变得非常复杂，难以从中间摘掉某个提交，或者快速定位和解决问题。rebase 是非常好的管理方式。</p>
-]]></content>
-      <categories>
-        <category>小笔记</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Renpy学习：定义角色</title>
-    <url>/posts/1bbafc1e/</url>
-    <content><![CDATA[<h1 id="学习来源"><a href="#学习来源" class="headerlink" title="学习来源"></a>学习来源</h1><blockquote>
-<p><a href="https://zhuanlan.zhihu.com/p/54693281">成功定义一个角色</a><br>SDK 版本 7.1.2</p>
-</blockquote>
-<h1 id="定义一个角色-Character-和一小段对话-dialogue"><a href="#定义一个角色-Character-和一小段对话-dialogue" class="headerlink" title="定义一个角色(Character)和一小段对话(dialogue)"></a>定义一个角色(Character)和一小段对话(dialogue)</h1><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># script.rpy里有这样一段</span></span><br><span class="line">define e = Character(<span class="string">&#x27;艾琳&#x27;</span>)</span><br><span class="line"></span><br><span class="line">e <span class="string">&quot;您已创建一个新的 Ren&#x27;Py 游戏。&quot;</span></span><br><span class="line">e <span class="string">&quot;当您完善了故事、图片和音乐之后，您就可以向全世界发布了！&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>一般情况下,脚本中角色的每段话都会导致对话窗口内容更新并暂停, 需要一个鼠标点击事件继续</p>
-<h1 id="定制化角色"><a href="#定制化角色" class="headerlink" title="定制化角色"></a>定制化角色</h1><h2 id="角色对话内容可以进一步定制化"><a href="#角色对话内容可以进一步定制化" class="headerlink" title="角色对话内容可以进一步定制化"></a>角色对话内容可以进一步定制化</h2><figure class="highlight py"><table><tr><td class="code"><pre><span class="line">define e = Character(<span class="string">&quot;艾琳&quot;</span>, who_color=<span class="string">&quot;#c8ffc8&quot;</span>, window_background=<span class="string">&quot;frame.png&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>这样定义角色的话,名字的文本颜色是#c8ffc8, 角色对话窗口背景使用图片”frame.png”<br><a href="https://renpy.cn/doc/dialogue.html?highlight=character#character">更多配置参考文档</a></p>
-<h2 id="立绘"><a href="#立绘" class="headerlink" title="立绘"></a>立绘</h2><figure class="highlight py"><table><tr><td class="code"><pre><span class="line">define e = Character(<span class="string">&#x27;艾琳&#x27;</span>, image=<span class="string">&quot;eileen&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>renpy 在处理带有图像标签的角色定义时,会自动搜索 game/images 目录下所有文件名满足”eileen *“格式的图片文件,并与角色’e’关联<br>教程工程中,有三个’eileen’开头的图片文件,分别是</p>
-<blockquote>
-<p>eileen concerned.png<br>eileen happy.png<br>eileen vhappy.png</p>
-</blockquote>
-<p>图片标签都是 eileen, 后面的部分称作图像属性(attribute)<br>角色图像显示可以用 show 语句, 也可以用角色+图片属性的形式:</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">define e = Character(<span class="string">&#x27;艾琳&#x27;</span>, image=<span class="string">&quot;eileen&quot;</span>)</span><br><span class="line">label start:</span><br><span class="line">  show eileen happy</span><br><span class="line">  e <span class="string">&quot;很高兴认识你&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>也可以写成:</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">define e = Character(<span class="string">&#x27;艾琳&#x27;</span>, image=<span class="string">&quot;eileen&quot;</span>)</span><br><span class="line">label start:</span><br><span class="line">  e happy <span class="string">&quot;很高兴认识你&quot;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">define e = Character(<span class="string">&quot;艾琳&quot;</span>, image=<span class="string">&quot;eileen&quot;</span>)</span><br><span class="line"></span><br><span class="line">label start:</span><br><span class="line">  show eileen mad</span><br><span class="line">  e <span class="string">&quot;我对你有点失望。&quot;</span></span><br><span class="line">  <span class="comment"># 如果在图像属性前面加一个 @ 符号，图像属性的改变将是临时性的，在执行完这行对话脚本后会恢复成上一个图像属性</span></span><br><span class="line">  e @ happy <span class="string">&quot;虽然还挺有趣的。&quot;</span></span><br><span class="line">  <span class="comment"># 两种语法可以混用，在 @ 符号之前表示永久改变，符号后面表示临时改变一次。</span></span><br><span class="line">  e happy @ vhappy <span class="string">&quot;真的！一切都改变了。&quot;</span></span><br><span class="line">  e <span class="string">&quot;不过别想我帮你从这档子破事里抽身。&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="独白模式-monologue-mode"><a href="#独白模式-monologue-mode" class="headerlink" title="独白模式(monologue mode)"></a>独白模式(monologue mode)</h2><p>将角色的对话内容放进成对的三引号里 用空行分隔:</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">define e = Character(<span class="string">&#x27;艾琳&#x27;</span>, image=<span class="string">&quot;eileen&quot;</span>)</span><br><span class="line"></span><br><span class="line">label start:</span><br><span class="line">  e <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    学习Ren&#x27;Py第一步是看文档。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    学习Ren&#x27;Py第二步是练习样例。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    学习Ren&#x27;Py第三步是放弃。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    或者……女装！</span></span><br><span class="line"><span class="string">  &quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h1><h2 id="what-prefix-amp-what-suffix"><a href="#what-prefix-amp-what-suffix" class="headerlink" title="what_prefix &amp; what_suffix"></a>what_prefix &amp; what_suffix</h2><p>角色对话内容在开头或结尾自动加上前缀或后缀</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">define e = Character(<span class="string">&#x27;艾琳&#x27;</span>, what_prefix=<span class="string">&quot;唔嗯&quot;</span>, what_suffix=<span class="string">&quot;是也&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="内插-interpolation-图片"><a href="#内插-interpolation-图片" class="headerlink" title="内插(interpolation)图片"></a>内插(interpolation)图片</h2><p>举例来讲, 如果我们有个雪花的图片, 名叫 snowflake.png, 开头先定义一个 image:</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 图片两秒顺时针旋转一圈</span></span><br><span class="line">image end_pic:</span><br><span class="line">  <span class="string">&quot;snowflake.png&quot;</span></span><br><span class="line">  size (<span class="number">16</span>, <span class="number">16</span>)</span><br><span class="line">  block:</span><br><span class="line">    rotate <span class="number">0</span></span><br><span class="line">    linear <span class="number">2.0</span> rotate <span class="number">360</span></span><br><span class="line">    repeat</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">define e = Character(<span class="string">&#x27;艾琳&#x27;</span>, what_suffix=<span class="string">&quot;&#123;image=endpic&#125;&quot;</span>)</span><br><span class="line"></span><br><span class="line">label start:</span><br><span class="line">  e <span class="string">&quot;嗯哼~&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://pic3.zhimg.com/80/v2-831f218349a751ca7fdbc4e05725a5c6_720w.jpg"></p>
-]]></content>
-      <categories>
-        <category>Renpy</category>
-      </categories>
-      <tags>
-        <tag>Renpy</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Renpy学习：自定义开场画面</title>
     <url>/posts/b9a2d959/</url>
     <content><![CDATA[<h1 id="学习来源"><a href="#学习来源" class="headerlink" title="学习来源"></a>学习来源</h1><blockquote>
@@ -2767,6 +2603,170 @@
       </categories>
       <tags>
         <tag>Renpy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第一次摩旅：洛阳-西安</title>
+    <url>/posts/70ac33cd/</url>
+    <content><![CDATA[<p>写下这篇文章的时候已经是十一假期了</p>
+<p>我已经在西安暂住下来，并且开始逐渐了解这座城市</p>
+<hr>
+<p>我做了一件很不得了的事情，至少我自己觉得很厉害！</p>
+<p>9.24 和 9.25 这两天的时间，骑上我的本田 cc110，从洛阳到达了西安</p>
+<p>完成了人生第一次摩托车旅行</p>
+<h1 id="每年最完美的季节"><a href="#每年最完美的季节" class="headerlink" title="每年最完美的季节"></a>每年最完美的季节</h1><p>小熊说，Cub 可以带我去任何地方，我还想去更远的地方</p>
+<p>芝麻凛的爷爷说，我刚拿到驾照可能会不知道，季节交替的时候正式摩托旅行的好时机</p>
+<div id="dplayer3" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer3"),"video":{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/Yuru%20Camp%20Season%203%2009%20%E7%89%87%E6%AE%B5.mp4"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
+
+<p>摩托旅行是视野最开阔的旅行方式，有速度，有风，眼前所有的东西全是景色</p>
+<h1 id="出发前的心情和准备"><a href="#出发前的心情和准备" class="headerlink" title="出发前的心情和准备"></a>出发前的心情和准备</h1><h2 id="喜欢的事情"><a href="#喜欢的事情" class="headerlink" title="喜欢的事情"></a>喜欢的事情</h2><p>早在今年一月份的时候，看了动画片《本田小狼与我》</p>
+<p>再之后，看了《摇曳露营 3》</p>
+<p>这两个动画片让我知道摩托车可以是生活的一部分，是一种人生态度，是可以陪伴到老的东西</p>
+<p>是接近我的理想，值得我去向往和追求的事物</p>
+<p>七月份拿到驾照和车之后，我就摩拳擦掌想要试一次摩托旅行。于是从家里骑到了陆浑水库</p>
+<p>在陆浑环湖骑行了一圈。我确信我做了正确的决定，我喜欢的就是这样的东西</p>
+<p>我觉得这是给自己放暑假期间做的最有意义的事情了</p>
+<h2 id="悠闲，还有些害怕"><a href="#悠闲，还有些害怕" class="headerlink" title="悠闲，还有些害怕"></a>悠闲，还有些害怕</h2><p>暑假过的很快，弟弟的暑假在九月份结束了，我意识到我差不多也该重新组织自己的生活了</p>
+<p>我想把骑行继续下去，所以目光看向了洛阳旁边的城市西安，我觉得西安应该是一个很舒服的地方，吃得惯住得惯，骑行环境好，机车天堂</p>
+<p>了解长途骑行的知识，护具的选购，防御性驾驶等等</p>
+<p>买了护膝护肘护腰，一个很满意的后座包…</p>
+<p>不害怕是不可能的，我知道国道路况没那么好，国道上非常多的挂车，可能会遇到横风，甚至落石</p>
+<p>我也知道，如果出事故，一切都会结束。是很可怕的事情…</p>
+<p>除此之外，我去西安是找工作的，如果没找到的话会怎样，重新安排之后的事情…</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240923_180908.jpg" alt="前一天的黄昏"></p>
+<p>做出决定的时候，是稍微有些焦虑的，甚至犹豫这趟危险的骑行是不是不对的</p>
+<p>后来朋友一句话把我点醒了</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20241005135813.png" alt="生活是体验"></p>
+<p>在后座包上扣了芙莉莲的吧唧，伊蕾娜和小熊的挂饰，还有友人送的护身符</p>
+<div class="gallery-container" data-type="data" data-button="">
+      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20241005_230238.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20241005_230216.jpg","alt":""}]</div>
+      <div class="gallery-items">
+      </div>
+    </div>
+
+<p>带着些许畏惧，还有许许多多期待，开始了第一次摩旅</p>
+<h1 id="出发，我一直都在路上"><a href="#出发，我一直都在路上" class="headerlink" title="出发，我一直都在路上"></a>出发，我一直都在路上</h1><p>9.24 上午，去邻村喝了碗豆腐脑，吃了两个水煎包回家。把沉重的后座包放在车上</p>
+<p>准备出发的时候遇到老爸，原来是出门给我买了点吃的，几个苹果，一袋玉米肠，还有点心。叮嘱我在路上多休息休息</p>
+<p>由于行李空间有限，我只带了玉米肠和一个苹果还有说不出的感谢</p>
+<p>穿上护具，目标 大雁塔，出发</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_095235.jpg" alt="背景就是我家"></p>
+<h2 id="第一天：洛阳-潼关"><a href="#第一天：洛阳-潼关" class="headerlink" title="第一天：洛阳 - 潼关"></a>第一天：洛阳 - 潼关</h2><p>出发不一会儿就从瀍河上了洛阳段的 310 国道</p>
+<p>一个转弯进入国道，视野开阔起来，洛阳段的国道修得真好，双向六车道，路边是山山水水和村庄</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_112030.jpg"></p>
+<p>也许是因为我的详细计划，选了一个晴天的工作日，国道并没有我想象的那么危险，虽然大车也不少，但是路很宽</p>
+<p>我骑在最右车道最右侧 30 公分的距离，如果左后视镜里有大车出现，我就乖巧地借用非机动车道，然后减速让大车先走</p>
+<p>遵循这样的让车规则，渐渐在国道上稳定下来，不一会儿就到了三门峡</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_115032.jpg"></p>
+<p>中午从义马下了国道，去吃了午饭，在饭店里休息了一个小时，继续出发！</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_123242.jpg"></p>
+<p>下午也是一路骑行，在每个服务区都做了休息</p>
+<p>一下午在服务区一共遇到了五个摩友，他们有来自山西的，来自陕西的，甚至还有江苏的大哥</p>
+<p>在服务区简单聊天十分愉快，大家都会相互夸赞，聊一聊车，聊一聊沿路的景点</p>
+<p>很少和陌生人聊的这么愉快过</p>
+<p>休息之后各自分别，打一个再见的招呼，继续旅行，有几个大哥还会在下个服务区碰面</p>
+<p>实际上，我骑车的速度要比导航计算的速度更慢</p>
+<p>六点的时候太阳落山，骑车是最不舒服的，虽然有遮光镜，但是太阳光依然会直射前方…</p>
+<p>但是有些不服输吧，心里想着第一天要进入陕西界</p>
+<p>终于到了潼关，在此落脚，还吃了个肉夹馍~</p>
+<div class="gallery-container" data-type="data" data-button="">
+      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_144022.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_151821.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_151831.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_154609.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_174457.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_181336.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_185622.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_204858.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240924_202615.jpg","alt":""}]</div>
+      <div class="gallery-items">
+      </div>
+    </div>
+
+<p>如此，第一天的旅行结束了</p>
+<h2 id="第二天：潼关-西安"><a href="#第二天：潼关-西安" class="headerlink" title="第二天：潼关 - 西安"></a>第二天：潼关 - 西安</h2><p>前一天在酒店提前查了一下陕西段国道的路况（因为在渭南市下国道的时候，那段路实在有些糟糕）</p>
+<p>改变了路线，决定不再走 310 国道，取而代之的是堤顶路</p>
+<p>骑过之后才知道，堤顶路是沿着渭河修建的一条穿过渭南-西安-宝鸡的道路</p>
+<p>这条路简直是为了旅游者而修建的，限高 2.2m，限速 60，意味着没有大车，希望旅行者慢慢走</p>
+<p>这条路两边是田地，村庄，渭河。红绿顶非常少，甚至还有农民在路上晒玉米（毕竟是这个季节嘛</p>
+<p>好在车非常少，景色优美，骑行心情悠然自得，太享受了</p>
+<p>这张照片是从国道走入一条无名道路上，这条道路连接着国道和堤顶路，走上这条无名路我就知道自己选对路了！</p>
+<div class="gallery-container" data-type="data" data-button="">
+      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_110425.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_105154.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_105200.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_105601.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_110015.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_110026.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_110319.jpg","alt":""}]</div>
+      <div class="gallery-items">
+      </div>
+    </div>
+
+<p>如此惬意，美好，自由</p>
+<div class="gallery-container" data-type="data" data-button="">
+      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_111458.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_113452.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_114403.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_114433.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_114758.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_115155.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_120043.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_120051.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_120620.jpg","alt":""}]</div>
+      <div class="gallery-items">
+      </div>
+    </div>
+
+<p>沿着这条路继续走下去，穿过了田野，穿过了华阴，见到渭河</p>
+<p>这一路没有什么饭店，但是休息也没有国道上那么嘈杂，想停就停，停下也很安静</p>
+<p>摘掉头盔，大口呼吸空气，吃点火腿肠，咬一口大苹果</p>
+<p>休息的一刻，我也是自然的一部分</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_121533.jpg" alt="源远流长"></p>
+<p>慢慢悠悠地，西安人民欢迎您</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_125837.jpg" alt="西安界"></p>
+<p>在西安界内，也是先沿着渭河堤走，渭河就在旁边</p>
+<p>到西安之后明显发现摩托车变多了，好多酷炫的摩托佬</p>
+<div class="gallery-container" data-type="data" data-button="">
+      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_133014.jpg","alt":""},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_131734.jpg","alt":""}]</div>
+      <div class="gallery-items">
+      </div>
+    </div>
+
+<p>大概四点半的时候到达大雁塔，大雁塔红绿灯前草草拍了个照片，旅程算是结束了</p>
+<p>我做到了！！</p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/IMG_20240925_154043.jpg" alt="到达！"></p>
+<h1 id="到达后的感想"><a href="#到达后的感想" class="headerlink" title="到达后的感想"></a>到达后的感想</h1><details class="toggle" ><summary class="toggle-button" style="">一点点骑行建议</summary><div class="toggle-content"><p><strong>路线</strong></p>
+<p>第一天：洛阳-潼关：310 国道<br>第二天：潼关-西安：堤顶路</p>
+<div class="gallery-container" data-type="data" data-button="">
+      <div class="gallery-data">[{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/Screenshot_2024-09-19-18-28-21-200_com.autonavi.m.jpg","alt":"原定路线：310国道"},{"url":"https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/Screenshot_2024-10-05-20-21-46-270_com.autonavi.m.jpg","alt":"第二天的路线：堤顶路"}]</div>
+      <div class="gallery-items">
+      </div>
+    </div>
+
+<p><strong>准备</strong></p>
+<p>出发前的准备非常重要，除了头盔护具这些提高生存率的东西之外</p>
+<p>头盔最好是全盔，舒适性方面最重要的是不让眼睛吹风，这个非常非常重要，甚至可以准备一点玻璃酸钠滴眼液</p>
+<p>衣服要考虑防风性能，晚上的时候也要兼顾保暖</p>
+<p>护腰可以尝试一下，骑行是非常累的，想办法减轻自己的疲劳</p>
+<p><strong>休息</strong></p>
+<p>带一点咖啡因饮料也许可以集中精神，牛磺酸饮料对减轻疲劳也有用</p>
+<p>合理安排骑行时间，最好每个小时休息一次，休息的时候吃点东西（带糖分的最好</p>
+<p>关注油耗，国道上加油站比较少，加油很可能要下国道</p>
+<p><strong>时间</strong></p>
+<p>朝西方向骑行的时候，五六点钟太阳会直射眼睛，最好在这个时间前就休息吧</p>
+<p>天黑不骑车，危险倍增，夜晚国道上大车会变得很多，最好的时间是工作日的上午和下午</p>
+<p><strong>防御性驾驶</strong></p>
+<p>防御性驾驶一定要学一下，或者锻炼一下</p>
+<p>摩托车在国道上出事一般都是会转生异世界的….</p>
+<p>而摩托车视野最开阔，天然适合防御性驾驶</p>
+<p>预测未来道路会发生的事情，主动让车</p>
+<p>国道非机动车道最好不要走，路的质量很糟糕，还有玻璃碴子…</p>
+<p><strong>横风</strong></p>
+<p>摩托车避免不了横风问题，国道上没有城市的高楼，横风会强劲又突然</p>
+<p>需要特别注意两类横风</p>
+<p>一个是自然横风，经过山和桥的时候，可能会遭遇很突然的风，甚至吹偏一个车道</p>
+<p>一个是大车从身边穿过的风，挂车从身边过去的时候那个压迫感…. 过去之后会有个向大车方向吸过去的风，这个也不容小觑</p>
+<p>对付横风最好的方法是减速，本田小狼速度上 70 就能感觉到横向风的影响，80 的时候会变得严重，骑帅不骑快就好啦！</p>
+<p>对付大车的横风，就是走最右车道和减速让行（不要停车），走最右车道是因为不会被两个大车夹在中间</p>
+</div></details>
+
+<p>第一次摩旅毕业了！</p>
+<p>出发前是害怕和不安</p>
+<p>出发后是紧张，稳稳骑行，珍惜自己的生命，感慨国道上开阔的视野</p>
+<p>对骑车技术有把握之后，开始欣赏沿路的美景，享受旅行</p>
+<p>到达目的地后，先前的不安和紧张都不再有了，取而代之的是豁然开朗！</p>
+<p>还有对自己的肯定：我做到了！！</p>
+<p>最初考虑，我会在西安住上一个月去找工作</p>
+<p>但是当我到达的时候，已经觉得骑到西安这件事本身的价值已经超越了找工作，担心找不到工作的忧愁也不存在了</p>
+<p>毕竟，西安不是我的终点，只是其中一站而已</p>
+<p>在民宿住下之后去泡了个澡，把疲惫溶解在温泉里…</p>
+<p>真让人脸扁~~</p>
+<p><strong>旅途的风景都在路上，生活是体验。我一直都在路上，我一直都在体验</strong></p>
+<p><img src="https://homu-asteroid.oss-cn-hangzhou.aliyuncs.com/imgs/20241005223412.png"></p>
+]]></content>
+      <categories>
+        <category>本田小狼与我</category>
+      </categories>
+      <tags>
+        <tag>摩托车</tag>
       </tags>
   </entry>
   <entry>
@@ -3706,23 +3706,6 @@
       </tags>
   </entry>
   <entry>
-    <title>策略模式的表单校验</title>
-    <url>/posts/311eacd8/</url>
-    <content><![CDATA[<h1 id="策略模式在表单验证中的应用"><a href="#策略模式在表单验证中的应用" class="headerlink" title="策略模式在表单验证中的应用"></a>策略模式在表单验证中的应用</h1><p>最近想要封装一个校验表单的方法，没有什么很优雅的解决思路。<br>今天偶然看到了这篇文章，学到了一种新的设计模式….<br>实现也很容易理解。<br>原文链接： <a href="http://hcysun.me/2016/02/21/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E5%9C%A8%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">http://hcysun.me/2016/02/21/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E5%9C%A8%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</a><br>作者： HcySunYang</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">FormValidation</span>(<span class="params">VerifiPolicy</span>) &#123;</span><br><span class="line">  <span class="comment">// 保存策略对象</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">strategies</span> = <span class="title class_">VerifiPolicy</span>;</span><br><span class="line">  <span class="comment">// 验证缓存</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">validationFns</span> = [];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">FormValidation</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">add</span> = <span class="keyword">function</span> (<span class="params">dom, rule, errMsg</span>) &#123;</span><br><span class="line">  <span class="comment">// 因为传入的是一个字符串，如&#x27;maxLength: 16&#x27;，所以将其拆成数组方便操作</span></span><br><span class="line">  <span class="keyword">var</span> ary = rule.<span class="title function_">split</span>(<span class="string">&quot;:&quot;</span>);</span><br><span class="line">  <span class="comment">// 策略函数的参数</span></span><br><span class="line">  <span class="keyword">var</span> arg = [];</span><br><span class="line">  <span class="keyword">var</span> self = <span class="variable language_">this</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">validationFns</span>.<span class="title function_">push</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 重置参数</span></span><br><span class="line">    arg = [];</span><br><span class="line">    <span class="keyword">var</span> ruleName = ary[<span class="number">0</span>];</span><br><span class="line">    arg.<span class="title function_">push</span>(dom.<span class="property">value</span>);</span><br><span class="line">    <span class="comment">// 组装参数</span></span><br><span class="line">    <span class="keyword">if</span> (ary[<span class="number">1</span>]) &#123;</span><br><span class="line">      arg.<span class="title function_">push</span>(ary[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    arg.<span class="title function_">push</span>(errMsg);</span><br><span class="line">    arg.<span class="title function_">push</span>(dom);</span><br><span class="line">    <span class="comment">// 调用策略函数</span></span><br><span class="line">    <span class="keyword">return</span> self.<span class="property">strategies</span>[ruleName].<span class="title function_">apply</span>(dom, arg);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 一键校验的方法</span></span><br><span class="line"><span class="title class_">FormValidation</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">start</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> msgs = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">validationFns</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> msg = <span class="variable language_">this</span>.<span class="property">validationFns</span>[i]();</span><br><span class="line">    <span class="keyword">if</span> (msg) &#123;</span><br><span class="line">      msgs.<span class="title function_">push</span>(msg);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (msgs.<span class="property">length</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> msgs;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">&quot;wrapper&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;&quot;</span>&gt;</span>USERNAME<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;&quot;</span>&gt;</span>PASSWORD<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;button&quot;</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 策略对象</span></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">VerifiPolicy</span> = &#123;</span><br><span class="line">  <span class="comment">// 判断是否为空</span></span><br><span class="line">  <span class="attr">isNoEmpty</span>: <span class="keyword">function</span> (<span class="params">value, errorMsg, el</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value == <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; errorMsg, el &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 判断最小长度</span></span><br><span class="line">  <span class="attr">minLength</span>: <span class="keyword">function</span> (<span class="params">value, length, errorMsg, el</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value.<span class="property">length</span> &lt; length) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; errorMsg, el &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">maxLength</span>: <span class="keyword">function</span> (<span class="params">value, length, errorMsg, el</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value.<span class="property">length</span> &gt; length) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; errorMsg, el &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 判断是否为手机号</span></span><br><span class="line">  <span class="attr">isMobile</span>: <span class="keyword">function</span> (<span class="params">value, errorMsg</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="regexp">/(^1[3|5|8][0-9]&#123;9&#125;$)/</span>.<span class="title function_">test</span>(value)) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; errorMsg, el &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 其他</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> validation = <span class="keyword">new</span> <span class="title class_">FormValidation</span>(<span class="title class_">VerifiPolicy</span>);</span><br><span class="line"><span class="keyword">var</span> form = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.wrapper&quot;</span>);</span><br><span class="line">validation.<span class="title function_">add</span>(form.<span class="property">username</span>, <span class="string">&quot;isNoEmpty&quot;</span>, <span class="string">&quot;用户名错误&quot;</span>);</span><br><span class="line">validation.<span class="title function_">add</span>(form.<span class="property">password</span>, <span class="string">&quot;minLength: 6&quot;</span>, <span class="string">&quot;密码太短&quot;</span>);</span><br><span class="line">validation.<span class="title function_">add</span>(form.<span class="property">password</span>, <span class="string">&quot;maxLength: 4&quot;</span>, <span class="string">&quot;密码太长&quot;</span>);</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.button&quot;</span>).<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> errmsg = validation.<span class="title function_">start</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(errmsg);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/* (3) [&#123;…&#125;, &#123;…&#125;, &#123;…&#125;]</span></span><br><span class="line"><span class="comment">0: &#123;errorMsg: &quot;用户名错误&quot;, el: input&#125;</span></span><br><span class="line"><span class="comment">1: &#123;errorMsg: &quot;密码太短&quot;, el: input&#125;</span></span><br><span class="line"><span class="comment">2: &#123;errorMsg: &quot;密码太长&quot;, el: input&#125;</span></span><br><span class="line"><span class="comment">length: 3</span></span><br><span class="line"><span class="comment">__proto__: Array(0) */</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>小笔记</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>简单理解JavaScript中的new</title>
     <url>/posts/e9d688c/</url>
     <content><![CDATA[<h1 id="new-和直接执行函数的区别，new-如何实现"><a href="#new-和直接执行函数的区别，new-如何实现" class="headerlink" title="new 和直接执行函数的区别，new 如何实现"></a>new 和直接执行函数的区别，new 如何实现</h1><h2 id="this-指向不同"><a href="#this-指向不同" class="headerlink" title="this 指向不同"></a>this 指向不同</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">创建一个<span class="title class_">Test</span>构造函数，打印<span class="variable language_">this</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Test</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> test = <span class="keyword">new</span> <span class="title class_">Test</span>() <span class="comment">// Test &#123;&#125;</span></span><br><span class="line"><span class="keyword">var</span> t = <span class="title class_">Test</span>()  <span class="comment">// Window &#123; ... &#125;</span></span><br></pre></td></tr></table></figure>
@@ -3750,6 +3733,23 @@
 <li>确保 Fn 的函数体返回的是对象</li>
 </ol>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> result == <span class="string">&quot;object&quot;</span>) &#123;</span><br><span class="line">  fn = result;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  fn = obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>小笔记</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>策略模式的表单校验</title>
+    <url>/posts/311eacd8/</url>
+    <content><![CDATA[<h1 id="策略模式在表单验证中的应用"><a href="#策略模式在表单验证中的应用" class="headerlink" title="策略模式在表单验证中的应用"></a>策略模式在表单验证中的应用</h1><p>最近想要封装一个校验表单的方法，没有什么很优雅的解决思路。<br>今天偶然看到了这篇文章，学到了一种新的设计模式….<br>实现也很容易理解。<br>原文链接： <a href="http://hcysun.me/2016/02/21/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E5%9C%A8%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">http://hcysun.me/2016/02/21/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E5%9C%A8%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</a><br>作者： HcySunYang</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">FormValidation</span>(<span class="params">VerifiPolicy</span>) &#123;</span><br><span class="line">  <span class="comment">// 保存策略对象</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">strategies</span> = <span class="title class_">VerifiPolicy</span>;</span><br><span class="line">  <span class="comment">// 验证缓存</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">validationFns</span> = [];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">FormValidation</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">add</span> = <span class="keyword">function</span> (<span class="params">dom, rule, errMsg</span>) &#123;</span><br><span class="line">  <span class="comment">// 因为传入的是一个字符串，如&#x27;maxLength: 16&#x27;，所以将其拆成数组方便操作</span></span><br><span class="line">  <span class="keyword">var</span> ary = rule.<span class="title function_">split</span>(<span class="string">&quot;:&quot;</span>);</span><br><span class="line">  <span class="comment">// 策略函数的参数</span></span><br><span class="line">  <span class="keyword">var</span> arg = [];</span><br><span class="line">  <span class="keyword">var</span> self = <span class="variable language_">this</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">validationFns</span>.<span class="title function_">push</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 重置参数</span></span><br><span class="line">    arg = [];</span><br><span class="line">    <span class="keyword">var</span> ruleName = ary[<span class="number">0</span>];</span><br><span class="line">    arg.<span class="title function_">push</span>(dom.<span class="property">value</span>);</span><br><span class="line">    <span class="comment">// 组装参数</span></span><br><span class="line">    <span class="keyword">if</span> (ary[<span class="number">1</span>]) &#123;</span><br><span class="line">      arg.<span class="title function_">push</span>(ary[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    arg.<span class="title function_">push</span>(errMsg);</span><br><span class="line">    arg.<span class="title function_">push</span>(dom);</span><br><span class="line">    <span class="comment">// 调用策略函数</span></span><br><span class="line">    <span class="keyword">return</span> self.<span class="property">strategies</span>[ruleName].<span class="title function_">apply</span>(dom, arg);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 一键校验的方法</span></span><br><span class="line"><span class="title class_">FormValidation</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">start</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> msgs = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="variable language_">this</span>.<span class="property">validationFns</span>.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> msg = <span class="variable language_">this</span>.<span class="property">validationFns</span>[i]();</span><br><span class="line">    <span class="keyword">if</span> (msg) &#123;</span><br><span class="line">      msgs.<span class="title function_">push</span>(msg);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (msgs.<span class="property">length</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> msgs;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">&quot;wrapper&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;&quot;</span>&gt;</span>USERNAME<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;&quot;</span>&gt;</span>PASSWORD<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;button&quot;</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 策略对象</span></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">VerifiPolicy</span> = &#123;</span><br><span class="line">  <span class="comment">// 判断是否为空</span></span><br><span class="line">  <span class="attr">isNoEmpty</span>: <span class="keyword">function</span> (<span class="params">value, errorMsg, el</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value == <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; errorMsg, el &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 判断最小长度</span></span><br><span class="line">  <span class="attr">minLength</span>: <span class="keyword">function</span> (<span class="params">value, length, errorMsg, el</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value.<span class="property">length</span> &lt; length) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; errorMsg, el &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">maxLength</span>: <span class="keyword">function</span> (<span class="params">value, length, errorMsg, el</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value.<span class="property">length</span> &gt; length) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; errorMsg, el &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 判断是否为手机号</span></span><br><span class="line">  <span class="attr">isMobile</span>: <span class="keyword">function</span> (<span class="params">value, errorMsg</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="regexp">/(^1[3|5|8][0-9]&#123;9&#125;$)/</span>.<span class="title function_">test</span>(value)) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; errorMsg, el &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 其他</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> validation = <span class="keyword">new</span> <span class="title class_">FormValidation</span>(<span class="title class_">VerifiPolicy</span>);</span><br><span class="line"><span class="keyword">var</span> form = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.wrapper&quot;</span>);</span><br><span class="line">validation.<span class="title function_">add</span>(form.<span class="property">username</span>, <span class="string">&quot;isNoEmpty&quot;</span>, <span class="string">&quot;用户名错误&quot;</span>);</span><br><span class="line">validation.<span class="title function_">add</span>(form.<span class="property">password</span>, <span class="string">&quot;minLength: 6&quot;</span>, <span class="string">&quot;密码太短&quot;</span>);</span><br><span class="line">validation.<span class="title function_">add</span>(form.<span class="property">password</span>, <span class="string">&quot;maxLength: 4&quot;</span>, <span class="string">&quot;密码太长&quot;</span>);</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.button&quot;</span>).<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> errmsg = validation.<span class="title function_">start</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(errmsg);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/* (3) [&#123;…&#125;, &#123;…&#125;, &#123;…&#125;]</span></span><br><span class="line"><span class="comment">0: &#123;errorMsg: &quot;用户名错误&quot;, el: input&#125;</span></span><br><span class="line"><span class="comment">1: &#123;errorMsg: &quot;密码太短&quot;, el: input&#125;</span></span><br><span class="line"><span class="comment">2: &#123;errorMsg: &quot;密码太长&quot;, el: input&#125;</span></span><br><span class="line"><span class="comment">length: 3</span></span><br><span class="line"><span class="comment">__proto__: Array(0) */</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>小笔记</category>
